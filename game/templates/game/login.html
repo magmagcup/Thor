@@ -1,0 +1,19 @@
+{% extends "game/base.html" %}
+
+{% block content %}
+
+<h1> Login page</h1>
+<form>
+    <div class="form-group">
+    <label for="username">User name</label>
+    <input type="text" class="form-control" id="username" aria-describedby="userhelp" placeholder="Enter Username">
+    <small id="userhelp" class="form-text text-muted">Your username must consist</small>
+  </div>
+    <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" aria-describedby="passwordhelp" placeholder="Enter Password">
+    <small id="passwordhelp" class="form-text text-muted">Password</small>
+  </div>
+</form>
+
+{% endblock %}

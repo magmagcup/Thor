@@ -1,0 +1,32 @@
+{% extends "polls/base.html" %}
+{% block content %}
+
+<div>
+<h1>{{ question.question_text }}</h1>
+
+    <table class="table table-primary">
+        <thead>
+        <tr>
+            <th> Choice </th>
+            <th> Vote </th>
+        </tr>
+        </thead>
+        <tbody>
+{% for choice in question.order %}
+    <tr>
+        <td>{{ choice.choice_text }}</td>
+        <td>{{ choice.votes }} vote{{ choice.votes|pluralize }}
+</td>
+    </tr>
+
+{% endfor %}
+        </tbody>
+        </table>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
+
+<a href="{% url 'polls:index' %}">Back to index</a>
+
+
+{% endblock %}
