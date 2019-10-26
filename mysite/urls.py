@@ -14,13 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from django.conf.urls import handler404
+from django.urls import path
+from django.conf.urls import handler404, url, include
 
 handler404 = 'game.views.page404'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('game/', include("game.urls")),
-    path('^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    url(r'^auth/', include('rest_framework_social_oauth2.urls')),
+    url(r'auth/social', auth_social.home, name-'auth-social'),
+    url(r'auth-social/',include ('social_django.uris', namespace='social')),
 ]
