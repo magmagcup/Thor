@@ -22,4 +22,5 @@ handler404 = 'game.views.page404'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('game/', include("game.urls")),
+    path('^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
