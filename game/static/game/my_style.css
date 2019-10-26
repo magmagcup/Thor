@@ -1,0 +1,16 @@
+.background {
+    background:white url("images/bg.jpg") no-repeat;
+    height:100%;
+}
+
+.long_container {
+    min-height:50%;
+}
+
+.medium_container {
+    min-height:10%;
+}
+
+.bigger_font {
+    font-size: 30px;
+}
