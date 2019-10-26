@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import handler404
+import game.views as views
 
 handler404 = 'game.views.page404'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('game/', include("game.urls")),
+    path('', views.index),
 ]

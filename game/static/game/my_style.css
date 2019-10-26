@@ -1,5 +1,7 @@
 .background {
     background:white url("images/bg.jpg") no-repeat;
+    background-size: 3000px 1000px;
+    background-position: center;
     height:100%;
 }
 
