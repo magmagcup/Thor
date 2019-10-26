@@ -19,4 +19,4 @@ Thor: The Thunder God! is an Education Game where players have to correctly answ
 
 * Iteration plans  in [project document](https://docs.google.com/document/d/1Q2PZyZD6GGjra6n8zBE4ohgaDXcAb8P__CwaxpWwbAs/edit#).  
 * Task board  on [Trello](https://trello.com/b/5H0LhPUD/isp-series).
-* Issues are in Github issuec tracker [here](https://github.com/magmagcup/Thor/issues).a
+* Issues are in Github issuec tracker [here](https://github.com/magmagcup/Thor/issues).
