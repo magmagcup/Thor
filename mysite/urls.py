@@ -22,7 +22,5 @@ handler404 = 'game.views.page404'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('game/', include("game.urls")),
-    url(r'^auth/', include('rest_framework_social_oauth2.urls')),
-    url(r'auth/social', auth_social.home, name-'auth-social'),
-    url(r'auth-social/',include ('social_django.uris', namespace='social')),
+    path('o/', include('social_django.urls', namespace='social'))
 ]

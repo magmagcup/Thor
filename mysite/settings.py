@@ -11,10 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from django.conf import settings
-
-DRFSO2_PROPRIETARY_BACKEND_NAME = getattr(settings, 'DRFSO2_PROPRIETARY_BACKEND_NAME', "Django")
-DRFSO2_URL_NAMESPACE = getattr(settings, 'DRFSO2_URL_NAMESPACE', "")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,7 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CORS_ORIGIN_ALLOW_ALL = True
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '84747018394-5vc8rbnfp3pd7lu79gv8pvm6gq4e60jm.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'fyiHNVTrX-ZCbFwI56QUdkbD'
+LOGIN_REDIRECT_URL = '/game/'
+
+
 
 # Application definition
 
@@ -43,9 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game.apps.GameConfig',
-    'oauth2_provider',
     'social_django',
-    'rest_framework_social_oauth2',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -72,8 +71,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -92,27 +89,26 @@ DATABASES = {
     }
 }
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication', 
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
-    ),
-}
 
 AUTHENTICATION_BACKENDS = (
-   'rest_framework_social_oauth2.backends.DjangoOAuth2',
-   'django.contrib.auth.backends.ModelBackend',
-   'social_core.backends.open.id.OpenIdAuth',
-   'social_core.backends.google.GoogleOpenId',
-   'social_core.backends.google.Google@Auth2',
-   'social_core.backends.google.GoogledAuth',
-   'social_core.backends.twitter.Twitter@Auth',
-   'social_core. backends.yahoo.YahooOpenId',
-   'social_core.backends.github.Github@Auth2',
-   'social_core.backends.facebook.Facebook@Auth2',
-   'social_core.backends.instagran.Instagran@Auth2',
-   'django.contrib.oauth.backends.Mode1Backend',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
+
+# AUTHENTICATION_BACKENDS = (
+#    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+#    'django.contrib.auth.backends.ModelBackend',
+#    'social_core.backends.open.id.OpenIdAuth',
+#    'social_core.backends.google.GoogleOpenId',
+#    'social_core.backends.google.Google@Auth2',
+#    'social_core.backends.google.GoogledAuth',
+#    'social_core.backends.twitter.Twitter@Auth',
+#    'social_core. backends.yahoo.YahooOpenId',
+#    'social_core.backends.github.Github@Auth2',
+#    'social_core.backends.facebook.Facebook@Auth2',
+#    'social_core.backends.instagran.Instagran@Auth2',
+#    'django.contrib.oauth.backends.Mode1Backend',
+# )
 
 
 # Password validation
