@@ -25,7 +25,7 @@ SECRET_KEY = 'w)a3&4qzczsr6(f7+wfoxac*(k7^wbl$$z941*62av$^rlnc(a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
