@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '84747018394-5vc8rbnfp3pd7lu79gv8pvm6gq4e60jm.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'fyiHNVTrX-ZCbFwI56QUdkbD'
+LOGIN_REDIRECT_URL = '/game/'
+
+
 
 # Application definition
 
@@ -38,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game.apps.GameConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +88,27 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# AUTHENTICATION_BACKENDS = (
+#    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+#    'django.contrib.auth.backends.ModelBackend',
+#    'social_core.backends.open.id.OpenIdAuth',
+#    'social_core.backends.google.GoogleOpenId',
+#    'social_core.backends.google.Google@Auth2',
+#    'social_core.backends.google.GoogledAuth',
+#    'social_core.backends.twitter.Twitter@Auth',
+#    'social_core. backends.yahoo.YahooOpenId',
+#    'social_core.backends.github.Github@Auth2',
+#    'social_core.backends.facebook.Facebook@Auth2',
+#    'social_core.backends.instagran.Instagran@Auth2',
+#    'django.contrib.oauth.backends.Mode1Backend',
+# )
 
 
 # Password validation
