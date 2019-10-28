@@ -24,6 +24,6 @@ handler404 = 'game.views.page404'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('game/', include("game.urls")),
-    path('o/', include('social_django.urls', namespace='social'))
+    path('o/', include('social_django.urls', namespace='social')),
     path('', views.index),
 ]
