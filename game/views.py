@@ -17,7 +17,7 @@ def page404(request, exception):
 
 def views_logout(request):
     logout(request)
-    return redirect("game:index")
+    return redirect("game:home")
 
 def home_page(request):
     return render(request, 'game/home.html')

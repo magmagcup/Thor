@@ -95,21 +95,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-# AUTHENTICATION_BACKENDS = (
-#    'rest_framework_social_oauth2.backends.DjangoOAuth2',
-#    'django.contrib.auth.backends.ModelBackend',
-#    'social_core.backends.open.id.OpenIdAuth',
-#    'social_core.backends.google.GoogleOpenId',
-#    'social_core.backends.google.Google@Auth2',
-#    'social_core.backends.google.GoogledAuth',
-#    'social_core.backends.twitter.Twitter@Auth',
-#    'social_core. backends.yahoo.YahooOpenId',
-#    'social_core.backends.github.Github@Auth2',
-#    'social_core.backends.facebook.Facebook@Auth2',
-#    'social_core.backends.instagran.Instagran@Auth2',
-#    'django.contrib.oauth.backends.Mode1Backend',
-# )
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
