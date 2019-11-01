@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -13,6 +14,10 @@ def index_page(request):
 
 def page404(request, exception):
     return render(request, 'game/404.html')
+
+def views_logout(request):
+    logout(request)
+    return redirect("game:home")
 
 def home_page(request):
     return render(request, 'game/home.html')
