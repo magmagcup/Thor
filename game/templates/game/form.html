@@ -1,0 +1,9 @@
+<script src="../../static/js/focus_script.js" ></script>
+
+<form action='{%url "game:set"%}' method="post">
+  {% csrf_token %}
+  <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
+  <textarea style="height: 500px; width:1000px;font-size: 26px;" class="form-control css-require" name="question" value="question" id="question">{{ form }}</textarea>
+  <button type="sumbit">Submit</button>
+</div>
+</form>
