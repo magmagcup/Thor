@@ -37,3 +37,15 @@ def get(request):
             form = QuestionForm()
     context = {'form': form, 'text': text}
     return render(request, 'form.html', context)
+
+# def get_reply( prompt_msg ):
+#       reply = input( prompt_msg )
+#       return reply.lower( )
+ 
+# # use the method
+# reply = get_reply( "Do you like Python?" )
+# if reply == "yes":
+#     print("Good! So do I.")
+# else:
+#     print('Sorry. Try Javascript instead.')
+
