@@ -3,7 +3,10 @@
 <form action='{%url "game:set"%}' method="post">
   {% csrf_token %}
   <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
-  <textarea style="height: 500px; width:1000px;font-size: 26px;" class="form-control css-require" name="question" value="question" id="question">{{ form }}</textarea>
+  <textarea style="height: 50px; width:1000px;font-size: 26px;" class="form-control css-require" name="title" value="title" id="title">{{ form }}</textarea>
+  <textarea style="height: 400px; width:1000px;font-size: 26px;" class="form-control css-require" name="question" value="question" id="question">{{ form }}</textarea>
+  <textarea style="height: 100px; width:1000px;font-size: 26px;" class="form-control css-require" name="answer" value="answer" id="answer">{{ form }}</textarea>
+  <textarea style="height: 100px; width:1000px;font-size: 26px;" class="form-control css-require" name="hint" value="hint" id="hint">{{ form }}</textarea>
   <button type="sumbit">Submit</button>
 </div>
 </form>

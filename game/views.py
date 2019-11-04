@@ -28,8 +28,11 @@ def get(request):
         form = QuestionForm(request.POST)
 
         if form.is_valid():
+            title = form.data.get('title')
             question = form.data.get('question')
-            q = Question(question_text = question)
+            answer = form.data.get('answer')
+            hint = form.data.get('hint')
+            q = Question(question_title=title, question_text=question, question_answer=answer, answer_hint=hint)
             q.save()
             return redirect("game:form")
         
