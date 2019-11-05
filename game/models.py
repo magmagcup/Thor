@@ -22,6 +22,7 @@ class Question(models.Model):
 
 class Statistic(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    best_score = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     pub_date = models.DateTimeField('date published', blank=True, null=True)
 

@@ -1,3 +1,13 @@
-{% for stat in stat %}
-<h1>{{ stat.score }}</h1>
-{% endfor %}
+{% extends "game/base.html" %}
+
+{% block content %}
+<div class="container-fluid bg-white medium_container">
+    <h1> Home page <br> <br></h1>
+</div>
+{% if user.is_authenticated %}
+    <a href="{% url 'game:home' %}">home</a>
+    {% for stat in stat %}
+        <h1 class="text-white">Score = {{ stat.score }}</h1>
+    {% endfor %}
+{% endif %}
+{% endblock %}

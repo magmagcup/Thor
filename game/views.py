@@ -32,7 +32,7 @@ def statistic_page(request):
 
 @login_required
 def get_stat(request):
-    """Create statistic of each player include score"""
+    """Create statistic for each player include score"""
     user_id = request.user.id
     status = True
     check_id = Statistic.objects.filter(user_id=user_id)
@@ -42,12 +42,9 @@ def get_stat(request):
             status = False
     if User.is_authenticated and status == True:
         user = User.objects.get(pk=user_id)
-        try:
-            stat = Statistic(user=user)
-            stat.save()
-        except User.DoesNotExist:
-            return render(request, 'game/home.html', {'stat': stat})
-    return redirect("game:home")
+        stat = Statistic(user=user)
+        stat.save()
+    return redirect('game:home')
 
 def get(request):
     if request.method == 'POST':
