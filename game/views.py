@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import logout, authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm
-from .models import Question
+from .models import Question, Statistic
 # Create your views here.
 
 def index(request):
@@ -23,6 +25,30 @@ def views_logout(request):
 def home_page(request):
     return render(request, 'game/home.html')
 
+def statistic_page(request):
+    statistic = Statistic.objects.all()
+    return render(request, 'game/statistic.html', {'stat':statistic})
+
+
+@login_required
+def get_stat(request):
+    """Create statistic of each player include score"""
+    user_id = request.user.id
+    status = True
+    check_id = Statistic.objects.filter(user_id=user_id)
+    for check in check_id:
+        print("check.id =  ", check)
+        if check.user_id == user_id:
+            status = False
+    if User.is_authenticated and status == True:
+        user = User.objects.get(pk=user_id)
+        try:
+            stat = Statistic(user=user)
+            stat.save()
+        except User.DoesNotExist:
+            return render(request, 'game/home.html', {'stat': stat})
+    return redirect("game:home")
+
 def get(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
@@ -35,11 +61,13 @@ def get(request):
             q = Question(question_title=title, question_text=question, question_answer=answer, answer_hint=hint)
             q.save()
             return redirect("game:form")
-        
+
         else:
             form = QuestionForm()
-    context = {'form': form, 'text': text}
+    context = {'form': form}
     return render(request, 'form.html', context)
+
+
 
 # def get_reply( prompt_msg ):
 #       reply = input( prompt_msg )
