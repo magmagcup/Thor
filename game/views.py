@@ -57,12 +57,12 @@ def get(request):
             hint = form.data.get('hint')
             q = Question(question_title=title, question_text=question, question_answer=answer, answer_hint=hint)
             q.save()
-            return redirect("game:form")
+            return redirect("game:home")
 
         else:
             form = QuestionForm()
     context = {'form': form}
-    return render(request, 'form.html', context)
+    return render(request, 'game/home.html', context)
 
 
 
