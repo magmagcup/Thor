@@ -1,0 +1,34 @@
+{% extends 'game/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<script>
+
+window.onload = function() {
+  document.getElementById("title").focus();
+};
+
+</script>
+
+<form action='{%url "game:set"%}' method="post">
+  {% csrf_token %}
+  <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
+  <h4 class="text-white">Title</h4>
+
+  <textarea style="height: 50px; width:1000px;font-size: 26px;" class="form-control css-require mt-3" name="title" value="title" id="title">{{ form }}</textarea>
+
+  <h4 class="text-white">Question</h4>
+  <textarea style="height: 400px; width:1000px;font-size: 26px;" class="form-control css-require mt-3" name="question" value="question" id="question">{{ form }}</textarea>
+
+  <h4 class="text-white">answer</h4>
+  <textarea style="height: 100px; width:1000px;font-size: 26px;" class="form-control css-require mt-3" name="answer" value="answer" id="answer">{{ form }}</textarea>
+
+  <h4 class="text-white">hint</h4>
+  <textarea style="height: 100px; width:1000px;font-size: 26px;" class="form-control css-require mt-3" name="hint" value="hint" id="hint">{{ form }}</textarea>
+
+  <button class="btn btn-sm mt-3" type="sumbit">Submit</button>
+</div>
+</form>
+
+{% endblock  %}
