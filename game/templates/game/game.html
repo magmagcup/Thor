@@ -1,0 +1,26 @@
+{% extends 'game/base.html' %}
+
+
+{% block  content %}
+
+<script>
+start = () => {
+    var x = document.getElementById("start").innerHTML;
+    setTimeout(function() { x.value="1"}, 1000);
+    setTimeout(function() { x.value="2"}, 2000);
+    setTimeout(function() { x.value="3"}, 3000);
+    setTimeout(function() { x.value="start"}, 4000);
+}
+
+</script>
+
+    <button class="btn btn-primary" onclick="start()">Start</button>
+    {% comment %} <input  type="text" id="start"> {% endcomment %}
+    <div class="text-white" id="start"></div>
+
+{% comment %} {% for question in question %}
+    <h1 class="text-white">{{ question.question_title }}</h1>
+    <p class="text-white">{{ question.question_text }}</p>
+{% endfor %} {% endcomment %}
+
+{% endblock  %}

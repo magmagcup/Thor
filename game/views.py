@@ -29,6 +29,10 @@ def statistic_page(request):
     statistic = Statistic.objects.all()
     return render(request, 'game/statistic.html', {'stat':statistic})
 
+def game_page(request):
+    question = Question.objects.all()
+    return render(request, 'game/game.html', {'question': question})
+
 
 @login_required
 def get_stat(request):
@@ -59,21 +63,9 @@ def get(request):
             q.save()
             return redirect("game:home")
 
-        else:
-            form = QuestionForm()
-    context = {'form': form}
-    return render(request, 'game/home.html', context)
-
-
-
-# def get_reply( prompt_msg ):
-#       reply = input( prompt_msg )
-#       return reply.lower( )
- 
-# # use the method
-# reply = get_reply( "Do you like Python?" )
-# if reply == "yes":
-#     print("Good! So do I.")
-# else:
-#     print('Sorry. Try Javascript instead.')
+    elif request.method == 'GET':
+        form = QuestionForm()
+        print(form)
+        context = {'form': form}
+        return render(request, 'game/form.html', context)
 

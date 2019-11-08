@@ -5,9 +5,11 @@
     <h1> Home page <br> <br></h1>
 </div>
 {% if user.is_authenticated %}
+    <a href="{% url 'game:thor' %}">Play game</a>
+    <br>
     <a href="{% url 'game:statistic' %}">stat</a>
     <br>
-    <a href="{% url 'game:form' %}">form</a>
+    <a href="{% url 'game:set' %}">form</a>
     <h1 class="text-white">Username = {{ user.username }}</h1>
     <h1 class="text-white">User id = {{ user.id }}</h1>
 {% endif %}
