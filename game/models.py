@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class Question(models.Model):
     question_title = models.CharField(max_length=1000000)
     question_text = models.CharField(max_length=10000000)
@@ -20,6 +21,7 @@ class Question(models.Model):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
+
 class Statistic(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     best_score = models.IntegerField(default=0)
@@ -32,3 +34,18 @@ class Statistic(models.Model):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
+    def get_picture(self):
+        pass
+
+
+class UserPicture(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_photo = models.CharField(max_length=10000)
+
+
+def save_picture(backend, user, response, details,*args,**kwargs):
+    user.is_new = True
+    if user.is_new:
+        new_user_pic = UserPicture(user=user, profile_photo=response['picture'])
+        new_user_pic.save()
