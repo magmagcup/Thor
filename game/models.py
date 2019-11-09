@@ -45,7 +45,6 @@ class UserPicture(models.Model):
 
 
 def save_picture(backend, user, response, details,*args,**kwargs):
-    user.is_new = True
-    if user.is_new:
+    if not UserPicture.objects.filter(user=user):
         new_user_pic = UserPicture(user=user, profile_photo=response['picture'])
         new_user_pic.save()
