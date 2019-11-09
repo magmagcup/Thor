@@ -1,11 +1,9 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-<div class="container-fluid bg-white medium_container">
-    <h1> Home page <br> <br></h1>
-</div>
+<h1 class=""style="font-family:verdana; text-align:center; color:azure; padding-top:5%" > Player Stats <br> <br></h1>
 {% if user.is_authenticated %}
-    <a href="{% url 'game:home' %}">home</a>
+    <button type="button" class="btn btn-outline-info"><a href="{% url 'game:home' %}">home</a></button>
     {% for stat in stat %}
         <h1 class="text-white">Score = {{ stat.score }}</h1>
     {% endfor %}
