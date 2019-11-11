@@ -1,16 +1,38 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-<div class="container-fluid bg-white medium_container">
-    <h1> Home page <br> <br></h1>
-</div>
+<h1 class=""style="font-family:verdana; text-align:center; color:azure; padding-top:5%" > Welcome to Thor: The God of Thunder!! <br> <br></h1>
 {% if user.is_authenticated %}
-    <a href="{% url 'game:thor' %}">Play game</a>
-    <br>
-    <a href="{% url 'game:statistic' %}">stat</a>
-    <br>
-    <a href="{% url 'game:set' %}">form</a>
-    <h1 class="text-white">Username = {{ user.username }}</h1>
-    <h1 class="text-white">User id = {{ user.id }}</h1>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4 d-flex justify-content-center">
+                <h3 class="text-white">Username = {{ user.username }}</h3>
+            </div>
+            <div class="col-2 d-flex justify-content-center">
+                <h3 class="text-white">User id = {{ user.id }}</h3>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="row justify-content-center">
+          <div class="col-2 d-flex justify-content-center">
+            <button type="button" class="btn btn-light"><a href="{% url 'game:statistic' %}">Player Stats</a></button>
+          </div>
+          <div class="col-2 d-flex justify-content-center">
+            <button type="button" class="btn btn-light"><a href="{% url 'game:form' %}">Create Forms</a></button>
+            <br>
+          </div>
+        </div>
+    </div>
+{% else %}
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>    
+    <div class="container text-white">
+        <div class="row justify-content-center">
+            <div class="col-2 d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary btn-lg ">Play Now</button>
+            </div>
+        </div>
+    </div>
 {% endif %}
+<br><br><br><br>
 {% endblock %}

@@ -33,7 +33,19 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '84747018394-5vc8rbnfp3pd7lu79gv8pvm6gq4e60jm.ap
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'fyiHNVTrX-ZCbFwI56QUdkbD'
 LOGIN_REDIRECT_URL = '/game/stat'
 
+SOCIAL_AUTH_PIPELINE = (
 
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'game.models.save_picture',
+)
 
 # Application definition
 

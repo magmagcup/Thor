@@ -1,13 +1,20 @@
- {% extends "game/base.html" %}
+{% extends "game/base.html" %}
 
 {% block content %}
-<div class="container-fluid bg-white medium_container">
-    <h1> Home page <br> <br></h1>
+    <h1 class=""style="font-family:verdana; text-align:center; color:azure; padding-top:5%" > Player Stats <br> <br></h1>
+<div class="row">
+  <div class="col-sm-6">
+      <img class="img-responsive rounded mx-auto d-block" src="{{ pic.profile_photo }}">
 </div>
-{% if user.is_authenticated %}
-    <a href="{% url 'game:home' %}">home</a>
-    {% for stat in stat %}
-        <h1 class="text-white">Score = {{ stat.score }}</h1>
-    {% endfor %}
-{% endif %}
+    <div class="col-sm-6">
+        {% if user.is_authenticated %}
+    <h1 class="text-white">Score = {{ stat.score }}</h1>
+        <a href="{% url 'game:statistic' %}">stat</a>
+    <br>
+            <a href="{% url 'game:home' %}">home</a>
+
+    <a href="{% url 'game:form' %}">form</a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

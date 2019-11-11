@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm
-from .models import Question, Statistic
+from .models import Question, Statistic, UserPicture
 # Create your views here.
 
 def index(request):
@@ -26,8 +26,9 @@ def home_page(request):
     return render(request, 'game/home.html')
 
 def statistic_page(request):
-    statistic = Statistic.objects.all()
-    return render(request, 'game/statistic.html', {'stat':statistic})
+    statistic = get_object_or_404(Statistic, user=request.user)
+    picture = get_object_or_404(UserPicture, user=request.user)
+    return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture})
 
 def game_page(request):
     question = Question.objects.all()
