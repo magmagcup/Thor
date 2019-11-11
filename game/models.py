@@ -35,9 +35,6 @@ class Statistic(models.Model):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
-    def get_picture(self):
-        pass
-
 
 class UserPicture(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

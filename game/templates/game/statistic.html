@@ -2,7 +2,8 @@
 {% block content %}
     <h1 class=""style="font-family:verdana; text-align:center; color:azure; padding-top:5%" > Player Stats <br> <br></h1>
 <div class="row">
-  <div class="col-sm-6">    <img src="{{ pic.profile_photo }}">
+  <div class="col-sm-6">
+      <img class="img-responsive rounded mx-auto d-block" src="{{ pic.profile_photo }}">
 </div>
     <div class="col-sm-6">
         {% if user.is_authenticated %}

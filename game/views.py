@@ -26,8 +26,8 @@ def home_page(request):
     return render(request, 'game/home.html')
 
 def statistic_page(request):
-    statistic = Statistic.objects.filter(user=request.user)[0]
-    picture = UserPicture.objects.filter(user=request.user)[0]
+    statistic = get_object_or_404(Statistic, user=request.user)
+    picture = get_object_or_404(UserPicture, user=request.user)
     return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture})
 
 
