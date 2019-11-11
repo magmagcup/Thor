@@ -14,4 +14,5 @@ urlpatterns = [
     path('set/' , views.get, name='set'),
     path('stat/', views.get_stat, name='stat'),
     path('statistic/',views.statistic_page, name='statistic'),
+    path('thor/',views.game_page, name='thor'),
 ]

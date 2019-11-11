@@ -3,6 +3,16 @@
 
 {% block content %}
 
+
+
+<form action='{%url "game:set"%}' method="post">
+  {% csrf_token %}
+  <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
+    <h4 class="text-white">{{ form.as_p }}</h4>
+    <button class="btn btn-sm mt-3" type="sumbit">Submit</button>
+  </div>
+</form>
+
 <script>
 
 window.onload = function() {
@@ -11,51 +21,4 @@ window.onload = function() {
 
 </script>
 
-<h1 class=""style="font-family:verdana; text-align:center; color:azure; padding-top:5%" > Create your own question from <br> <br></h1>
-
-<div class="container">
-  <div class="row justify-content-center">
-      <div class="col-8">
-        <form action='{%url "game:set"%}' method="post">
-          {% csrf_token %}
-          <div class="form-group  has-feedback">
-            <h4 class="text-white">Title</h4>
-
-            <textarea style="height: 50px; font-size: 22px;" class="form-control css-require mt-3" name="title" value="title" id="title">{{ form }}</textarea>
-            <div class="form-group">
-              <label for="difficulty" class="text-white mt-3"><h4>Difficulty</h4></label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>Easy</option>
-                  <option>Medium</option>
-                  <option>Hard</option>
-                  <option>Extremely Hard</option>
-                </select>
-                {% if difficulty == 'Easy' %}
-                <select class="form-control" id="question">
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                </select>
-                {% endif %}
-            </div>
-            <h4 class="text-white mt-3">Question</h4>
-            <textarea style="height: 400px; font-size: 22px;" class="form-control css-require mt-3" name="question" value="question" id="question">{{ form }}</textarea>
-            {% for number in question %}
-              <div class="row justify-content-center">
-                <h4 class="col-2 text-white mt-3">No.</h4>
-                <h4 class="col-4 text-white mt-3">Answer</h4>
-                <h4 class="col-6 text-white mt-3">Hint</h4>
-              </div>
-              <div class="row justify-content-center">
-                  <textarea style="height: 50px; font-size: 22px;" class="col-4 form-control css-require mt-3" name="answer" value="answer" id="answer">{{ form }}</textarea>
-                  <textarea style="height: 50px; font-size: 22px;" class="col-6 form-control css-require mt-3" name="hint" value="hint" id="hint">{{ form }}</textarea>
-              </div>
-            {% endfor %}
-            <button class="btn btn-sm mt-3" type="sumbit">Submit</button>
-          </div>
-        </form>
-      </div>
-  </div>
-</div>
-<br><br><br><br>
 {% endblock  %}

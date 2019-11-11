@@ -26,9 +26,13 @@ def home_page(request):
     return render(request, 'game/home.html')
 
 def statistic_page(request):
-    statistic = Statistic.objects.filter(user=request.user)[0]
-    picture = UserPicture.objects.filter(user=request.user)[0]
+    statistic = get_object_or_404(Statistic, user=request.user)
+    picture = get_object_or_404(UserPicture, user=request.user)
     return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture})
+
+def game_page(request):
+    question = Question.objects.all()
+    return render(request, 'game/game.html', {'question': question})
 
 
 @login_required
@@ -38,7 +42,6 @@ def get_stat(request):
     status = True
     check_id = Statistic.objects.filter(user_id=user_id)
     for check in check_id:
-        print("check.id =  ", check)
         if check.user_id == user_id:
             status = False
     if User.is_authenticated and status == True:
@@ -60,21 +63,8 @@ def get(request):
             q.save()
             return redirect("game:home")
 
-        else:
-            form = QuestionForm()
-    context = {'form': form}
-    return render(request, 'game/home.html', context)
-
-
-
-# def get_reply( prompt_msg ):
-#       reply = input( prompt_msg )
-#       return reply.lower( )
- 
-# # use the method
-# reply = get_reply( "Do you like Python?" )
-# if reply == "yes":
-#     print("Good! So do I.")
-# else:
-#     print('Sorry. Try Javascript instead.')
+    elif request.method == 'GET':
+        form = QuestionForm()
+        context = {'form': form}
+        return render(request, 'game/form.html', context)
 
