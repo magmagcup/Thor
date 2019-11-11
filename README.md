@@ -1,4 +1,4 @@
-# Thor: The Thunder God!  
+# Thor: The God of Thunder  
 
 <!-- [![codecov](https://codecov.io/gh/magmagcup/thor/branch/master/graph/badge.svg)](https://codecov.io/gh/magmagcup/thor) -->
 
