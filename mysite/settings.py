@@ -29,8 +29,8 @@ DEBUG = config('DEBUG', cast=bool, default=False)
 ALLOWED_HOSTS = ['*']
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-SOCIAL_AUTH_POSTGRES_JSONFIELD = True
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("OAUTH2_KEY", default="secret")
+SOCIAL_AUTH_POSTGRES_JSONFIELD = config("AUTH_POSTGRES_JSONFIELD", cast=bool, default=False)
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("OAUTH2_KEY", default="key")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("OAUTH2_SECRET", default="secret")
 LOGIN_REDIRECT_URL = '/game/stat'
 
@@ -121,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = config("TIME_ZONE", default="timezone")
 
 USE_I18N = True
 
