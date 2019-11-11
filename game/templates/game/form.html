@@ -3,6 +3,15 @@
 
 {% block content %}
 
+
+<form action='{%url "game:set"%}' method="post">
+  {% csrf_token %}
+  <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
+    <h4 class="text-white">{{ form.as_p }}</h4>
+    <button class="btn btn-sm mt-3" type="sumbit">Submit</button>
+  </div>
+</form>
+
 <script>
 
 window.onload = function() {
@@ -10,13 +19,5 @@ window.onload = function() {
 };
 
 </script>
-
-<form action='{%url "game:set"%}' method="post">
-  {% csrf_token %}
-  <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
-  {{ form.as_p }}
-  <button class="btn btn-sm mt-3" type="sumbit">Submit</button>
-</div>
-</form>
 
 {% endblock  %}

@@ -41,7 +41,6 @@ def get_stat(request):
     status = True
     check_id = Statistic.objects.filter(user_id=user_id)
     for check in check_id:
-        print("check.id =  ", check)
         if check.user_id == user_id:
             status = False
     if User.is_authenticated and status == True:
@@ -65,7 +64,6 @@ def get(request):
 
     elif request.method == 'GET':
         form = QuestionForm()
-        print(form)
         context = {'form': form}
         return render(request, 'game/form.html', context)
 
