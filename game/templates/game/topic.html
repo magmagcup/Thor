@@ -1,0 +1,9 @@
+{% extends "game/base.html" %}
+
+{% block content %}
+
+{% for t in topic %}
+  {{ t }}
+  {% comment %} <a href="{% url 'game:question' %}">{{ t }}</a> {% endcomment %}
+{% endfor %}
+{% endblock  %}

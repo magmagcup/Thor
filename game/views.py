@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm
-from .models import Question, Statistic
+from .models import Question, Statistic, Topic
 # Create your views here.
 
 def index(request):
@@ -28,6 +28,16 @@ def home_page(request):
 def statistic_page(request):
     statistic = Statistic.objects.all()
     return render(request, 'game/statistic.html', {'stat':statistic})
+
+
+def topic_page(request):
+    topic = Topic.objects.all()
+    return render(request, 'game/topic.html', {'topic':topic})
+
+# def question_page(request, topic_id):
+#     question = Question.objects.filter(topic_id=topic_id)
+    
+#     return render(request, 'game/question.html', {'question':question})
 
 
 @login_required
@@ -58,22 +68,7 @@ def get(request):
             q = Question(question_title=title, question_text=question, question_answer=answer, answer_hint=hint)
             q.save()
             return redirect("game:home")
-
-        else:
-            form = QuestionForm()
-    context = {'form': form}
-    return render(request, 'game/home.html', context)
-
-
-
-# def get_reply( prompt_msg ):
-#       reply = input( prompt_msg )
-#       return reply.lower( )
- 
-# # use the method
-# reply = get_reply( "Do you like Python?" )
-# if reply == "yes":
-#     print("Good! So do I.")
-# else:
-#     print('Sorry. Try Javascript instead.')
-
+    else:
+        form = QuestionForm()
+        context = {'form': form}
+        return render(request, 'game/form.html', context)
