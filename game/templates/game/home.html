@@ -1,38 +1,82 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-<h1 class=""style="font-family:verdana; text-align:center; color:azure; padding-top:5%" > Welcome to Thor: The God of Thunder!! <br> <br></h1>
 {% if user.is_authenticated %}
-
-    <div class="container">
+    <h1 class=""style="font-family: 'Supermercado One'; font-size: 80px; text-align:center; color:fefce0 ; padding-top:5%" >Thor: The God of Thunder</h1>
+    <div class="container text-white" style="padding-top:3%">
         <div class="row justify-content-center">
-            <div class="col-4 d-flex justify-content-center">
-                <h3 class="text-white">Username = {{ user.username }}</h3>
+            <div class="col-4" style="border-style:solid">
+                <div class="row d-flex justify-content-center">
+                    <h3>TOP 10 Scoreboard</h3> 
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-3 d-flex justify-content-center">
+                        RANK
+                    </div>
+                    <div class="col-3 d-flex justify-content-center">
+                        NAME
+                    </div>
+                    <div class="col-3 d-flex justify-content-center">
+                        TOPIC
+                    </div>
+                    <div class="col-3 d-flex justify-content-center">
+                        SCORE
+                    </div>
+                </div>
             </div>
-            <div class="col-2 d-flex justify-content-center">
-                <h3 class="text-white">User id = {{ user.id }}</h3>
+            <div class="col-1">
             </div>
-        </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <div class="row justify-content-center">
-          <div class="col-2 d-flex justify-content-center">
-            <button type="button" class="btn btn-light"><a href="{% url 'game:statistic' %}">Player Stats</a></button>
-          </div>
-          <div class="col-2 d-flex justify-content-center">
-            <button type="button" class="btn btn-light"><a href="{% url 'game:form' %}">Create Forms</a></button>
-            <br>
-          </div>
-        </div>
-    </div>
+            <div class="col-4" style="padding-top:6%">
+                <div class="row">
+                    <button type="button" class="btn btn-light btn-lg" style="padding: 5% 39%">Play Now</button>
+                </div>
+                <div class="row" style="padding-top: 4%">
+                    <div class="col-6 d-flex justify-content-center">
+                        <button type="button" class="btn btn-light" style="padding: 3% 30%"><a href="{% url 'game:statistic' %}">Player Stats</a></button>
+                    </div>
+                    <div class="col-6 d-flex justify-content-center">
+                        <button type="button" class="btn btn-light" style="padding: 3% 28%"><a href="{% url 'game:set' %}">Create Forms</a></button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+     </div>
+     <br><br><br><br><br><br><br><br>
 {% else %}
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>    
-    <div class="container text-white">
-        <div class="row justify-content-center">
-            <div class="col-2 d-flex justify-content-center">
-                <button type="button" class="btn btn-secondary btn-lg ">Play Now</button>
-            </div>
+    <br><br><br><br><br><br><br><br><br>br><br><br><br>
+    <h1 class=""style="font-family: 'Supermercado One'; font-size: 80px; text-align:center; color:fefce0 ; padding-top:5%" >Thor: The God of Thunder</h1>
+    <div class="row justify-content-center">    
+        <div class="col-2 d-flex justify-content-center">
+            <button type="button" class="btn btn-light btn-lg mt-5" style="padding: 26px 63px;"><a href="{% url "social:begin" "google-oauth2" %}">Login with  <i class="fab fa-google" ></i></a></button>
         </div>
     </div>
+    <br><br><br><br>
 {% endif %}
 <br><br><br><br>
 {% endblock %}
+
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4 d-flex justify-content-center">
+            <h3 class="text-white">Username = {{ user.username }}</h3>
+        </div>
+        <div class="col-2 d-flex justify-content-center">
+            <h3 class="text-white">User id = {{ user.id }}</h3>
+        </div>
+    </div>
+  </div> 
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+
+
