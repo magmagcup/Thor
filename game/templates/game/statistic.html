@@ -1,20 +1,37 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-    <h1 class=""style="font-family:verdana; text-align:center; color:azure; padding-top:5%" > Player Stats <br> <br></h1>
-<div class="row">
-  <div class="col-sm-6">
-      <img class="img-responsive rounded mx-auto d-block" src="{{ pic.profile_photo }}">
-</div>
-    <div class="col-sm-6">
-        {% if user.is_authenticated %}
-    <h1 class="text-white">Score = {{ stat.score }}</h1>
-        <a href="{% url 'game:statistic' %}">stat</a>
-    <br>
-            <a href="{% url 'game:home' %}">home</a>
-
-    <a href="{% url 'game:form' %}">form</a>
-        {% endif %}
+<h1 class=""style="font-family: 'Supermercado One'; font-size: 80px; text-align:center; color:azure; padding-top:5%" >Player's Profile<br> <br></h1>
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <img class="img-responsive rounded mx-auto d-block" src="{{ pic.profile_photo }}" alt="Profile Picture" width="300" height="auto">
+        </div>
+        <div class="col-5">
+            <div class="row justify-content-center">
+                <div class="col-7 d-flex justify-content-center">
+                    <h3 class="text-white">Username: {{ user.username }}</h3>
+                </div>
+                <div class="col-5 d-flex justify-content-center">
+                    <h3 class="text-white">User ID:{{ user.id }}</h3>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <h3 class="text-white">Highest Score = {{ stat.score }}</h3>
+            </div>
+            <br><br><br><br><br>
+            <div class="row justify-content-center">
+                <div class="col-6 d-flex justify-content-center">
+                    <button type="button" class="btn btn-light"><a href="{% url 'game:home' %}">Home</a></button>
+                </div>
+                <div class="col-6 d-flex justify-content-center">
+                    <button type="button" class="btn btn-light"><a href="{% url 'game:set' %}">Create Forms</a></button>
+                </div>
+            </div>
+        </div> 
     </div>
 </div>
+{% endif %}
+<br><br><br><br><br>
 {% endblock %}
