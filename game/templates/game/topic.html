@@ -3,7 +3,6 @@
 {% block content %}
 
 {% for t in topic %}
-  {{ t }}
-  {% comment %} <a href="{% url 'game:question' %}">{{ t }}</a> {% endcomment %}
+  <a href="{% url 'game:question' t.id %}">{{ t }}</a>
 {% endfor %}
 {% endblock  %}

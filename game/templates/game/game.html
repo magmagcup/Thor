@@ -1,0 +1,20 @@
+{% extends "game/base.html" %}
+{% load create_box %}
+
+{% block content %}
+
+{% for q in question %}
+{% with question_id=1 %}
+{% if q.id == question_id %}
+    {{q.question_title}}
+    <br>
+    {% with text=q.question_text|create_box %}
+    {{ text|safe }}
+    {% endwith %}
+    <br>
+{% endif %}
+
+{% endwith %}
+{% endfor %}
+
+{% endblock  %}

@@ -34,10 +34,9 @@ def topic_page(request):
     topic = Topic.objects.all()
     return render(request, 'game/topic.html', {'topic':topic})
 
-# def question_page(request, topic_id):
-#     question = Question.objects.filter(topic_id=topic_id)
-    
-#     return render(request, 'game/question.html', {'question':question})
+def question_page(request, topic_id):
+    question = Question.objects.filter(topic_id=topic_id)
+    return render(request, 'game/game.html', {'question':question})
 
 
 @login_required
