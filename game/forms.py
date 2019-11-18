@@ -7,7 +7,8 @@ class QuestionForm(forms.Form):
     widget=forms.Textarea(
         attrs={
             'id': 'title',
-            'style' : 'height: 50px; font-size: 22px'
+            'style' : 'height: 50px; font-size: 22px',
+            'class' : 'mt-5',
             }
         )
     )
@@ -16,7 +17,7 @@ class QuestionForm(forms.Form):
     widget=forms.Textarea(
         attrs={
             'id': 'question',
-            'style' : 'height: 400px; font-size: 22px'
+            'style' : 'height: 400px; font-size: 22px',
             }
         )
     )

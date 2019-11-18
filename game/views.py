@@ -63,7 +63,7 @@ def get(request):
             q.save()
             return redirect("game:home")
 
-    elif request.method == 'GET':
+    else:
         form = QuestionForm()
         context = {'form': form}
         return render(request, 'game/form.html', context)
