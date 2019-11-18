@@ -5,11 +5,11 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm
-from .models import Question, Statistic
+from .models import Question, Statistic, Topic, Best_score
 # Create your views here.
 
 def index(request):
-    #redirect players to the homepage index
+    """redirect players to the homepage index"""
     return HttpResponseRedirect(reverse("game:index"))
 
 def form_page(request):
@@ -29,6 +29,10 @@ def statistic_page(request):
     statistic = Statistic.objects.all()
     return render(request, 'game/statistic.html', {'stat':statistic})
 
+def topic_page(request):
+    topic = Topic.objects.all()
+    return render(request, 'game/topic.html', {'topic': topic})
+
 
 @login_required
 def get_stat(request):
@@ -36,15 +40,33 @@ def get_stat(request):
     user_id = request.user.id
     status = True
     check_id = Statistic.objects.filter(user_id=user_id)
-    for check in check_id:
-        print("check.id =  ", check)
-        if check.user_id == user_id:
-            status = False
+    if check_id:
+        status = False
     if User.is_authenticated and status == True:
         user = User.objects.get(pk=user_id)
         stat = Statistic(user=user)
         stat.save()
     return redirect('game:home')
+
+def get_best_score(request, topic_id):
+    user_id = request.user.id
+    topic = get_object_or_404(Topic, pk=topic_id)
+    get_user = User.objects.get(pk=user_id)
+    score_id = Statistic()
+    check_key = Best_score.objects.filter(key=topic.topic_name, user=user_id)
+    if check_key:
+        s = Best_score.objects.get(key=topic.topic_name, user=user_id)
+        if score_id.score > s.value:
+            s.value += 1
+            s.save()
+        return redirect('game:home')
+    s = Best_score(user=get_user, key=topic.topic_name, value=0)
+    s.save()
+    return redirect('game:home')
+
+def cal_score_each_round(request):
+    return 0
+
 
 def get(request):
     if request.method == 'POST':
@@ -63,17 +85,3 @@ def get(request):
             form = QuestionForm()
     context = {'form': form}
     return render(request, 'game/home.html', context)
-
-
-
-# def get_reply( prompt_msg ):
-#       reply = input( prompt_msg )
-#       return reply.lower( )
- 
-# # use the method
-# reply = get_reply( "Do you like Python?" )
-# if reply == "yes":
-#     print("Good! So do I.")
-# else:
-#     print('Sorry. Try Javascript instead.')
-
