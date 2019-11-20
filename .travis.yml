@@ -12,6 +12,8 @@
 
  # script to run tests. Script can have many commands, one per line.
  script:
+   - manage.py makemigrations
+   - manage.py migrate
    - coverage run --source='.' manage.py test game/tests
 
  after_success:
