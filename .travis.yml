@@ -12,7 +12,7 @@
 
  # script to run tests. Script can have many commands, one per line.
  script:
-   - coverage run --source='.' manage.py test game\tests
+   - coverage run --source='.' manage.py test "game\tests"
 
  after_success:
    - codecov
