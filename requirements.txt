@@ -3,3 +3,5 @@ social-auth-app-django
 psycopg2
 python-decouple
 coverage
+codecov
+Pillow
