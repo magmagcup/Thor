@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm
-from .models import Question, Statistic, Topic
+from .models import Question, Statistic, Topic, Answer
 # Create your views here.
 
 def index(request):
@@ -13,7 +13,9 @@ def index(request):
     return HttpResponseRedirect(reverse("game:index"))
 
 def form_page(request):
-    return render(request, 'game/form.html')
+    form = QuestionForm()
+    context = {'form': form}
+    return render(request, 'game/form.html', context)
 
 def page404(request, exception):
     return render(request, 'game/404.html')
@@ -55,19 +57,41 @@ def get_stat(request):
         stat.save()
     return redirect('game:home')
 
-def get(request):
+def preview_form(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
-
         if form.is_valid():
+            topic = Topic.objects.get(topic_name=form.data.get('select_topic'))
             title = form.data.get('title')
             question = form.data.get('question')
-            answer = form.data.get('answer')
-            hint = form.data.get('hint')
-            q = Question(question_title=title, question_text=question, question_answer=answer, answer_hint=hint)
+            difficulty = form.data.get('select_difficulty')
+            q = Question(topic_id=topic.id, question_title=title, question_text=question, difficulty=difficulty)
             q.save()
-            return redirect("game:home")
+            assign_answer(question, q.id)
+            return render(request, "game/preview_form.html", {'question':q})
+
+def discard_form(request, question_id):
+    check = Question.objects.filter(pk=question_id)
+    if check:
+        q = Question.objects.get(pk=question_id)
+        q.delete()
+        return redirect("game:form")
     else:
-        form = QuestionForm()
-        context = {'form': form}
-        return render(request, 'game/form.html', context)
+        return preview_form(request.POST)
+
+def assign_answer(value,question_id):
+    last_box_mark = 0
+    while (']]' in value):
+        start = value.find('[[', last_box_mark)
+        if start < last_box_mark:
+            break
+        mid = value.find('|', last_box_mark)
+        end = value.find(']]', last_box_mark)
+        a = Answer(question_id=question_id, answer_text=value[start+2:mid], hint_text=value[mid+1:end])
+        a.save()
+        last_box_mark = end + 1
+
+def get_topic(request):
+    object_topic = Topic.objects.all()
+    select_topic = [tuple([t,t]) for t in get_topic()]
+    return select_topic
