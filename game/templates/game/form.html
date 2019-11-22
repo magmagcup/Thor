@@ -11,11 +11,11 @@ window.onload = function() {
 
 </script>
 
-<form action='{%url "game:set"%}' method="post">
+<form action='{%url "game:preview"%}' method="post">
   {% csrf_token %}
   <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
     <h4 class="text-white">{{ form.as_p }}</h4>
-    <button class="btn btn-sm mt-3" type="sumbit">Submit</button>
+    <button class="btn btn-sm mt-3" type="sumbit">Next</button>
   </div>
 </form>
 
