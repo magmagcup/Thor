@@ -1,72 +1,76 @@
 {% extends "game/base.html" %}
+{% load static %}
 
 {% block content %}
 {% if user.is_authenticated %}
-    <h1 class=""style="font-family: 'Supermercado One'; font-size: 80px; text-align:center; color:fefce0 ; padding-top:5%" >Thor: The God of Thunder</h1>
-    <div class="container text-white" style="padding-top:3%">
-        <div class="row justify-content-center">
-            <div class="col-4" style="border-style:solid">
-                <div class="row d-flex justify-content-center" style="padding-top:4%">
-                    <h3>TOP 10 Scoreboard</h3> 
+    <h1 class="mt-5 pt-5" style="font-family: 'Supermercado One'; color:fefce0; font-size: 80px;" >Thor: The God of Thunder</h1>
+    <div class="container text-white my-3">
+        <div class="row d-flex justify-content-around mb-3 align-content-center">
+            <div class="col-5">
+                <div class="score_table row d-flex justify-content-left">
+                    <div class="col-6 d-flex justify-content-center">
+                        <div class="row align-content-center" style="font-size: 20px"> TOPIC </div>
+                    </div>
+                    <div class="dropdown col-6 d-flex justify-content-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">History</a>
+                            <a class="dropdown-item" href="#">Python</a>
+                            <a class="dropdown-item" href="#">Languages</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5"></div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="score_table col-5">
+                <div class="row d-flex justify-content-center mt-2">
+                    <h3 class="mt-1">TOP 10 SCOREBOARD</h3> 
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center">
                         <div class="row"> RANK </div>
                     </div>
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center">
                         NAME
                     </div>
-                    <div class="col-3 d-flex justify-content-center">
-                        TOPIC
-                    </div>
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center">
                         SCORE
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center" style="padding-top: 3%">
-                    <ol>
-                        <li>Player1 History1000</li>
-                        <li>Player2</li>
-                        <li>Player3</li>
-                        <li>Player4</li>
-                        <li>Player5</li>
-                        <li>Player6</li>
-                        <li>Player7</li>
-                        <li>Player8</li>
-                        <li>Player9</li>
-                        <li>Player10</li>
-                    </ol>   
+                    {% for in%}
                 </div>  
             </div>
-            <div class="col-1">
-            </div>
-            <div class="col-4" style="padding-top:6%">
-                <div class="row">
-                    <button type="button" class="btn btn-light btn-lg" style="padding: 5% 39%">Play Now</button>
+            
+            <div class="col-5">
+                <div class="row d-flex justify-content-center">
+                    <img src="{% static 'game/icon.png' %}" alt="Thor Icon" height="300" class="col-12">
                 </div>
-                <div class="row" style="padding-top: 4%">
-                    <div class="col-6 d-flex justify-content-center">
-                        <button type="button" class="btn btn-light" style="padding: 3% 30%"><a href="{% url 'game:statistic' %}">Player Stats</a></button>
-                    </div>
-                    <div class="col-6 d-flex justify-content-center">
-                        <button type="button" class="btn btn-light" style="padding: 3% 28%"><a href="{% url 'game:set' %}">Create Forms</a></button>
-                    </div>
+                <div class="row d-flex justify-content-center my-3">
+                    <button type="button" class="btn btn-light btn-lg col-11">Play Now</button>
+                </div>
+                <div class="row d-flex justify-content-around my-3">
+                    <button type="button" class="btn btn-light col-5"><a href="{% url 'game:statistic' %}">Player Stats</a></button>
+                
+                    <button type="button" class="btn btn-light col-5"><a href="{% url 'game:set' %}">Create Forms</a></button>
                 </div>
             </div>
         </div> 
      </div>
-     <br><br><br><br><br><br><br><br>
 {% else %}
-    <br><br><br><br><br><br><br><br><br>br><br><br><br>
-    <h1 class=""style="font-family: 'Supermercado One'; font-size: 80px; text-align:center; color:fefce0 ; padding-top:5%" >Thor: The God of Thunder</h1>
-    <div class="row justify-content-center">    
+    <h1  class="mt-5 pt-5" style="font-family: 'Supermercado One'; color:fefce0; font-size: 100px; letter-spacing: 38px; padding-top:3%" >THOR</h1>
+    <h1 style="font-family: 'Supermercado One'; color:fefce0; font-size: 40px;" >The God of Thunder</h1>
+    <div class="row justify-content-center" style="padding-top:18%">    
         <div class="col-2 d-flex justify-content-center">
-            <button type="button" class="btn btn-light btn-lg mt-5" style="padding: 26px 63px;"><a href="{% url "social:begin" "google-oauth2" %}">Login with  <i class="fab fa-google" ></i></a></button>
+            <button type="button" class="btn btn-light mt-5" style="padding: 26px 63px; border-style: solid; border-color: grey;"><a href="{% url "social:begin" "google-oauth2" %}">Login with  <i class="fab fa-google" ></i></a></button>
         </div>
     </div>
-    <br><br><br><br>
 {% endif %}
-<br><br><br><br>
+
 {% endblock %}
 
 

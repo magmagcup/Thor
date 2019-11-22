@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* background: rgb(12,18,74);
+    background: linear-gradient(90deg, rgba(12,18,74,1) 16%, rgba(140,0,0,1) 95%); */
+    /* background-size: cover, contain; */
+    background-image: url("bg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+h1 {
+    text-align: center;
+    text-shadow: 5px 4px black;
+  }
+
+.score_table {
+background-color: rgba(18, 33, 39, 0.616);
+border-radius: 15px;
+border-style: solid; 
+}
+
+/* unvisited link */
+a:link {
+color: black;
+}
+
+/* visited link */
+a:visited {
+color: hotpink;
+}
+
+/* mouse over link */
+a:hover {
+color: white;
+}
+
+
+.long_container {
+    min-height:50%;
+}
+
+.medium_container {
+    min-height:10%;
+}
+
+.bigger_font {
+    font-size: 30px;
+}

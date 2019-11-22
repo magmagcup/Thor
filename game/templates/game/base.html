@@ -1,18 +1,20 @@
 {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="{% static 'game/my_style.css' %}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel = "stylesheet" type = "text/css" href="{% static 'game/my_style.css' %}">
 
     <link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Supermercado+One&display=swap">
-
-
+    
     <script src="https://kit.fontawesome.com/b7f2372ef6.js" crossorigin="anonymous"></script>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        {% comment %} <a class="navbar-brand" href="#">Navbar</a> {% endcomment %}
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <img src="{% static 'game/icon.png' %}" alt="Thor Icon" height="40" class="mr-3 ml-1 py-1">
+        <a class="navbar-brand" href="#">THOR: The God of Thunder</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,8 +45,8 @@
             </div>
         {% endif %}
     </nav>
-
-    <div class="container-fluid medium_container background">
+    
+    <div class="container-fluid medium_container">
 <!--    <div class ="nav-bar"></div>-->
     {% block content %}
         {% endblock %}
