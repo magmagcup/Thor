@@ -1,4 +1,4 @@
-var timeleft = 1;
+var time = 1;
 let is_running = false;
 let score = 0;
 document.getElementById("end").style.display = "none";
@@ -12,8 +12,8 @@ start = function () {
             clearInterval(interval);
             document.getElementById("button1").style.display = "none";
         } else {
-            document.getElementById("countdown").innerHTML = timeleft + " second remaining";
-            timeleft++;
+            document.getElementById("countdown").innerHTML = time + " second remaining";
+            time++;
         }
         }, 1000)
         document.getElementById("button1").style.display = "inline";
@@ -23,7 +23,7 @@ start = function () {
 
 stop = function() {
     is_running = false;
-    timeleft = 1;
+    time = 1;
     document.getElementById("countdown").innerHTML = "Game Over";
     document.getElementById("end").style.display = "inline";
 }
