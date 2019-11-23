@@ -32,6 +32,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     answer_text = models.CharField(max_length=100)
     hint_text = models.CharField(max_length=1000000)
 

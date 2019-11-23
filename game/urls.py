@@ -15,7 +15,6 @@ urlpatterns = [
     path('preview',views.preview_form, name='preview'),
     path('stat/', views.get_stat, name='stat'),
     path('statistic/',views.statistic_page, name='statistic'),
-    # path('getthor/', views.get_question, name='getthor'),
     path('topic/', views.topic_page, name='topic'),
-    path('<int:topic_id>/', views.question_page, name='question')
+    path('<int:topic_id>/', views.question_page, name='question'),
 ]

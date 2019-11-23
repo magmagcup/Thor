@@ -38,7 +38,8 @@ def topic_page(request):
 
 def question_page(request, topic_id):
     question = Question.objects.filter(topic_id=topic_id)
-    return render(request, 'game/game.html', {'question':question})
+    answer = Answer.objects.filter(topic_id=topic_id)
+    return render(request, 'game/game.html', {'question':question, 'answer':answer})
 
 
 @login_required
@@ -67,7 +68,7 @@ def preview_form(request):
             difficulty = form.data.get('select_difficulty')
             q = Question(topic_id=topic.id, question_title=title, question_text=question, difficulty=difficulty)
             q.save()
-            assign_answer(question, q.id)
+            assign_answer(question, q.id, topic.id)
             return render(request, "game/preview_form.html", {'question':q})
 
 def discard_form(request, question_id):
@@ -79,7 +80,7 @@ def discard_form(request, question_id):
     else:
         return preview_form(request.POST)
 
-def assign_answer(value,question_id):
+def assign_answer(value,question_id,topic_id):
     last_box_mark = 0
     while (']]' in value):
         start = value.find('[[', last_box_mark)
@@ -87,11 +88,11 @@ def assign_answer(value,question_id):
             break
         mid = value.find('|', last_box_mark)
         end = value.find(']]', last_box_mark)
-        a = Answer(question_id=question_id, answer_text=value[start+2:mid], hint_text=value[mid+1:end])
+        a = Answer(question_id=question_id, topic_id=topic_id, answer_text=value[start+2:mid], hint_text=value[mid+1:end])
         a.save()
         last_box_mark = end + 1
 
 def get_topic(request):
     object_topic = Topic.objects.all()
-    select_topic = [tuple([t,t]) for t in get_topic()]
+    select_topic = [tuple([t,t]) for t in object_topic]
     return select_topic

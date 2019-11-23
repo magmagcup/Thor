@@ -1,19 +1,37 @@
 {% extends "game/base.html" %}
-{% load create_box %}
+{% load gamepage_filter %}
 
 {% block content %}
 
 {% for q in question %}
-{% with question_id=1 %}
-{% if q.id == question_id %}
+{% comment %} {% with question_id=1 %} {% endcomment %}
+{% comment %} {% if q.id == question_id %} {% endcomment %}
+  {% with a=answer|question:q.id %}
     {{q.question_title}}
     <br>
-    {% with text=q.question_text|create_box %}
-    {{ text|safe }}
-    {% endwith %}
+    {{ q.question_text|create_box }}
+    <script>
+      function checkAnswer() {
+      let user_ans = document.getElementsByTagName("INPUT");
+      let real_ans = {{ a|safe }};
+      let i;
+      for (i = 0; i < user_ans.length; i++) {
+        if (user_ans[i].value == ""){
+          user_ans[i].style.backgroundColor = "white";
+        }
+        else if (user_ans[i].value == real_ans[i]){
+          user_ans[i].style.backgroundColor = "green";
+        }
+        else{
+          user_ans[i].style.backgroundColor = "red";
+        }
+      }
+      }
+    </script>
     <br>
-{% endif %}
+{% comment %} {% endif %} {% endcomment %}
 
+{% comment %} {% endwith %} {% endcomment %}
 {% endwith %}
 {% endfor %}
 
