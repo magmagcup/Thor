@@ -2,33 +2,61 @@
 {% load gamepage_filter %}
 
 {% block content %}
+<script>
+window.onload = function() {
+  document.getElementById("id_answer").focus();
+};
+</script>
 
 {% for q in question %}
 {% comment %} {% with question_id=1 %} {% endcomment %}
 {% comment %} {% if q.id == question_id %} {% endcomment %}
   {% with ans=answer|get_answer:q.id hint=answer|get_hint:q.id %}
+  <style> 
+  input[type=text] {
+    padding: 15px 5px;
+    box-sizing: border-box;
+    border: 2px solid #eeeddd;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    outline: none;
+  }
+
+  input[type=text]:focus {
+    border: 2px solid #555;
+  }
+  </style>
     {{q.question_title}}
     <br>
     {{ q.question_text|create_box }}
     <script>
       let user_ans = document.getElementsByTagName("INPUT");
+      let real_ans = {{ ans }};
+      let ans_hint = {{ hint }};
+
+      function adjustBoxSize() {
+        let i;
+        for (i = 0; i < user_ans.length; i++) {
+            user_ans[i].style.size = real_ans[i].length;
+        }
+      }
+
       function checkAnswer() {
-        let real_ans = {{ ans|safe }};
         let i;
         for (i = 0; i < user_ans.length; i++) {
           if (user_ans[i].value == ""){
             user_ans[i].style.backgroundColor = "white";
           }
           else if (user_ans[i].value == real_ans[i]){
-            user_ans[i].style.backgroundColor = "green";
+            user_ans[i].style.backgroundColor = "#6dff6d";
           }
           else{
-            user_ans[i].style.backgroundColor = "red";
+            user_ans[i].style.backgroundColor = "#ff9494";
           }
         }
       }
+
       function showHint() {
-        let ans_hint = {{ hint|safe }};
         for (i = 0; i < user_ans.length; i++) {
           user_ans[i].title = ans_hint[i];
         }
@@ -40,4 +68,5 @@
 {% comment %} {% endwith %} {% endcomment %}
 {% endwith %}
 {% endfor %}
+{% comment %} <input type="button"></input> {% endcomment %}
 {% endblock  %}

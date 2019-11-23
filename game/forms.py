@@ -44,15 +44,18 @@ class QuestionForm(forms.Form):
     )
 
 class AnswerForm(forms.Form):
-    answer = forms.CharField(
-        label=mark_safe(''),
-        max_length=1000,
-        widget=forms.TextInput(
+    answer = forms.CharField(label=mark_safe(''))
+
+    def __init__(self, *args, **kwargs):
+        ans_length = kwargs.pop('ans_length')
+        box_length = kwargs.pop('box_length')
+        super(AnswerForm, self).__init__(*args, **kwargs)
+        self.fields['answer'].widget = forms.TextInput(
             attrs={
                 'id': 'answer',
-                'style': 'height: 50px; font-size: 22px; ',
+                'style': 'height: 28px; font-size: 16px; ',
+                'size': box_length,
+                'maxlength': ans_length,
                 'onblur': 'checkAnswer()',
                 'onmouseover': 'showHint()',
-            }
-        )
-    )
+            })
