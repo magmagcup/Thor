@@ -6,26 +6,32 @@
 {% for q in question %}
 {% comment %} {% with question_id=1 %} {% endcomment %}
 {% comment %} {% if q.id == question_id %} {% endcomment %}
-  {% with a=answer|question:q.id %}
+  {% with ans=answer|get_answer:q.id hint=answer|get_hint:q.id %}
     {{q.question_title}}
     <br>
     {{ q.question_text|create_box }}
     <script>
-      function checkAnswer() {
       let user_ans = document.getElementsByTagName("INPUT");
-      let real_ans = {{ a|safe }};
-      let i;
-      for (i = 0; i < user_ans.length; i++) {
-        if (user_ans[i].value == ""){
-          user_ans[i].style.backgroundColor = "white";
-        }
-        else if (user_ans[i].value == real_ans[i]){
-          user_ans[i].style.backgroundColor = "green";
-        }
-        else{
-          user_ans[i].style.backgroundColor = "red";
+      function checkAnswer() {
+        let real_ans = {{ ans|safe }};
+        let i;
+        for (i = 0; i < user_ans.length; i++) {
+          if (user_ans[i].value == ""){
+            user_ans[i].style.backgroundColor = "white";
+          }
+          else if (user_ans[i].value == real_ans[i]){
+            user_ans[i].style.backgroundColor = "green";
+          }
+          else{
+            user_ans[i].style.backgroundColor = "red";
+          }
         }
       }
+      function showHint() {
+        let ans_hint = {{ hint|safe }};
+        for (i = 0; i < user_ans.length; i++) {
+          user_ans[i].title = ans_hint[i];
+        }
       }
     </script>
     <br>
@@ -34,5 +40,4 @@
 {% comment %} {% endwith %} {% endcomment %}
 {% endwith %}
 {% endfor %}
-
 {% endblock  %}

@@ -19,6 +19,11 @@ def create_box(value):
     return mark_safe(value)
 
 @register.filter
-def question(value, question_id):
+def get_answer(value, question_id):
     ans_queryset = value.filter(question_id=question_id)
-    return [(a.answer_text) for a in ans_queryset]
+    return [ans.answer_text for ans in ans_queryset]
+
+@register.filter
+def get_hint(value, question_id):
+    ans_queryset = value.filter(question_id=question_id)
+    return [ans.hint_text for ans in ans_queryset]

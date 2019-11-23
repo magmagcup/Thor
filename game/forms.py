@@ -51,7 +51,8 @@ class AnswerForm(forms.Form):
             attrs={
                 'id': 'answer',
                 'style': 'height: 50px; font-size: 22px; ',
-                'onblur': 'checkAnswer()'
+                'onblur': 'checkAnswer()',
+                'onmouseover': 'showHint()',
             }
         )
     )
