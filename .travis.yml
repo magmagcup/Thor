@@ -14,6 +14,7 @@
  script:
    - python manage.py makemigrations
    - python manage.py migrate
+   - coverage run manage.py test game/tests
    - coverage xml --omit=mysite/*,game/migrations/*,manage.py
 
  after_success:
