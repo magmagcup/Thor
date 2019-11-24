@@ -2,71 +2,90 @@
 {% load gamepage_filter %}
 
 {% block content %}
+
+<style> 
+input[type=text] {
+  padding: 15px 5px;
+  box-sizing: border-box;
+  border: 2px solid #eeeddd;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+
+input[type=text]:focus {
+  border: 2px solid #555;
+}
+
+.main_focus {
+  background-color:white;
+  padding:20px;
+}
+
+.title {
+  text-align: center;
+}
+
+.q_text {
+  text-align: justified;
+}
+
+</style>
+
+<span class="main_focus">
+  <span class="title"><h3 id="title"></h3></span>
+  <br>
+  <span class="q_text">
+    <p id="question"></p>
+  </span>
+</span>
+<br>
+<button type="button" id="btn-next" onclick="nextQuestion()" disabled>Next</button>
 <script>
-window.onload = function() {
-  document.getElementById("id_answer").focus();
-};
+  let q_index = 0;
+  let q_title = {{q_title|safe}};
+  let q_text = {{q_text|safe}};
+  let answer = {{answer|safe}};
+  let hint = {{hint|safe}};
+  let user_ans = document.getElementsByTagName("INPUT");
+  let real_ans = answer[q_index];
+  let ans_hint = hint[q_index];
+  let all_correct = [];
+  let green = "#6dff6d";
+  let red = "#ff9494";
+
+  window.onload = function() {
+    document.getElementById("answer").focus();
+  };
+
+  document.getElementById("title").innerHTML = q_title[q_index];
+  document.getElementById("question").innerHTML = q_text[q_index];
+
+  function checkAnswer() {
+    let i;
+    for (i = 0; i < user_ans.length; i++) {
+      if (user_ans[i].value == ""){
+        user_ans[i].style.backgroundColor = "white";
+      }
+      else if (user_ans[i].value == real_ans[i]){
+        user_ans[i].style.backgroundColor = green;
+      }
+      else{
+        user_ans[i].style.backgroundColor = red;
+      }
+    }
+  }
+
+  function nextQuestion(){
+
+    if (q_index < 9){
+      q_index += 1;
+      document.getElementById("title").innerHTML = q_title[q_index];
+      document.getElementById("question").innerHTML = q_text[q_index];
+      document.getElementById("answer").focus();
+      real_ans = answer[q_index];
+      ans_hint = hint[q_index];
+    }
+  }
 </script>
-
-{% for q in question %}
-{% comment %} {% with question_id=1 %} {% endcomment %}
-{% comment %} {% if q.id == question_id %} {% endcomment %}
-  {% with ans=answer|get_answer:q.id hint=answer|get_hint:q.id %}
-  <style> 
-  input[type=text] {
-    padding: 15px 5px;
-    box-sizing: border-box;
-    border: 2px solid #eeeddd;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-    outline: none;
-  }
-
-  input[type=text]:focus {
-    border: 2px solid #555;
-  }
-  </style>
-    {{q.question_title}}
-    <br>
-    {{ q.question_text|create_box }}
-    <script>
-      let user_ans = document.getElementsByTagName("INPUT");
-      let real_ans = {{ ans }};
-      let ans_hint = {{ hint }};
-
-      function adjustBoxSize() {
-        let i;
-        for (i = 0; i < user_ans.length; i++) {
-            user_ans[i].style.size = real_ans[i].length;
-        }
-      }
-
-      function checkAnswer() {
-        let i;
-        for (i = 0; i < user_ans.length; i++) {
-          if (user_ans[i].value == ""){
-            user_ans[i].style.backgroundColor = "white";
-          }
-          else if (user_ans[i].value == real_ans[i]){
-            user_ans[i].style.backgroundColor = "#6dff6d";
-          }
-          else{
-            user_ans[i].style.backgroundColor = "#ff9494";
-          }
-        }
-      }
-
-      function showHint() {
-        for (i = 0; i < user_ans.length; i++) {
-          user_ans[i].title = ans_hint[i];
-        }
-      }
-    </script>
-    <br>
-{% comment %} {% endif %} {% endcomment %}
-
-{% comment %} {% endwith %} {% endcomment %}
-{% endwith %}
-{% endfor %}
-{% comment %} <input type="button"></input> {% endcomment %}
-{% endblock  %}
+{% endblock %}

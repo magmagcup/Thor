@@ -49,6 +49,7 @@ class AnswerForm(forms.Form):
     def __init__(self, *args, **kwargs):
         ans_length = kwargs.pop('ans_length')
         box_length = kwargs.pop('box_length')
+        hint = kwargs.pop('hint')
         super(AnswerForm, self).__init__(*args, **kwargs)
         self.fields['answer'].widget = forms.TextInput(
             attrs={
@@ -56,6 +57,6 @@ class AnswerForm(forms.Form):
                 'style': 'height: 28px; font-size: 16px; ',
                 'size': box_length,
                 'maxlength': ans_length,
+                'title': hint,
                 'onblur': 'checkAnswer()',
-                'onmouseover': 'showHint()',
             })
