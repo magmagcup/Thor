@@ -4,14 +4,15 @@
 }
 
 body {
-    /* background: rgb(12,18,74);
-    background: linear-gradient(90deg, rgba(12,18,74,1) 16%, rgba(140,0,0,1) 95%); */
-    /* background-size: cover, contain; */
-    background-image: url("bg.jpg");
+    background: rgb(12,18,74);
+    background: linear-gradient(90deg, rgba(12,18,74,1) 16%, rgba(140,0,0,1) 95%);
+    /* background-image: url("bg.jpg"); */
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    /* background-attachment: fixed; */
+    background-size: cover, contain;
+    font-family: 'Mallanno';
 }
+
 
 h1 {
     text-align: center;
@@ -19,10 +20,10 @@ h1 {
   }
 
 .score_table {
-background-color: rgba(18, 33, 39, 0.616);
-border-radius: 15px;
-border-style: solid; 
-}
+    background-color: rgba(18, 33, 39, 0.616);
+    border-radius: 15px;
+    border-style: solid; 
+    }
 
 /* unvisited link */
 a:link {

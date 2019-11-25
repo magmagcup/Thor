@@ -3,7 +3,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    <h1 class="mt-5 pt-5" style="font-family: 'Supermercado One'; color:fefce0; font-size: 80px;" >Thor: The God of Thunder</h1>
+    <h1 class="mt-5 pt-5" style="font-family: 'Odibee Sans'; color:fefce0; font-size: 80px; letter-spacing: 5">Thor: The God of Thunder</h1>
     <div class="container text-white my-3">
         <div class="row d-flex justify-content-around mb-3 align-content-center">
             <div class="col-5">
@@ -17,7 +17,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">History</a>
-                            <a class="dropdown-item" href="#">Python</a>
+                            <a class="dropdown-item" href="#">Python</a> 
                             <a class="dropdown-item" href="#">Languages</a>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
             
             <div class="col-5">
                 <div class="row d-flex justify-content-center">
-                    <img src="{% static 'game/icon.png' %}" alt="Thor Icon" height="300" class="col-12">
+                    <img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="300" class="col-12">
                 </div>
                 <div class="row d-flex justify-content-center my-3">
                     <button type="button" class="btn btn-light btn-lg col-11">Play Now</button>
@@ -61,13 +61,16 @@
         </div> 
      </div>
 {% else %}
-    <h1  class="mt-5 pt-5" style="font-family: 'Supermercado One'; color:fefce0; font-size: 100px; letter-spacing: 38px; padding-top:3%" >THOR</h1>
-    <h1 style="font-family: 'Supermercado One'; color:fefce0; font-size: 40px;" >The God of Thunder</h1>
-    <div class="row justify-content-center" style="padding-top:18%">    
+    <center>
+    <h1  class="mt-5 pt-5" style="font-family: 'Baloo Bhai'; color: fefce0; font-size: 100px; letter-spacing: 38px;" >THOR</h1>
+    <h1 style="font-family: 'Odibee Sans'; color: F5D875; font-size: 40px; letter-spacing: 10;">The God of Thunder</h1>
+    <img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="300">
+    <div class="mt-3 row justify-content-center">    
         <div class="col-2 d-flex justify-content-center">
-            <button type="button" class="btn btn-light mt-5" style="padding: 26px 63px; border-style: solid; border-color: grey;"><a href="{% url "social:begin" "google-oauth2" %}">Login with  <i class="fab fa-google" ></i></a></button>
+            <button type="button" class="btn btn-light" style="padding: 26px 63px; border-style: solid;"><a href="{% url "social:begin" "google-oauth2" %}">Login with <i class="ml-1 fab fa-google" ></i></a></button>
         </div>
     </div>
+    </center>
 {% endif %}
 
 {% endblock %}
