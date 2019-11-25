@@ -15,4 +15,5 @@ urlpatterns = [
     path('stat/', views.get_stat, name='stat'),
     path('statistic/',views.statistic_page, name='statistic'),
     path('thor/',views.game_page, name='thor'),
-]
+    path('howtoplay/', views.how_to_play_page, name='howtoplay')
+]                       

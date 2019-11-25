@@ -34,6 +34,9 @@ def game_page(request):
     question = Question.objects.all()
     return render(request, 'game/game.html', {'question': question})
 
+def how_to_play_page(request):
+    return render(request, 'game/howto.html')
+
 
 @login_required
 def get_stat(request):
