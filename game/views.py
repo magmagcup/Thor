@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm, AnswerForm
 from .models import Question, Statistic, Topic, Answer
 from random import sample
+
 # Create your views here.
 
 def index(request):
@@ -64,7 +65,7 @@ def create_answer_box(value):
         mid = value.find('|')
         end = value.find(']]')
         ans_length = mid - start - 2
-        box_length = ans_length - 2
+        box_length = ans_length
         if box_length < 1:
             box_length = 1
         hint = value[mid+1:end]
@@ -87,17 +88,14 @@ def assign_answer(value, question_id, topic_id):
         a.save()
         last_box_mark = end + 1
 
-
 @login_required
 def get_stat(request):
     """Create statistic for each player include score"""
     user_id = request.user.id
     status = True
     check_id = Statistic.objects.filter(user_id=user_id)
-    for check in check_id:
-        print("check.id =  ", check)
-        if check.user_id == user_id:
-            status = False
+    if check_id:
+        status = False
     if User.is_authenticated and status == True:
         user = User.objects.get(pk=user_id)
         stat = Statistic(user=user)
@@ -127,7 +125,11 @@ def discard_form(request, question_id):
     else:
         return preview_form(request.POST)
 
-def get_topic(request):
-    object_topic = Topic.objects.all()
-    select_topic = [tuple([t,t]) for t in object_topic]
-    return select_topic
+def receive_score(request):
+    user_id = request.user.id
+    score = request.GET.get('result_score')
+    profile = Statistic.objects.get(user=user_id)
+    if int(profile.best_score) < int(score):
+        profile.best_score = int(score)
+        profile.save()
+    return render(request, "game/home.html")
