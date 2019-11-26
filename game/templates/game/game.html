@@ -55,6 +55,7 @@ input[type=text]:focus {
   let q_text = {{q_text|safe}};
   let answer = {{answer|safe}};
   let hint = {{hint|safe}};
+  let total_question = q_title.length;
   let user_ans = document.getElementsByTagName("INPUT");
   let real_ans = answer[q_index];
   let ans_hint = hint[q_index];
@@ -123,7 +124,7 @@ input[type=text]:focus {
 
   function nextQuestion(){
 
-    if (q_index < 9){
+    if (q_index < total_question){
       q_index += 1;
       document.getElementById("title").innerHTML = q_title[q_index];
       document.getElementById("question").innerHTML = q_text[q_index];
@@ -132,8 +133,8 @@ input[type=text]:focus {
       ans_hint = hint[q_index];
       document.getElementById("btn-next").disabled = true;
     }else{
-        result = Math.floor((score/remaining_time)*100)
-        clearInterval(downloadTimer)
+        result = Math.floor((score/remaining_time)*100);
+        clearInterval(downloadTimer);
         location.href="/game/";
     }
   }

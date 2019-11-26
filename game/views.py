@@ -41,12 +41,22 @@ def topic_page(request):
 def question_difficulty(value, topic_id, difficulty):
     return [q for q in value.objects.filter(topic_id=topic_id, difficulty=difficulty)]
 
+
+def sample_question(value, topic_id, diff, question_no):
+    each_question_diff = question_difficulty(value, topic_id, diff)
+    try:
+        shuffle = sample(each_question_diff, question_no)
+    except:
+        shuffle = sample(each_question_diff, len(each_question_diff))
+    return shuffle
+
 def random_question_list(value, topic_id):
-    easy = sample(question_difficulty(value, topic_id, 'easy'), 3)
-    normal = sample(question_difficulty(value, topic_id, 'normal'), 3)
-    hard = sample(question_difficulty(value, topic_id, 'hard'), 3)
-    extreme = sample(question_difficulty(value, topic_id, 'extreme'), 1)
-    return easy + normal + hard + extreme
+    question_list = []
+    for diff in ['easy', 'normal', 'hard']:
+        shuffle = sample_question(value, topic_id, diff, 3)
+        question_list += shuffle
+    question_list += sample_question(value, topic_id, 'extreme', 1)
+    return question_list
 
 def question_page(request, topic_id):
     question = random_question_list(Question, topic_id)
