@@ -17,4 +17,5 @@ urlpatterns = [
     path('statistic/',views.statistic_page, name='statistic'),
     path('topic/', views.topic_page, name='topic'),
     path('<int:topic_id>/', views.question_page, name='question'),
+    path('receive/', views.receive_score, name='receive_score'),
 ]
