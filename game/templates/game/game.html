@@ -117,6 +117,7 @@ input[type=text]:focus {
     }
     if (all_correct) {
         document.getElementById("btn-next").disabled = false;
+        document.getElementById("btn-next").focus();
     }
   }
 
@@ -129,6 +130,7 @@ input[type=text]:focus {
       document.getElementById("answer").focus();
       real_ans = answer[q_index];
       ans_hint = hint[q_index];
+      document.getElementById("btn-next").disabled = true;
     }else{
         result = Math.floor((score/remaining_time)*100)
         clearInterval(downloadTimer)
