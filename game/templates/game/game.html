@@ -41,7 +41,7 @@ input[type=text]:focus {
   </div>
 </div>
 <br>
-<button type="button" id="btn-next" onclick="nextQuestion()">Next</button>
+<button type="button" id="btn-next" onclick="nextQuestion()" disabled>Next</button>
 <a href="{% url 'game:home' %}">Home</a>
 
 <script>
@@ -58,8 +58,7 @@ input[type=text]:focus {
   let user_ans = document.getElementsByTagName("INPUT");
   let real_ans = answer[q_index];
   let ans_hint = hint[q_index];
-  let all_correct = true;
-  let green = "#6dff6d";
+  let green = "rgb(109, 255, 109)";
   let red = "#ff9494";
 
   window.onload = function() {
@@ -107,7 +106,15 @@ input[type=text]:focus {
         user_ans[i].style.backgroundColor = red;
       }
     }
-
+    
+    let all_correct = true;
+    let j;
+    for (j = 0; j < user_ans.length; j++) {
+      if (user_ans[j].style.backgroundColor != green) {
+        all_correct = false;
+        break;
+      }
+    }
     if (all_correct) {
         document.getElementById("btn-next").disabled = false;
     }
