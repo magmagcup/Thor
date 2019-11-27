@@ -80,13 +80,14 @@ def question_page(request, topic_id):
     questions = random_question_list(Question, topic_id)
     q_title = [q.question_title for q in questions]
     q_text = [q.question_text for q in questions]
+    q_diff = [q.difficulty for q in questions]
     ans, hint = [], []
     for question in questions:
         answer_set = list(Answer.objects.filter(question_id=question.id, topic_id=topic_id))
         ans.append([a.answer_text for a in answer_set])
         hint.append([a.hint_text for a in answer_set])
     return render(request, 'game/game.html', {
-        'q_title':q_title, 'q_text':q_text, 'answer':ans, 'hint':hint})
+        'q_title':q_title, 'q_text':q_text, 'answer':ans, 'hint':hint, 'q_diff':q_diff})
 
 def create_answer_box(value: str):
     """Replace '[[__|__]]' with input tag.

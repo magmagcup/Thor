@@ -33,6 +33,7 @@ input[type=text]:focus {
 
 <h2 id="countdown" align="right" class="text-white"></h2>
 <div class="main_focus">
+  <h4 id="diff"></h4>
   <div class="title"><h3 id="title"></h3></div>
   <br>
   <div class="q_text">
@@ -52,6 +53,7 @@ input[type=text]:focus {
   let q_index = 0;
   let q_title = {{q_title|safe}};
   let q_text = {{q_text|safe}};
+  let q_diff = {{q_diff|safe}}
   let answer = {{answer|safe}};
   let hint = {{hint|safe}};
   let total_question = q_title.length - 1;
@@ -70,15 +72,15 @@ input[type=text]:focus {
     let min = Math.floor(time/60);
     if (sec <= 9){
         if (min <= 9){
-            document.getElementById("countdown").innerHTML = "0" + min + " : " + "0" + sec + " remaining"
+            document.getElementById("countdown").innerHTML = "0" + min + " : " + "0" + sec + " Remaining"
         }else{
-            document.getElementById("countdown").innerHTML = min + " : " + "0" + sec + " remaining"
+            document.getElementById("countdown").innerHTML = min + " : " + "0" + sec + " Remaining"
         }
     }else{
         if(min <= 9){
-            document.getElementById("countdown").innerHTML = "0" + min + " : " + sec + " remaining"
+            document.getElementById("countdown").innerHTML = "0" + min + " : " + sec + " Remaining"
         }else{
-            document.getElementById("countdown").innerHTML = min + " : " + sec + " remaining"
+            document.getElementById("countdown").innerHTML = min + " : " + sec + " Remaining"
         }
     }
     time--;
@@ -89,6 +91,7 @@ input[type=text]:focus {
     }
   },1000)
 
+  document.getElementById("diff").innerHTML = "Difficulty: " + q_diff[q_index].charAt(0).toUpperCase() + q_diff[q_index].slice(1);
   document.getElementById("title").innerHTML = q_title[q_index];
   document.getElementById("question").innerHTML = q_text[q_index];
 
@@ -125,6 +128,7 @@ input[type=text]:focus {
 
     if (q_index < total_question){
       q_index += 1;
+      document.getElementById("diff").innerHTML = "Difficulty: " + q_diff[q_index].charAt(0).toUpperCase() + q_diff[q_index].slice(1);
       document.getElementById("title").innerHTML = q_title[q_index];
       document.getElementById("question").innerHTML = q_text[q_index];
       document.getElementById("answer").focus();
