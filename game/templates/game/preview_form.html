@@ -1,3 +1,68 @@
+{% extends "game/base.html" %}
+{% block content %}
 
-<a href="{% url 'game:discard' question.id%}">Back to form</a>
-<a href="{% url 'game:home' %}">Save</a>
+<style> 
+    input[type=text] {
+        padding: 15px 5px;
+        box-sizing: border-box;
+        border: 2px solid #999;
+        -webkit-transition: 0.2s;
+        transition: 0.2s;
+        outline: none;
+    }
+
+    input[type=text]:focus {
+        border: 2px solid #555;
+    }
+
+    .head {
+        color:white;
+        text-align:center;
+        margin-top: 20px;
+    }
+
+    .main_focus {
+        background-color:white;
+        padding:20px;
+        margin:20px;
+    }
+
+    .title, .button-group {
+        text-align: center;
+    }
+
+    .q_text {
+        text-align: justified;
+    }
+
+    a.button {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: css-button;
+        border-radius: 4px;
+        padding: 12px 36px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+</style>
+
+<h1 class="head">Preview Form</h1>
+<div class="main_focus">
+    <h4>Difficulty: {{question.difficulty|title}}</h4>
+    <h3 class="title">{{question.question_title}}</h3>
+    <br>
+    <p class="q_text">{{question.question_text|safe}}</p>
+</div>
+
+<div class="button-group">
+    <a class="button" href="{% url 'game:discard' question.id%}">Back to Edit Form</a>
+    <a class="button" href="{% url 'game:form' %}">Save and Create Another</a>
+    <a class="button" href="{% url 'game:home' %}">Save</a>
+</div>
+
+{% endblock %}
