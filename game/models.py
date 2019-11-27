@@ -20,15 +20,9 @@ class Question(models.Model):
     question_text = models.CharField(max_length=10000000)
 
     difficulty = models.CharField(max_length=10)
-    
-    pub_date = models.DateTimeField('date published', blank=True, null=True)
 
     def __str__(self):
         return self.question_title
-
-    def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -42,11 +36,6 @@ class Answer(models.Model):
 class Statistic(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     best_score = models.IntegerField(default=0)
-    pub_date = models.DateTimeField('date published', blank=True, null=True)
 
     def __str__(self):
         return self.user.username
-
-    def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
