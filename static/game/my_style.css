@@ -2,42 +2,52 @@
     margin: 0;
     padding: 0;
 }
+@font-face
+{
+    font-family: 'THOR Ragnarok';
+    src: url('THOR Ragnarok.eot') url('THOR Ragnarok.eot?#') format('embedded-opentype'),
+    url('THOR Ragnarok.woff') format('woff'),
+    url('THOR Ragnarok.ttf') format('truetype');
+}
 
 body {
-    background: rgb(12,18,74);
-    background: linear-gradient(90deg, rgba(12,18,74,1) 16%, rgba(140,0,0,1) 95%);
-    /* background-image: url("bg.jpg"); */
+    background-image: url("lightning.jpg");
     background-repeat: no-repeat;
-    /* background-attachment: fixed; */
+    background-attachment: fixed;
     background-size: cover, contain;
-    font-family: 'Mallanno';
+    font-family: 'Mallanna';
 }
 
 
 h1 {
     text-align: center;
-    text-shadow: 5px 4px black;
+    text-shadow: 5px 2px darkred;
   }
 
+.col-12 {
+width: 100% !important;
+}
+
+
 .score_table {
-    background-color: rgba(18, 33, 39, 0.616);
+    background-color: rgba(70, 83, 88, 0.445);
     border-radius: 15px;
     border-style: solid; 
     }
 
 /* unvisited link */
 a:link {
-color: black;
+color: rebeccapurple;
 }
 
 /* visited link */
 a:visited {
-color: hotpink;
+color: black;
 }
 
 /* mouse over link */
 a:hover {
-color: white;
+color: palevioletred;
 }
 
 

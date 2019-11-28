@@ -3,7 +3,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    <h1 class="mt-5 pt-5" style="font-family: 'Odibee Sans'; color:fefce0; font-size: 80px; letter-spacing: 5">Thor: The God of Thunder</h1>
+    <h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Thor: The God of Thunder</h1>
     <div class="container text-white my-3">
         <div class="row d-flex justify-content-around mb-3 align-content-center">
             <div class="col-5">
@@ -47,7 +47,7 @@
             
             <div class="col-5">
                 <div class="row d-flex justify-content-center">
-                    <img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="300" class="col-12">
+                    <center><img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="350"></center>
                 </div>
                 <div class="row d-flex justify-content-center my-3">
                     <button type="button" class="btn btn-light btn-lg col-11">Play Now</button>
@@ -62,9 +62,9 @@
      </div>
 {% else %}
     <center>
-    <h1  class="mt-5 pt-5" style="font-family: 'Baloo Bhai'; color: fefce0; font-size: 100px; letter-spacing: 38px;" >THOR</h1>
-    <h1 style="font-family: 'Odibee Sans'; color: F5D875; font-size: 40px; letter-spacing: 10;">The God of Thunder</h1>
-    <img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="300">
+    <h1  class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color: rosybrown; font-size: 100px; letter-spacing: 38px; text-shadow: 4px 2px white" >THOR</h1>
+    <h2 style="font-family: 'THOR Ragnarok'; color: white; font-size: 40px; font-type:extra bold; letter-spacing: 5;">The God of Thunder</h2>
+    <img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="300" width="auto">
     <div class="mt-3 row justify-content-center">    
         <div class="col-2 d-flex justify-content-center">
             <button type="button" class="btn btn-light" style="padding: 26px 63px; border-style: solid;"><a href="{% url "social:begin" "google-oauth2" %}">Login with <i class="ml-1 fab fa-google" ></i></a></button>
