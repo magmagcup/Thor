@@ -86,8 +86,9 @@ def question_page(request, topic_id):
         answer_set = list(Answer.objects.filter(question_id=question.id, topic_id=topic_id))
         ans.append([a.answer_text for a in answer_set])
         hint.append([a.hint_text for a in answer_set])
+    get_best_score(request, topic_id)
     return render(request, 'game/game.html', {
-        'q_title':q_title, 'q_text':q_text, 'answer':ans, 'hint':hint, 'q_diff':q_diff})
+        'q_title':q_title, 'q_text':q_text, 'answer':ans, 'hint':hint, 'q_diff':q_diff, 'topic_id':topic_id})
 
 def create_answer_box(value: str):
     """Replace '[[__|__]]' with input tag.
@@ -162,15 +163,18 @@ def discard_form(request, question_id):
         return redirect("game:form")
     return preview_form(request.POST)
 
-def receive_score(request):
+def receive_score(request, topic_id):
     """Save highscore to User profile when the game finished."""
     user_id = request.user.id
-    score = request.GET.get('result_score')
-    profile = Statistic.objects.get(user=user_id)
-    if int(profile.best_score) < int(score):
-        profile.best_score = int(score)
-        profile.save()
-    return render(request, "game/home.html")
+    topic = get_object_or_404(Topic, pk=topic_id)
+    profile = Best_score.objects.get(user=user_id, key=topic.topic_name)
+    try:
+        score = request.GET.get('result_score')
+        if int(profile.value) < int(score):
+            profile.value = int(score)
+            profile.save()
+    except:
+        pass
 
 def get_best_score(request, topic_id):
     user_id = request.user.id
@@ -179,11 +183,7 @@ def get_best_score(request, topic_id):
     score_id = Statistic()
     check_key = Best_score.objects.filter(key=topic.topic_name, user=user_id)
     if check_key:
-        s = Best_score.objects.get(key=topic.topic_name, user=user_id)
-        if score_id.score > s.value:
-            s.value = 1
-            s.save()
-        return redirect('game:home')
-    s = Best_score(user=get_user, key=topic.topic_name, value=0)
-    s.save()
-    return redirect('game:home')
+        receive_score(request, topic_id)
+    else:
+        s = Best_score(user=get_user, key=topic.topic_name, value=0)
+        s.save()

@@ -47,6 +47,7 @@ input[type=text]:focus {
 <script>
 
   let time = 1200;
+  let max_time = 1200;
   let score = 0;
   let result = 0;
   let q_index = 0;
@@ -84,8 +85,10 @@ input[type=text]:focus {
     }
     time--;
     if (time<0){
-        location.href="/game/";
-        clearInterval(downloadTimer)
+        result = Math.floor((score/(max_time-time))*100);
+        clearInterval(downloadTimer);
+        location.href="/game/"
+        
     }
   },1000)
 
@@ -134,15 +137,15 @@ input[type=text]:focus {
       ans_hint = hint[q_index];
       document.getElementById("btn-next").disabled = true;
     }else{
-        result = Math.floor((score/time)*100);
+        result = Math.floor((score/(max_time-time))*100);
         clearInterval(downloadTimer);
-        location.href="/game/";
+        location.href="/game/"
     }
   }
 
 $("#btn-next").click(function(){
     $.ajax({
-        url:'{% url "game:receive_score" %}',
+        url:'{% url "game:question" topic_id %}',
         data:{
             'result_score':result
         },
