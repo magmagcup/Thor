@@ -168,13 +168,16 @@ def receive_score(request, topic_id):
     user_id = request.user.id
     topic = get_object_or_404(Topic, pk=topic_id)
     profile = Best_score.objects.get(user=user_id, key=topic.topic_name)
-    try:
-        score = request.GET.get('result_score')
-        if int(profile.value) < int(score):
-            profile.value = int(score)
-            profile.save()
-    except:
-        pass
+    check_key = Best_score.objects.filter(key=topic.topic_name, user=user_id)
+    if check_key:
+        try:
+            score = request.GET.get('result_score')
+            if int(profile.value) < int(score):
+                profile.value = int(score)
+                profile.save()
+        except:
+            pass
+    return redirect("game:home")
 
 def get_best_score(request, topic_id):
     user_id = request.user.id
@@ -182,8 +185,6 @@ def get_best_score(request, topic_id):
     get_user = User.objects.get(pk=user_id)
     score_id = Statistic()
     check_key = Best_score.objects.filter(key=topic.topic_name, user=user_id)
-    if check_key:
-        receive_score(request, topic_id)
-    else:
+    if not check_key:
         s = Best_score(user=get_user, key=topic.topic_name, value=0)
         s.save()

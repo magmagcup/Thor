@@ -87,7 +87,7 @@ input[type=text]:focus {
     if (time<0){
         result = Math.floor((score/(max_time-time))*100);
         clearInterval(downloadTimer);
-        location.href="/game/"
+        location.href='{% url "game:receive" topic_id %}';
         
     }
   },1000)
@@ -139,13 +139,13 @@ input[type=text]:focus {
     }else{
         result = Math.floor((score/(max_time-time))*100);
         clearInterval(downloadTimer);
-        location.href="/game/"
+        location.href='{% url "game:receive" topic_id %}';
     }
   }
 
 $("#btn-next").click(function(){
     $.ajax({
-        url:'{% url "game:question" topic_id %}',
+        url:'{% url "game:receive" topic_id %}',
         data:{
             'result_score':result
         },
