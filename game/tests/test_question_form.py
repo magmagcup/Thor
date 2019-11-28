@@ -37,6 +37,7 @@ class QuestionFormTest(TestCase):
     def test_invalid_form(self):
         self.assertTrue(self.post_form.is_valid())
         self.assertFalse(self.form.is_valid())
+        self.assertFalse(QuestionForm({'topic':self.topic,}).is_valid())
     
     def test_question_form_tag_html(self):
         self.assertTrue(self.form)

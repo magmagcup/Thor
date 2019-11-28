@@ -48,7 +48,6 @@ input[type=text]:focus {
 
   let time = 1200;
   let score = 0;
-  let remaining_time=0;
   let result = 0;
   let q_index = 0;
   let q_title = {{q_title|safe}};
@@ -84,7 +83,6 @@ input[type=text]:focus {
         }
     }
     time--;
-    remaining_time++;
     if (time<0){
         location.href="/game/";
         clearInterval(downloadTimer)
@@ -136,7 +134,7 @@ input[type=text]:focus {
       ans_hint = hint[q_index];
       document.getElementById("btn-next").disabled = true;
     }else{
-        result = Math.floor((score/remaining_time)*100);
+        result = Math.floor((score/time)*100);
         clearInterval(downloadTimer);
         location.href="/game/";
     }

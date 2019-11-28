@@ -35,7 +35,14 @@ class Answer(models.Model):
 
 class Statistic(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    best_score = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username
+
+class Best_score(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    key = models.CharField(max_length=100)
+    value = models.IntegerField(default=0)
+
+    def __str__(self):
+        return  self.key

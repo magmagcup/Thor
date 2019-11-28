@@ -1,12 +1,12 @@
 from random import sample
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm, AnswerForm
-from .models import Question, Statistic, Topic, Answer
+from .models import Question, Statistic, Topic, Answer, Best_score
 
 # Create your views here.
 
@@ -171,3 +171,19 @@ def receive_score(request):
         profile.best_score = int(score)
         profile.save()
     return render(request, "game/home.html")
+
+def get_best_score(request, topic_id):
+    user_id = request.user.id
+    topic = get_object_or_404(Topic, pk=topic_id)
+    get_user = User.objects.get(pk=user_id)
+    score_id = Statistic()
+    check_key = Best_score.objects.filter(key=topic.topic_name, user=user_id)
+    if check_key:
+        s = Best_score.objects.get(key=topic.topic_name, user=user_id)
+        if score_id.score > s.value:
+            s.value = 1
+            s.save()
+        return redirect('game:home')
+    s = Best_score(user=get_user, key=topic.topic_name, value=0)
+    s.save()
+    return redirect('game:home')
