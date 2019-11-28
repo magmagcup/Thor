@@ -1,6 +1,7 @@
 # Thor: The God of Thunder  
 
-<!-- [![codecov](https://codecov.io/gh/magmagcup/thor/branch/master/graph/badge.svg)](https://codecov.io/gh/magmagcup/thor) -->
+[![Build Status](https://travis-ci.com/magmagcup/Thor.svg?branch=develop)](https://travis-ci.com/magmagcup/Thor)
+[![codecov](https://codecov.io/gh/magmagcup/thor/branch/develop/graph/badge.svg)](https://codecov.io/gh/magmagcup/thor) 
 
 ## Team members
 
