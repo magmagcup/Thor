@@ -14,11 +14,6 @@ def index(request):
     """Redirect to index page."""
     return HttpResponseRedirect(reverse("game:index"))
 
-def form_page(request):
-    """Redirect to Add Question Form page."""
-    form = QuestionForm()
-    context = {'form': form}
-    return render(request, 'game/form.html', context)
 
 def page404(request, exception):
     """Redirect to 404 page."""
@@ -33,17 +28,25 @@ def home_page(request):
     """Redirect to homepage."""
     return render(request, 'game/home.html')
 
+@login_required
+def form_page(request):
+    """Redirect to Add Question Form page."""
+    form = QuestionForm()
+    context = {'form': form}
+    return render(request, 'game/form.html', context)
 
+@login_required
 def statistic_page(request):
     """Redirect to Stat page."""
     statistic = Statistic.objects.all()
     return render(request, 'game/statistic.html', {'stat':statistic})
 
-
+@login_required
 def topic_page(request):
     """Redirect to Select Topic page."""
     topic = Topic.objects.all()
     return render(request, 'game/topic.html', {'topic':topic})
+
 
 def question_difficulty(value: Question, topic_id: int, difficulty: str):
     """Return list of Question with filtered topic_id and difficulty."""
@@ -74,7 +77,7 @@ def random_question_list(value, topic_id: int):
     question_list += sample_question(value, topic_id, 'extreme', 1)
     return question_list
 
-
+@login_required
 def question_page(request, topic_id):
     """Redirect to the Game page."""
     questions = random_question_list(Question, topic_id)
@@ -134,8 +137,13 @@ def get_stat(request):
         user = User.objects.get(pk=user_id)
         stat = Statistic(user=user)
         stat.save()
-    return redirect('game:home')
+    try:
+        next_page = request.GET['next']
+        return HttpResponseRedirect(next_page)
+    except:
+        return redirect('game:home')
 
+@login_required
 def preview_form(request):
     """Reidrect to Form Preview page."""
     if request.method == 'POST':
@@ -154,6 +162,7 @@ def preview_form(request):
             assign_answer(raw_question, question.id, topic.id)
             return render(request, "game/preview_form.html", {'question': question})
 
+@login_required
 def discard_form(request, question_id):
     """Discard the Question Form."""
     check = Question.objects.filter(pk=question_id)
@@ -163,6 +172,7 @@ def discard_form(request, question_id):
         return redirect("game:form")
     return preview_form(request.POST)
 
+@login_required
 def receive_score(request, topic_id):
     """Save highscore to User profile when the game finished."""
     user_id = request.user.id
@@ -178,6 +188,7 @@ def receive_score(request, topic_id):
         except:
             pass
     return redirect("game:home")
+
 
 def get_best_score(request, topic_id):
     user_id = request.user.id
