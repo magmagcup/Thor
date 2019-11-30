@@ -3,6 +3,31 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+<script>
+
+    function change_data() {
+        var x = document.getElementById("select_topic").value;
+        var rank_num = 1;
+        var num_reset_score = 1;
+        {% for each_score in best %}
+            var topic_text = "{{ each_score.key }}"
+            if (x == topic_text) {
+                var name_id = "name_" + rank_num;
+                var name_score = "num_" + rank_num;
+                document.getElementById(name_id).innerHTML = "{{ each_score.user }}";
+                document.getElementById(name_score).innerHTML = {{ each_score.value }};
+                rank_num++;
+            } else {
+                var name_id = "name_" + num_reset_score;
+                var name_score = "num_" + num_reset_score;
+                document.getElementById(name_id).innerHTML = "";
+                document.getElementById(name_score).innerHTML = "";
+            }
+            num_reset_score++;
+        {% endfor %}
+    }
+</script>
+
     <h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Thor: The God of Thunder</h1>
     <div class="container text-white my-3">
         <div class="row d-flex justify-content-around mb-3 align-content-center">
@@ -12,8 +37,8 @@
                         <div class="row align-content-center" style="font-size: 20px"> TOPIC </div>
                     </div>
                     <div class="col-6 d-flex justify-content-center">
-                            <select class="browser-default custom-select">
-                                <option selected>Please select topic</option>
+                            <select class="browser-default custom-select" id = "select_topic" onchange="change_data()">
+                                <option selected>Select topic</option>
                                 {% for each_topic in all_topic %}
                                 <option value="{{ each_topic.topic_name }}"> {{each_topic.topic_name}}</option>
                                 {% endfor %}
@@ -39,6 +64,18 @@
                         SCORE
                     </div>
                 </div>
+                {% for num in number %}
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center">
+                        <div class="row"> {{num}} </div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center" id="name_{{num}}">
+                    </div>
+                    <div class="col-4 d-flex justify-content-center" id="num_{{num}}">
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
                 <div class="row d-flex justify-content-center" style="padding-top: 3%">
                 </div>  
             </div>

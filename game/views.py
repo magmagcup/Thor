@@ -27,7 +27,8 @@ def views_logout(request):
 def home_page(request):
     """Redirect to homepage."""
     topic = Topic.objects.all()
-    return render(request, 'game/home.html', {'all_topic': topic})
+    all_best_score = Best_score.objects.all()
+    return render(request, 'game/home.html', {'all_topic': topic, 'best': all_best_score, 'number': range(1, 11)})
 
 @login_required
 def form_page(request):
