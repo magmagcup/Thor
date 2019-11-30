@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+@font-face
+{
+    font-family: 'THOR Ragnarok';
+    src: url('THOR Ragnarok.otf');
+}
+
+body {
+    background-image: url("lightning.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover, contain;
+    font-family: 'Mallanna';
+}
+
+
+h1 {
+    text-align: center;
+    text-shadow: 5px 2px darkred;
+  }
+
+.col-12 {
+width: 100% !important;
+}
+
+
+.score_table {
+    background-color: rgba(70, 83, 88, 0.445);
+    border-radius: 15px;
+    border-style: solid; 
+    }
+
+/* unvisited link */
+a:link {
+color: rebeccapurple;
+}
+
+/* visited link */
+a:visited {
+color: black;
+}
+
+/* mouse over link */
+a:hover {
+color: palevioletred;
+}
+
+
+.long_container {
+    min-height:50%;
+}
+
+.medium_container {
+    min-height:10%;
+}
+
+.bigger_font {
+    font-size: 30px;
+}

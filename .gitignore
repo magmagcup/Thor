@@ -115,3 +115,5 @@ game/migrations/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+game/migrations/

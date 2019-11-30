@@ -1,14 +1,75 @@
 {% extends "game/base.html" %}
+{% load static %}
 
 {% block content %}
-<div class="container-fluid bg-white medium_container">
-    <h1> Home page <br> <br></h1>
-</div>
 {% if user.is_authenticated %}
-    <a href="{% url 'game:statistic' %}">stat</a>
-    <br>
-    <a href="{% url 'game:form' %}">form</a>
-    <h1 class="text-white">Username = {{ user.username }}</h1>
-    <h1 class="text-white">User id = {{ user.id }}</h1>
+    <h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Thor: The God of Thunder</h1>
+    <div class="container text-white my-3">
+        <div class="row d-flex justify-content-around mb-3 align-content-center">
+            <div class="col-5">
+                <div class="score_table row d-flex justify-content-left">
+                    <div class="col-6 d-flex justify-content-center">
+                        <div class="row align-content-center" style="font-size: 20px"> TOPIC </div>
+                    </div>
+                    <div class="dropdown col-6 d-flex justify-content-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">History</a>
+                            <a class="dropdown-item" href="#">Python</a> 
+                            <a class="dropdown-item" href="#">Languages</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5"></div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="score_table col-5">
+                <div class="row d-flex justify-content-center mt-2">
+                    <h3 class="mt-1">TOP 10 SCOREBOARD</h3> 
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center">
+                        <div class="row"> RANK </div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        NAME
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        SCORE
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center" style="padding-top: 3%">
+                </div>  
+            </div>
+            
+            <div class="col-5">
+                <div class="row d-flex justify-content-center">
+                    <center><img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="350"></center>
+                </div>
+                <div class="row d-flex justify-content-center my-3">
+                    <button type="button" class="btn btn-light btn-lg col-11"><a href="{% url 'game:topic' %}">Play Now</a></button>
+                </div>
+                <div class="row d-flex justify-content-around my-3">
+                    <button type="button" class="btn btn-light col-5"><a href="{% url 'game:statistic' %}">Player Stats</a></button>
+                
+                    <button type="button" class="btn btn-light col-5"><a href="{% url 'game:form' %}">Create Forms</a></button>
+                </div>
+            </div>
+        </div> 
+     </div>
+{% else %}
+    <center>
+    <h1  class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color: rosybrown; font-size: 100px; letter-spacing: 38px; text-shadow: 4px 2px white" >THOR</h1>
+    <h2 style="font-family: 'THOR Ragnarok'; color: white; font-size: 40px; font-type:extra bold; letter-spacing: 5;">The God of Thunder</h2>
+    <img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="300" width="auto">
+    <div class="mt-3 row justify-content-center">    
+        <div class="col-2 d-flex justify-content-center">
+            <button type="button" class="btn btn-light" style="padding: 26px 63px; border-style: solid;"><a href="{% url "social:begin" "google-oauth2" %}">Login with <i class="ml-1 fab fa-google" ></i></a></button>
+        </div>
+    </div>
+    </center>
 {% endif %}
 {% endblock %}

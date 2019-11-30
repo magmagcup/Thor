@@ -59,11 +59,11 @@ To run the server type the following command in the terminal.
 
 On MacOS/Linux:
 
-    python3 manage.py runserver
+    python3 manage.py runserver --insecure
 
 On Windows:
 
-    python manage.py runserver
+    python manage.py runserver --insecure
 
 ### Step 2
 
