@@ -39,7 +39,8 @@ def form_page(request):
 def statistic_page(request):
     statistic = get_object_or_404(Statistic, user=request.user)
     picture = get_object_or_404(UserPicture, user=request.user)
-    return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture})
+    score_for_user = Best_score.objects.filter(user=request.user)
+    return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture, 'user_score': score_for_user})
 
 def how_to_play_page(request):
     return render(request, 'game/howto.html')
