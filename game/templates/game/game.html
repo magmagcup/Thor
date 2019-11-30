@@ -1,26 +1,157 @@
-{% extends 'game/base.html' %}
+{% extends "game/base.html" %}
+{% block content %}
 
-
-{% block  content %}
-
-<script>
-start = () => {
-    var x = document.getElementById("start").innerHTML;
-    setTimeout(function() { x.value="1"}, 1000);
-    setTimeout(function() { x.value="2"}, 2000);
-    setTimeout(function() { x.value="3"}, 3000);
-    setTimeout(function() { x.value="start"}, 4000);
+<style> 
+input[type=text] {
+  padding: 15px 5px;
+  box-sizing: border-box;
+  border: 2px solid #eeeddd;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
 }
 
+input[type=text]:focus {
+  border: 2px solid #555;
+}
+
+.main_focus {
+  background-color:white;
+  padding:20px;
+}
+
+.title {
+  text-align: center;
+}
+
+.q_text {
+  text-align: justified;
+}
+
+</style>
+
+
+<h2 id="countdown" align="right" class="text-white"></h2>
+<div class="main_focus">
+  <h4 id="diff"></h4>
+  <div class="title"><h3 id="title"></h3></div>
+  <br>
+  <div class="q_text">
+    <p id="question"></p>
+  </div>
+</div>
+<br>
+<button type="button" id="btn-next" onclick="nextQuestion()" disabled>Next</button>
+<a href="{% url 'game:home' %}">Home</a>
+
+<script>
+
+  let time = 1200;
+  let max_time = 1200;
+  let score = 0;
+  let result = 0;
+  let q_index = 0;
+  let q_title = {{q_title|safe}};
+  let q_text = {{q_text|safe}};
+  let q_diff = {{q_diff|safe}}
+  let answer = {{answer|safe}};
+  let hint = {{hint|safe}};
+  let total_question = q_title.length - 1;
+  let user_ans = document.getElementsByTagName("INPUT");
+  let real_ans = answer[q_index];
+  let ans_hint = hint[q_index];
+  let green = "rgb(109, 255, 109)";
+  let red = "#ff9494";
+
+  window.onload = function() {
+    document.getElementById("answer").focus();
+  };
+
+  let downloadTimer = setInterval(function() {
+    let sec = time%60;
+    let min = Math.floor(time/60);
+    if (sec <= 9){
+        if (min <= 9){
+            document.getElementById("countdown").innerHTML = "0" + min + " : " + "0" + sec + " Remaining"
+        }else{
+            document.getElementById("countdown").innerHTML = min + " : " + "0" + sec + " Remaining"
+        }
+    }else{
+        if(min <= 9){
+            document.getElementById("countdown").innerHTML = "0" + min + " : " + sec + " Remaining"
+        }else{
+            document.getElementById("countdown").innerHTML = min + " : " + sec + " Remaining"
+        }
+    }
+    time--;
+    if (time<0){
+        result = Math.floor((score/(max_time-time))*100);
+        clearInterval(downloadTimer);
+        location.href='{% url "game:receive" topic_id %}';
+        
+    }
+  },1000)
+
+  document.getElementById("diff").innerHTML = "Difficulty: " + q_diff[q_index].charAt(0).toUpperCase() + q_diff[q_index].slice(1);
+  document.getElementById("title").innerHTML = q_title[q_index];
+  document.getElementById("question").innerHTML = q_text[q_index];
+
+  function checkAnswer() {
+    let i;
+    for (i = 0; i < user_ans.length; i++) {
+      if (user_ans[i].value == ""){
+        user_ans[i].style.backgroundColor = "white";
+      }
+      else if (user_ans[i].value == real_ans[i]){
+        user_ans[i].style.backgroundColor = green;
+        score++;
+      }
+      else{
+        user_ans[i].style.backgroundColor = red;
+      }
+    }
+    
+    let all_correct = true;
+    let j;
+    for (j = 0; j < user_ans.length; j++) {
+      if (user_ans[j].style.backgroundColor != green) {
+        all_correct = false;
+        break;
+      }
+    }
+    if (all_correct) {
+        document.getElementById("btn-next").disabled = false;
+        document.getElementById("btn-next").focus();
+    }
+  }
+
+  function nextQuestion(){
+
+    if (q_index < total_question){
+      q_index += 1;
+      document.getElementById("diff").innerHTML = "Difficulty: " + q_diff[q_index].charAt(0).toUpperCase() + q_diff[q_index].slice(1);
+      document.getElementById("title").innerHTML = q_title[q_index];
+      document.getElementById("question").innerHTML = q_text[q_index];
+      document.getElementById("answer").focus();
+      real_ans = answer[q_index];
+      ans_hint = hint[q_index];
+      document.getElementById("btn-next").disabled = true;
+    }else{
+        result = Math.floor((score/(max_time-time))*100);
+        clearInterval(downloadTimer);
+        location.href='{% url "game:receive" topic_id %}';
+    }
+  }
+
+$("#btn-next").click(function(){
+    $.ajax({
+        url:'{% url "game:receive" topic_id %}',
+        data:{
+            'result_score':result
+        },
+        dataType:'json'
+    })
+});
+
 </script>
-
-    <button class="btn btn-primary" onclick="start()">Start</button>
-    {% comment %} <input  type="text" id="start"> {% endcomment %}
-    <div class="text-white" id="start"></div>
-
-{% comment %} {% for question in question %}
-    <h1 class="text-white">{{ question.question_title }}</h1>
-    <p class="text-white">{{ question.question_text }}</p>
-{% endfor %} {% endcomment %}
-
-{% endblock  %}
+{% endblock %}

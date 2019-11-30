@@ -50,12 +50,12 @@
                     <center><img src="{% static 'game/icon.gif' %}" alt="Thor Icon" height="350"></center>
                 </div>
                 <div class="row d-flex justify-content-center my-3">
-                    <button type="button" class="btn btn-light btn-lg col-11">Play Now</button>
+                    <button type="button" class="btn btn-light btn-lg col-11"><a href="{% url 'game:topic' %}">Play Now</a></button>
                 </div>
                 <div class="row d-flex justify-content-around my-3">
                     <button type="button" class="btn btn-light col-5"><a href="{% url 'game:statistic' %}">Player Stats</a></button>
                 
-                    <button type="button" class="btn btn-light col-5"><a href="{% url 'game:set' %}">Create Forms</a></button>
+                    <button type="button" class="btn btn-light col-5"><a href="{% url 'game:form' %}">Create Forms</a></button>
                 </div>
             </div>
         </div> 
@@ -72,7 +72,4 @@
     </div>
     </center>
 {% endif %}
-
 {% endblock %}
-
-
