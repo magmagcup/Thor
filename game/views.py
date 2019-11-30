@@ -149,11 +149,12 @@ def get_stat(request):
 
 @login_required
 def preview_form(request):
-    """Reidrect to Form Preview page."""
+    """Redirect to Form Preview page."""
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
-            topic = Topic.objects.get(topic_name=form.data.get('topic'))
+            topic_id = topic_name=form.data.get('topic')  # topic_id is an integer
+            topic = Topic.objects.get(pk=topic_id)
             title = form.data.get('title')
             raw_question = form.data.get('question')
             boxed_question = create_answer_box(raw_question)
