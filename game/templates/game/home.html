@@ -11,15 +11,13 @@
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row align-content-center" style="font-size: 20px"> TOPIC </div>
                     </div>
-                    <div class="dropdown col-6 d-flex justify-content-center">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Select
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">History</a>
-                            <a class="dropdown-item" href="#">Python</a> 
-                            <a class="dropdown-item" href="#">Languages</a>
-                        </div>
+                    <div class="col-6 d-flex justify-content-center">
+                            <select class="browser-default custom-select">
+                                <option selected>Please select topic</option>
+                                {% for each_topic in all_topic %}
+                                <option value="{{ each_topic.topic_name }}"> {{each_topic.topic_name}}</option>
+                                {% endfor %}
+                            </select>
                     </div>
                 </div>
             </div>

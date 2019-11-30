@@ -26,7 +26,8 @@ def views_logout(request):
 
 def home_page(request):
     """Redirect to homepage."""
-    return render(request, 'game/home.html')
+    topic = Topic.objects.all()
+    return render(request, 'game/home.html', {'all_topic': topic})
 
 @login_required
 def form_page(request):
@@ -196,6 +197,7 @@ def receive_score(request, topic_id):
 
 
 def get_best_score(request, topic_id):
+    """Create best score obj"""
     user_id = request.user.id
     topic = get_object_or_404(Topic, pk=topic_id)
     get_user = User.objects.get(pk=user_id)
