@@ -11,19 +11,21 @@
         var num_reset_score = 1;
         {% for each_score in best %}
             var topic_text = "{{ each_score.key }}"
+            var name_id = "name_" + num_reset_score;
+            var name_score = "num_" + num_reset_score;
+            document.getElementById(name_id).innerHTML = "";
+            document.getElementById(name_score).innerHTML = "";
             if (x == topic_text) {
                 var name_id = "name_" + rank_num;
                 var name_score = "num_" + rank_num;
                 document.getElementById(name_id).innerHTML = "{{ each_score.user }}";
                 document.getElementById(name_score).innerHTML = {{ each_score.value }};
                 rank_num++;
-            } else {
-                var name_id = "name_" + num_reset_score;
-                var name_score = "num_" + num_reset_score;
-                document.getElementById(name_id).innerHTML = "";
-                document.getElementById(name_score).innerHTML = "";
             }
             num_reset_score++;
+            if (num_reset_score > 10){
+                return
+            }
         {% endfor %}
     }
 </script>
