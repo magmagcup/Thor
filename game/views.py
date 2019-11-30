@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm, AnswerForm
-from .models import Question, Statistic, Topic, Answer, Best_score
+from .models import Question, Statistic, Topic, Answer, Best_score, UserPicture
 
 # Create your views here.
 
@@ -37,9 +37,13 @@ def form_page(request):
 
 @login_required
 def statistic_page(request):
-    """Redirect to Stat page."""
-    statistic = Statistic.objects.all()
-    return render(request, 'game/statistic.html', {'stat':statistic})
+    statistic = get_object_or_404(Statistic, user=request.user)
+    picture = get_object_or_404(UserPicture, user=request.user)
+    return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture})
+
+def how_to_play_page(request):
+    return render(request, 'game/howto.html')
+    
 
 @login_required
 def topic_page(request):

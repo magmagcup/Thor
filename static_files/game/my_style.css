@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.bg {
+    background: rgb(12,18,74);
+    background: linear-gradient(90deg, rgba(12,18,74,1) 16%, rgba(140,0,0,1) 95%);
+    background-size: cover, contain;
+    background-repeat: no-repeat;
+}
+
+.long_container {
+    min-height:50%;
+}
+
+.medium_container {
+    min-height:10%;
+}
+
+.bigger_font {
+    font-size: 30px;
+}

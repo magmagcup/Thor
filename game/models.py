@@ -13,6 +13,7 @@ class Topic(models.Model):
     def __str__(self):
         return self.topic_name
 
+
 class Question(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
 
@@ -33,11 +34,23 @@ class Answer(models.Model):
     def __str__(self):
         return self.answer_text
 
+
 class Statistic(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
+
+
+class UserPicture(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_photo = models.CharField(max_length=10000)
+
+
+def save_picture(backend, user, response, details,*args,**kwargs):
+    if not UserPicture.objects.filter(user=user):
+        new_user_pic = UserPicture(user=user, profile_photo=response['picture'])
+        new_user_pic.save()
 
 class Best_score(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
