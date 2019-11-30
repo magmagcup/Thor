@@ -5,9 +5,7 @@
 @font-face
 {
     font-family: 'THOR Ragnarok';
-    src: url('THOR Ragnarok.eot') url('THOR Ragnarok.eot?#') format('embedded-opentype'),
-    url('THOR Ragnarok.woff') format('woff'),
-    url('THOR Ragnarok.ttf') format('truetype');
+    src: url('THOR Ragnarok.otf');
 }
 
 body {
