@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY', default="secret")
 
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=list, default=[])
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_POSTGRES_JSONFIELD = config("AUTH_POSTGRES_JSONFIELD", cast=bool, default=False)
