@@ -33,6 +33,7 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = config("AUTH_POSTGRES_JSONFIELD", cast=bool, de
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("OAUTH2_KEY", default="key")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("OAUTH2_SECRET", default="secret")
 LOGIN_REDIRECT_URL = '/game/stat'
+LOGIN_URL = '/game/'
 
 
 

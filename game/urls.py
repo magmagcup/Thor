@@ -11,7 +11,11 @@ urlpatterns = [
     path('logout/', views.views_logout, name='logout'),
     path('form/',views.form_page, name="form"),
     path('home/', views.home_page, name='home'),
-    path('set/' , views.get, name='set'),
+    path('<int:question_id>' , views.discard_form, name='discard'),
+    path('preview',views.preview_form, name='preview'),
     path('stat/', views.get_stat, name='stat'),
     path('statistic/',views.statistic_page, name='statistic'),
+    path('topic/', views.topic_page, name='topic'),
+    path('<int:topic_id>/', views.question_page, name='question'),
+    path('receive/<int:topic_id>/', views.receive_score, name='receive'),
 ]
