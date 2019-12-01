@@ -3,6 +3,6 @@
 {% block content %}
 
 {% for t in topic %}
-  <br><br><br><br><a href="{% url 'game:question' t.id %}">{{ t }}</a>
+  <br><br><br><br><a id="t-{{t.id}}" href="{% url 'game:question' t.id %}">{{ t }}</a>
 {% endfor %}
 {% endblock  %}

@@ -153,7 +153,7 @@ def preview_form(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
-            topic_id = topic_name=form.data.get('topic')  # topic_id is an integer
+            topic_id = form.data.get('topic')  # topic_id is an integer
             topic = Topic.objects.get(pk=topic_id)
             title = form.data.get('title')
             raw_question = form.data.get('question')
