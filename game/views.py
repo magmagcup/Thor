@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.db.models.functions import Lower
 from .forms import QuestionForm, AnswerForm
 from .models import Question, Statistic, Topic, Answer, Best_score, UserPicture
 
@@ -27,7 +28,8 @@ def views_logout(request):
 def home_page(request):
     """Redirect to homepage."""
     topic = Topic.objects.all()
-    all_best_score = Best_score.objects.all()
+    all_best_score = Best_score.objects.order_by('-value')[:10]
+
     return render(request, 'game/home.html', {'all_topic': topic, 'best': all_best_score, 'number': range(1, 11)})
 
 @login_required
