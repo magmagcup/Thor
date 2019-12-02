@@ -9,22 +9,37 @@
         var x = document.getElementById("select_topic").value;
         var rank_num = 1;
         var num_reset_score = 1;
+        document.getElementById('user_rank').innerHTML = '';
+        document.getElementById('user_score').innerHTML = '';
         {% for each_score in best %}
-            var topic_text = "{{ each_score.key }}"
-            var name_id = "name_" + num_reset_score;
-            var name_score = "num_" + num_reset_score;
-            document.getElementById(name_id).innerHTML = "";
-            document.getElementById(name_score).innerHTML = "";
-            if (x == topic_text) {
-                var name_id = "name_" + rank_num;
-                var name_score = "num_" + rank_num;
-                document.getElementById(name_id).innerHTML = "{{ each_score.user }}";
-                document.getElementById(name_score).innerHTML = {{ each_score.value }};
+            var topic_text = "{{ each_score.key }}";
+            if (num_reset_score <= 10) {
+                empty_data(num_reset_score);
+            }
+            if (x == topic_text ) {
+                if (num_reset_score <= 10) {
+                    var name_id = "name_" + rank_num;
+                    var name_score = "num_" + rank_num;
+                    document.getElementById(name_id).innerHTML = "{{ each_score.user }}";
+                    document.getElementById(name_score).innerHTML = "{{ each_score.value }}";
+                }
+                if ('{{ each_score.user }}' == '{{ user }}') {
+                    document.getElementById('user_rank').innerHTML = rank_num ;
+                    document.getElementById('user_score').innerHTML = {{each_score.value}};
+                }
                 rank_num++;
             }
             num_reset_score++;
         {% endfor %}
     }
+
+    function empty_data(num_reset_score) {
+        var name_id = "name_" + num_reset_score;
+        var name_score = "num_" + num_reset_score;
+        document.getElementById(name_id).innerHTML = "";
+        document.getElementById(name_score).innerHTML = "";
+    }
+
 </script>
 
     <h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Thor: The God of Thunder</h1>
@@ -90,6 +105,20 @@
                     <button type="button" class="btn btn-light col-5"><a href="{% url 'game:statistic' %}">Player Stats</a></button>
                 
                     <button type="button" class="btn btn-light col-5"><a href="{% url 'game:form' %}">Create Forms</a></button>
+                </div>
+                <div class="row d-flex justify-content-center score_table">
+                    <div class="col-4 d-flex justify-content-center">
+                        RANK
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        SCORE
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center score_table">
+                    <div id="user_rank" class="col-4 d-flex justify-content-center">
+                    </div>
+                    <div id="user_score" class="col-4 d-flex justify-content-center">
+                    </div>
                 </div>
             </div>
         </div> 
