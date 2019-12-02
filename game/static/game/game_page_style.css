@@ -28,3 +28,21 @@ input[type=text] {
   .q_text {
     text-align: justified;
   }
+  button {
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    border: palevioletred solid;
+    background-color: rgba(70, 83, 88, 0.445);
+    color: white;
+    width: 10%;
+
+  }
+  
+  button:hover {
+    background-color: palevioletred;
+    color:white;
+  }
+  button:focus{
+    background-color: palevioletred;
+    color:white;
+  }
