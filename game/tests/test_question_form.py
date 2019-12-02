@@ -29,10 +29,6 @@ class QuestionFormTest(TestCase):
         response_form = client.get(path='/game/form/')
         self.assertTemplateUsed(response_form, 'game/form.html')
 
-    def test_valid_form(self):
-        if self.post_form.is_valid():
-            self.assertTrue(self.post_form.is_valid())
-
     def test_invalid_form(self):
         self.assertFalse(self.form.is_valid())
         self.assertFalse(QuestionForm({'topic':1,}).is_valid())
