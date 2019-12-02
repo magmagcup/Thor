@@ -155,11 +155,12 @@ def get_stat(request):
 
 @login_required
 def preview_form(request):
-    """Reidrect to Form Preview page."""
+    """Redirect to Form Preview page."""
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
-            topic = Topic.objects.get(topic_name=form.data.get('topic'))
+            topic_id = form.data.get('topic')  # topic_id is an integer
+            topic = Topic.objects.get(pk=topic_id)
             title = form.data.get('title')
             raw_question = form.data.get('question')
             boxed_question = create_answer_box(raw_question)
@@ -205,7 +206,6 @@ def get_best_score(request, topic_id):
     user_id = request.user.id
     topic = get_object_or_404(Topic, pk=topic_id)
     get_user = User.objects.get(pk=user_id)
-    score_id = Statistic()
     check_key = Best_score.objects.filter(key=topic.topic_name, user=user_id)
     if not check_key:
         s = Best_score(user=get_user, key=topic.topic_name, value=0)
