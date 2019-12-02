@@ -25,11 +25,11 @@ def views_logout(request):
     logout(request)
     return redirect("game:home")
 
-def home_page(request):
+def home_page(request, error: str=''):
     """Redirect to homepage."""
     topic = Topic.objects.all()
     all_best_score = Best_score.objects.order_by('-value')
-    return render(request, 'game/home.html', {'all_topic': topic, 'best': all_best_score, 'number': range(1, 11)})
+    return render(request, 'game/home.html', {'all_topic': topic, 'best': all_best_score, 'number': range(1, 11), 'super_user': error})
 
 @login_required
 def form_page(request):
@@ -88,6 +88,8 @@ def random_question_list(value, topic_id: int):
 @login_required
 def question_page(request, topic_id):
     """Redirect to the Game page."""
+    if request.user.is_staff:
+        return home_page(request, "Can't play as super user")
     questions = random_question_list(Question, topic_id)
     q_title = [q.question_title for q in questions]
     q_text = [q.question_text for q in questions]

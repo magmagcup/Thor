@@ -6,18 +6,14 @@
 <script>
 
     function change_data() {
+        document.getElementById('name_10').innerHTML = " ";
         var x = document.getElementById("select_topic").value;
         var rank_num = 1;
-        var num_reset_score = 1;
-        document.getElementById('user_rank').innerHTML = '';
-        document.getElementById('user_score').innerHTML = '';
+        empty_data();
         {% for each_score in best %}
             var topic_text = "{{ each_score.key }}";
-            if (num_reset_score <= 10) {
-                empty_data(num_reset_score);
-            }
-            if (x == topic_text ) {
-                if (num_reset_score <= 10) {
+            if (x == topic_text) {
+                if (document.getElementById('name_10').innerHTML == '') {
                     var name_id = "name_" + rank_num;
                     var name_score = "num_" + rank_num;
                     document.getElementById(name_id).innerHTML = "{{ each_score.user }}";
@@ -29,20 +25,27 @@
                 }
                 rank_num++;
             }
-            num_reset_score++;
         {% endfor %}
     }
 
-    function empty_data(num_reset_score) {
-        var name_id = "name_" + num_reset_score;
-        var name_score = "num_" + num_reset_score;
+    function empty_data() {
+        document.getElementById('user_rank').innerHTML = '';
+        document.getElementById('user_score').innerHTML = '';
+        var i;
+        for (i = 1; i < 11; i++) {
+        var name_id = "name_" + i;
+        var name_score = "num_" + i;
         document.getElementById(name_id).innerHTML = "";
         document.getElementById(name_score).innerHTML = "";
+    }
     }
 
 </script>
 
     <h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Thor: The God of Thunder</h1>
+    {% if user_score != '' %}
+        <h1> {{ user_score }}</h1>
+    {% endif %}
     <div class="container text-white my-3">
         <div class="row d-flex justify-content-around mb-3 align-content-center">
             <div class="col-5">
