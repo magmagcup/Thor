@@ -1,53 +1,27 @@
 {% extends "game/base.html" %}
 {% block content %}
+{% load static %}
 
-<style> 
-input[type=text] {
-  padding: 15px 5px;
-  box-sizing: border-box;
-  border: 2px solid #eeeddd;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  outline: none;
-}
+<link rel="stylesheet" href="{% static 'game/game_page_style.css' %}">
 
-input[type=text]:focus {
-  border: 2px solid #555;
-}
-
-.main_focus {
-  background-color:white;
-  padding:20px;
-}
-
-.title {
-  text-align: center;
-}
-
-.q_text {
-  text-align: justified;
-}
-
-</style>
-
-
-<h2 id="countdown" align="right" class="text-white"></h2>
-<div class="main_focus">
+<div class="container main_focus">
+<h2 id="countdown" align="right">20 : 00 Remaining</h2>
   <h4 id="diff"></h4>
-  <div class="title"><h3 id="title"></h3></div>
+  <div class="title">
+  <h3 id="title" style="font-weight: 800; font-size: 34px"></h3>
+  </div>
   <br>
   <div class="q_text">
     <p id="question"></p>
   </div>
-</div>
 <br>
 <button type="button" id="btn-next" onclick="nextQuestion()" disabled>Next</button>
-<a href="{% url 'game:home' %}">Home</a>
+</div>
 
 <script>
 
-  let time = 1200;
-  let max_time = 1200;
+  let time = 1199;
+  let max_time = 1199;
   let score = 0;
   let result = 0;
   let q_index = 0;
@@ -121,7 +95,7 @@ input[type=text]:focus {
     }
     if (all_correct) {
         document.getElementById("btn-next").disabled = false;
-        document.getElementById("btn-next").focus();
+        document.getElementById("btn-next").focus()
     }
   }
 
