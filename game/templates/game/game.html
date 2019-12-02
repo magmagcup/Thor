@@ -15,7 +15,8 @@
     <p id="question"></p>
   </div>
 <br>
-<button type="button" id="btn-next" onclick="nextQuestion()" disabled>Next</button>
+<button type="button" id="btn-next" onclick="nextQuestion()">Next</button>
+
 </div>
 
 <script>
@@ -36,6 +37,7 @@
   let ans_hint = hint[q_index];
   let green = "rgb(109, 255, 109)";
   let red = "#ff9494";
+  document.getElementById("btn-next").style.display = "none"
 
   window.onload = function() {
     document.getElementById("answer").focus();
@@ -94,7 +96,7 @@
       }
     }
     if (all_correct) {
-        document.getElementById("btn-next").disabled = false;
+        document.getElementById("btn-next").style.display = "inline"
         document.getElementById("btn-next").focus()
     }
   }
@@ -109,7 +111,7 @@
       document.getElementById("answer").focus();
       real_ans = answer[q_index];
       ans_hint = hint[q_index];
-      document.getElementById("btn-next").disabled = true;
+      document.getElementById("btn-next").style.display = "none"
     }else{
         result = Math.floor((score/(max_time-time))*100);
         clearInterval(downloadTimer);
