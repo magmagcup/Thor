@@ -32,14 +32,32 @@ h1 {
     }
 
 .form_box {
-    background-color: white;
+    background-color: rgba(70, 83, 88, 0.445);
     border-radius: 15px;
     border-style: solid;
-    border-color: rosybrown;
+    border-color: black;
+}
+
+table, td, th {  
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+table {
+border-collapse: collapse;
+width: 100%;
+}
+
+th, td {
+padding: 15px;
+}
+
+mark {
+    color: darkred;
 }
 
 select {
-    font-size: 20;
+    font-size: 18;
 }
 
 .btnlogin {
