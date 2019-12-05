@@ -3,14 +3,37 @@
 
 {% block content %}
 
-<h1 class=""style="font-family: 'THOR Ragnarok'; font-size: 80px; text-align:center; color:fefce0 ; padding-top:5%" >Create Your Own Forms</h1>
-
-<form action='{%url "game:preview"%}' method="post">
-  {% csrf_token %}
-  <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
-    <h4 class="text-white">{{ form.as_p }}</h4>
-    <button class="btn btn-sm mt-3" type="submit">Next</button>
+<h1 class="mt-4" style="font-family: 'THOR Ragnarok'; font-size: 60px; text-align:center; color:wheat ; padding-top:5%" >Create Your Own Forms</h1>
+<div class="mt-5 container">
+  <div class="row mt-5">
+    <div class="col-8">
+      <center>
+        <form action='{%url "game:preview"%}' method="post">
+          {% csrf_token %}
+          <div class="form-group  has-feedback">
+            <h4 class="text-white">{{ form.as_p }}</h4>
+            <button class="btnform btn-light mt-3 mb-5" style="padding: 15px 35px; font-size: 18px" type="submit">Next</button>
+          </div>
+        </form>
+      </center>
+    </div>
+    <div class="col-4 row">
+      <p style="color: rosybrown; font-size:18px" class="p-4 justify-content-center form_box"> 
+        How to fill in the question form?<br>
+        [[fill the answer here|fill the hint here]<br>
+        This is the format to tell us where you’d like to create a fill-in the blank boxes.<br><br>
+        You can also leave the hint area empty.<br>
+        [[fill the answer here|]]<br>
+      </p>
+      <p style="color: rosybrown; font-size:18px" class="p-4 justify-content-center form_box"> 
+        Example:<br>
+        [[Climate|]] change is [[killing| An act of causing death. ]] the [[world| Earth]]'s coral reefs. 
+        But it's not the only factor turning them into [[white| Color of dead coral reefs]], dead husks. 
+        According to a new study, all the chemicals humans are dumping into the [[ocean| Sea]] are making 
+        it easier for the hotter weather to do its deadly work.
+      </p>
+    </div>
   </div>
-</form>
+<div>
 
 {% endblock  %}

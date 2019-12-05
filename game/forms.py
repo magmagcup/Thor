@@ -15,30 +15,40 @@ class QuestionForm(forms.Form):
     topic = forms.CharField(label='Topic', 
     widget=forms.Select(
         choices=select_topic,
+        attrs={
+            'id': 'topic',
+            'style' : 'height: 50px; font-size: 18x;',
+            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
+        }
         )
     )
     difficulty = forms.CharField(label='Difficulty', 
     widget=forms.Select(
         choices=select_difficulty,
-        )
-    )
-    title = forms.CharField(label=mark_safe("Title</br>"), 
-    max_length=100000,
-    widget=forms.Textarea(
         attrs={
-            'id': 'title',
-            'style' : 'height: 50px; font-size: 22px',
-            'class' : 'mt-5',
+            'id': 'difficulty',
+            'style' : 'height: 50px; font-size: 20px;',
+            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
             }
         )
     )
-    question = forms.CharField(label=mark_safe('Question</br>'), 
+    title = forms.CharField(label=mark_safe("Title"), 
+    max_length=100000,
+    widget=forms.TextInput(
+        attrs={
+            'id': 'title',
+            'style' : 'height: 50px; font-size: 20px',
+            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
+            }
+        )
+    )
+    question = forms.CharField(label=mark_safe('Question'), 
     max_length=100000,
     widget=forms.Textarea(
         attrs={
             'id': 'question',
-            'style' : 'height: 400px; font-size: 22px',
-            'class' : 'mt-5',
+            'style' : 'height: 400px; font-size: 18px; border-radius: 3%',
+            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
             }
         )
     )
@@ -60,3 +70,4 @@ class AnswerForm(forms.Form):
                 'title': hint,
                 'onblur': 'checkAnswer()',
             })
+ 
