@@ -1,16 +1,16 @@
 {% extends "game/base.html" %}
 {% block content %}
-{% load static %}
+{% load static boxed_answer %}
 
  <link rel = "stylesheet" type = "text/css" href="{% static 'game/preview_form_style.css' %}">
 
 <h1 class="head">Preview Form</h1>
 <div class="main_focus container">
-    <h4 >Topic: {{question.topic|title}}</h4>
+    <h4 >Topic: {{question.topic}}</h4>
     <h4> Difficulty: {{question.difficulty|title}}</h4>
     <h3 class="title">{{question.question_title}}</h3>
     <br>
-    <p class="q_text">{{question.question_text|safe}}</p>
+    <p class="q_text">{{question.question_text|boxed}}</p>
 </div>
 
 <div class="button-group">
