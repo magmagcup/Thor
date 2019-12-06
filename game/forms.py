@@ -1,9 +1,7 @@
 from django import forms
 from django.utils.safestring import mark_safe
-from game.models import Answer, Topic
+from game.models import Answer, Topic, Question
 
-object_topic = Topic.objects.all()
-select_topic = [tuple([t.topic_name, t.topic_name]) for t in object_topic]
 select_difficulty = [
     ('easy','Easy'),
     ('normal','Normal'),
@@ -11,37 +9,53 @@ select_difficulty = [
     ('extreme','Extreme'),
 ]
 
-class QuestionForm(forms.Form):
-    topic = forms.CharField(label='Topic', 
-    widget=forms.Select(
-        choices=select_topic,
-        )
-    )
-    difficulty = forms.CharField(label='Difficulty', 
-    widget=forms.Select(
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = '__all__'
+        widgets = {
+            'difficulty':forms.Select(
         choices=select_difficulty,
-        )
-    )
-    title = forms.CharField(label=mark_safe("Title</br>"), 
-    max_length=100000,
-    widget=forms.Textarea(
+        ),
+            'question_title': forms.Textarea(
         attrs={
             'id': 'title',
             'style' : 'height: 50px; font-size: 22px',
             'class' : 'mt-5',
             }
-        )
-    )
-    question = forms.CharField(label=mark_safe('Question</br>'), 
-    max_length=100000,
-    widget=forms.Textarea(
+            ),
+        'question_text':forms.Textarea(
         attrs={
             'id': 'question',
             'style' : 'height: 400px; font-size: 22px',
             'class' : 'mt-5',
             }
         )
-    )
+        }
+    # topic = forms.CharField(label='Topic', 
+    # widget=forms.Select(
+    #     choices=select_topic,
+    #     )
+    # )
+    # difficulty = forms.CharField(label='Difficulty', 
+    # widget=forms.Select(
+    #     choices=select_difficulty,
+    #     )
+    # )
+    # title = forms.CharField(label=mark_safe("Title</br>"), 
+    # max_length=100000,
+    # widget=
+    # )
+    # question = forms.CharField(label=mark_safe('Question</br>'), 
+    # max_length=100000,
+    # widget=forms.Textarea(
+    #     attrs={
+    #         'id': 'question',
+    #         'style' : 'height: 400px; font-size: 22px',
+    #         'class' : 'mt-5',
+    #         }
+    #     )
+    # )
 
 class AnswerForm(forms.Form):
     answer = forms.CharField(label=mark_safe(''))

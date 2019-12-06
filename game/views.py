@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuestionForm, AnswerForm
@@ -100,6 +101,8 @@ def question_page(request, topic_id):
 def create_answer_box(value: str):
     """Replace '[[__|__]]' with input tag.
     Return the formatted value."""
+    if not (']]' in value and '[[' in value):
+        raise ValidationError('No answer box in question field.')
     while ']]' in value:
         start = value.find('[[')
         mid = value.find('|')
@@ -153,12 +156,12 @@ def preview_form(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
-            topic = Topic.objects.get(topic_name=form.data.get('topic'))
-            title = form.data.get('title')
-            raw_question = form.data.get('question')
+            topic = Topic.objects.get(pk=int(form.data.get('topic')))
+            title = form.data.get('question_title')
+            raw_question = form.data.get('question_text')
             boxed_question = create_answer_box(raw_question)
             difficulty = form.data.get('difficulty')
-            question = Question(topic_id=topic.id,
+            question = Question(topic=topic,
                                 question_title=title,
                                 question_text=boxed_question,
                                 difficulty=difficulty)
@@ -203,3 +206,10 @@ def get_best_score(request, topic_id):
     if not check_key:
         s = Best_score(user=get_user, key=topic.topic_name, value=0)
         s.save()
+
+def edit_form(request, question_id):
+    if request.method == "GET":
+        question = Question.objects.get(pk=question_id)
+        topic = Topic.objects.get(pk=question.topic_id)
+        form = QuestionForm(instance=question)
+        return render(request, "game/form.html", {"question_id":question_id, "form":form})

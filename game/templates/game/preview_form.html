@@ -60,9 +60,11 @@
 </div>
 
 <div class="button-group">
-    <a class="button" href="{% url 'game:discard' question.id%}">Back to Edit Form</a>
+    <a class="button" href="{% url 'game:edit' question.id %}">Back to Edit Form</a>
     <a class="button" href="{% url 'game:form' %}">Save and Create Another</a>
     <a class="button" href="{% url 'game:home' %}">Save</a>
+    <a class="button" href="{% url 'game:discard' question.id %}">Discard</a>
+
 </div>
 
 {% endblock %}
