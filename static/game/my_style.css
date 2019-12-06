@@ -32,28 +32,34 @@ h1 {
     }
 
 .form_box {
-    background-color: rgba(70, 83, 88, 0.445);
+    background-color: rgba(15, 18, 19, 0.445);
     border-radius: 15px;
     border-style: solid;
-    border-color: black;
+    border-color: rgba(255, 255, 255, 0.76);
 }
 
-table, td, th {  
+table {
+    border-collapse: collapse;
+    width: 100%;
     border: 1px solid #ddd;
-    text-align: left;
+    color: white;
+}
+
+td, th {  
+    border: 1px solid #ddd;
+    color: white;
+    padding: 15px;
+    text-align: center;
   }
   
-table {
-border-collapse: collapse;
-width: 100%;
-}
-
-th, td {
-padding: 15px;
-}
-
+  
 mark {
-    color: darkred;
+    color: rgb(243, 243, 142);
+    background-color: rgba(150, 45, 110, 0.74);
+}
+
+b {
+    color: rgb(255, 255, 124);
 }
 
 select {
@@ -75,15 +81,15 @@ color: white;
 } 
 
 .btnform {
-color: rgb(192, 108, 108);
-background-color: white;
+color: white;
+background-color:rgba(70, 83, 88, 0.445);
 -webkit-transition-duration: 0.4s; 
 transition-duration: 0.4s;
 border-radius: 5%
 }
     
 .btnform:hover {
-background-color: rosybrown;
+background-color: rgb(109, 3, 3);
 color: white;
 }
 

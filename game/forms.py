@@ -17,7 +17,7 @@ class QuestionForm(forms.Form):
         choices=select_topic,
         attrs={
             'id': 'topic',
-            'style' : 'height: 50px; font-size: 18x;',
+            'style' : 'height: 50px; font-size: 20x;',
             'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
         }
         )
@@ -47,7 +47,7 @@ class QuestionForm(forms.Form):
     widget=forms.Textarea(
         attrs={
             'id': 'question',
-            'style' : 'height: 400px; font-size: 18px; border-radius: 3%',
+            'style' : 'height: 700px; font-size: 18px; border-radius: 3%',
             'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
             }
         )
@@ -64,7 +64,7 @@ class AnswerForm(forms.Form):
         self.fields['answer'].widget = forms.TextInput(
             attrs={
                 'id': 'answer',
-                'style': 'height: 28px; font-size: 16px; ',
+                'style': 'height: 28px; font-size: 18px; ',
                 'size': box_length,
                 'maxlength': ans_length,
                 'title': hint,

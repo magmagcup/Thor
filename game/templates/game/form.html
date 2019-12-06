@@ -1,9 +1,8 @@
 {% extends 'game/base.html' %}
+{% block content %}
 {% load static %}
 
-{% block content %}
-
-<h1 class="mt-4" style="font-family: 'THOR Ragnarok'; font-size: 60px; text-align:center; color:wheat ; padding-top:5%" >Create Your Own Forms</h1>
+<h1 class="mt-4" style="font-family: 'THOR Ragnarok'; font-size: 60px; text-align:center; color:white ; padding-top:5%" >Create Your Own Forms</h1>
 <div class="mt-5 container">
   <div class="row mt-5">
     <div class="col-8">
@@ -19,37 +18,40 @@
     </div>
     <div class="col-4 row">
       <p style="color: white; font-size:18px" class="p-4 justify-content-center form_box"> 
-        How to fill in the question form?<br>This is the format to tell us where you’d like to create a fill-in the blank boxes.<br><br>
-        <b><mark>[[fill the answer here|fill the hint here]</mark></b><br><br>
+        <b>Step 1:</b><br>Select the topic you wish to add your question to.<br>
+        <b>Step 2:</b><br>Select the difficulty for you question.<br>
+        <b>Step 3:</b><br>Add a title for your question.<br>
+        <b>Step 4:</b><br>Write your question/article inside the question box and follow the instruction below to manage how the question will be displayed<br><br>
+        QUESTION BOX FORMAT<br>
+        Use the following format to create a fill-in the blank boxes.<br><br>
+        <mark>[[fill the answer here|fill the hint here]]</mark><br><br>
         You can also leave the hint area empty.<br><br>
-        <b><mark>[[fill the answer here|]]</mark></b><br><br>
-        You can also add the following.<br>
+        <mark>[[fill the answer here|]]</mark><br><br>
+        If you want to add any of the following you need to use these format.<br><br>
         <table>
           <tr>
-            <th>A tab</th>
-            <th>1 space</th>
+            <th>Tab</th>
             <th>2 spaces</th>
-            <th>A new line</th>
+            <th>New line</th>
           </tr>
           <tr>
             <td><b><mark>&amp;emsp;</mark></b></td>
-            <td><b><mark>&amp;nbsp;</mark></b></td>
             <td><b><mark>&amp;ensp;</mark></b></td>
             <td><b><mark>&lt;br&gt;</mark></b></td>
           </tr>
         </table>
         <br>
         Example:<br>
-        What part of an if statement should be indented?&lt;br&gt;<br>
-        Ans: The statements [[within|inside]] it&lt;br&gt;<br>
-        &lt;br&gt;<br>
-        >>> num = 12:&lt;br&gt;<br>
-        >>> if [[num > 5|]]:&lt;br&gt;<br>
-        ...&amp;emsp;print(“Larger than 5”)&lt;br&gt;<br>
-        ...if num <=  47:&lt;br&gt;<br>
-        ...&amp;emsp;print(“Between 5 and 47”)&lt;br&gt;<br>
-        [[Larger than 5|]]&lt;br&gt;<br>
-        Between 5 and 47&lt;br&gt;<br>
+        What part of an if statement should be indented?<b>&lt;br&gt;</b><br>
+        Ans: The statements <b>[[within|inside]]</b> it<b>&lt;br&gt;</b><br>
+        <b>&lt;br&gt;</b><br>
+        >>> num = 12:<b>&lt;br&gt;</b><br>
+        >>> if <b>[[num > 5|]]</b>:<b>&lt;br&gt;</b><br>
+        ...<b>&amp;emsp;</b>print(“Larger than 5”)<b>&lt;br&gt;</b><br>
+        ...if num <=  47:<b>&lt;br&gt;</b><br>
+        ...<b>&amp;emsp;</b>print(“Between 5 and 47”)<b>&lt;br&gt;</b><br>
+        <b>[[Larger than 5|]]</b><b>&lt;br&gt;</b><br>
+        Between 5 and 47<b>&lt;br&gt;<b><br>
       </p>
     </div>
   </div>
