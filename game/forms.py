@@ -47,7 +47,7 @@ class QuestionForm(forms.Form):
     widget=forms.Textarea(
         attrs={
             'id': 'question',
-            'style' : 'height: 700px; font-size: 18px; border-radius: 3%',
+            'style' : 'height: 750px; font-size: 18px; border-radius: 3%',
             'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
             }
         )
