@@ -109,22 +109,22 @@
                 
                     <button type="button" class="btn btn-light col-5"><a href="{% url 'game:form' %}">Create Forms</a></button>
                 </div>
-                <div class="row d-flex justify-content-center score_table">
-                    <div class="col-4 d-flex justify-content-center">
+                <div class="row d-flex justify-content-center score_table mt-2">
+                    <div class="col-5 d-flex justify-content-center">
                         RANK
                     </div>
-                    <div class="col-4 d-flex justify-content-center">
+                    <div class="col-5 d-flex justify-content-center">
                         SCORE
                     </div>
+                        <div id="user_rank" class="col-5 d-flex justify-content-center">
+                        </div>
+                        <div id="user_score" class="col-5 d-flex justify-content-center">
+                        </div>
                 </div>
-                <div class="row d-flex justify-content-center score_table">
-                    <div id="user_rank" class="col-4 d-flex justify-content-center">
-                    </div>
-                    <div id="user_score" class="col-4 d-flex justify-content-center">
-                    </div>
-                </div>
+                                    </div>
+
             </div>
-        </div> 
+        </div>
      </div>
 {% else %}
     <center>
