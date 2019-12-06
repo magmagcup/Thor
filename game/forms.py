@@ -54,7 +54,7 @@ class AnswerForm(forms.Form):
         self.fields['answer'].widget = forms.TextInput(
             attrs={
                 'id': 'answer',
-                'style': 'height: 28px; font-size: 16px; ',
+                'style': 'height: 28px; font-size: 22px; ',
                 'size': box_length,
                 'maxlength': ans_length,
                 'title': hint,
