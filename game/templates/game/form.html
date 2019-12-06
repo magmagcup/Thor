@@ -5,7 +5,7 @@
 
 <h1 class=""style="font-family: 'THOR Ragnarok'; font-size: 80px; text-align:center; color:fefce0 ; padding-top:5%" >Create Your Own Forms</h1>
 
-<form action='{%url "game:preview"%}' method="post">
+<form action='{%url "game:preview" %}' method="post">
   {% csrf_token %}
   <div class="form-group  has-feedback" style="height: 500px; width:1000px;">
     <h4 class="text-white">{{ form.as_p }}</h4>

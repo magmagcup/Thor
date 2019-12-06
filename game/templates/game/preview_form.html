@@ -1,59 +1,13 @@
 {% extends "game/base.html" %}
 {% block content %}
+{% load static %}
 
-<style> 
-    input[type=text] {
-        padding: 15px 5px;
-        box-sizing: border-box;
-        border: 2px solid #999;
-        -webkit-transition: 0.2s;
-        transition: 0.2s;
-        outline: none;
-    }
-
-    input[type=text]:focus {
-        border: 2px solid #555;
-    }
-
-    .head {
-        color:white;
-        text-align:center;
-        margin-top: 20px;
-    }
-
-    .main_focus {
-        background-color:white;
-        padding:20px;
-        margin:20px;
-    }
-
-    .title, .button-group {
-        text-align: center;
-    }
-
-    .q_text {
-        text-align: justified;
-    }
-
-    a.button {
-        -webkit-appearance: button;
-        -moz-appearance: button;
-        appearance: css-button;
-        border-radius: 4px;
-        padding: 12px 36px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-
-</style>
+ <link rel = "stylesheet" type = "text/css" href="{% static 'game/preview_form_style.css' %}">
 
 <h1 class="head">Preview Form</h1>
-<div class="main_focus">
-    <h4>Difficulty: {{question.difficulty|title}}</h4>
+<div class="main_focus container">
+    <h4 >Topic: {{question.topic|title}}</h4>
+    <h4> Difficulty: {{question.difficulty|title}}</h4>
     <h3 class="title">{{question.question_title}}</h3>
     <br>
     <p class="q_text">{{question.question_text|safe}}</p>
