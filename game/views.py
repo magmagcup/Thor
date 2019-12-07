@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.db.models.functions import Lower
 from .forms import QuestionForm, AnswerForm
 from .models import Question, Statistic, Topic, Answer, Best_score, UserPicture
 
@@ -24,9 +25,11 @@ def views_logout(request):
     logout(request)
     return redirect("game:home")
 
-def home_page(request):
+def home_page(request, error: str=''):
     """Redirect to homepage."""
-    return render(request, 'game/home.html')
+    topic = Topic.objects.all()
+    all_best_score = Best_score.objects.order_by('-value')
+    return render(request, 'game/home.html', {'all_topic': topic, 'best': all_best_score, 'number': range(1, 11), 'super_user': error})
 
 @login_required
 def form_page(request):
@@ -39,7 +42,8 @@ def form_page(request):
 def statistic_page(request):
     statistic = get_object_or_404(Statistic, user=request.user)
     picture = get_object_or_404(UserPicture, user=request.user)
-    return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture})
+    score_for_user = Best_score.objects.filter(user=request.user)
+    return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture, 'user_score': score_for_user})
 
 def how_to_play_page(request):
     return render(request, 'game/howto.html')
@@ -84,6 +88,8 @@ def random_question_list(value, topic_id: int):
 @login_required
 def question_page(request, topic_id):
     """Redirect to the Game page."""
+    if request.user.is_staff:
+        return home_page(request, "Can't play as super user")
     questions = random_question_list(Question, topic_id)
     q_title = [q.question_title for q in questions]
     q_text = [q.question_text for q in questions]
@@ -196,6 +202,7 @@ def receive_score(request, topic_id):
 
 
 def get_best_score(request, topic_id):
+    """Create best score obj"""
     user_id = request.user.id
     topic = get_object_or_404(Topic, pk=topic_id)
     get_user = User.objects.get(pk=user_id)
