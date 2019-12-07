@@ -2,8 +2,6 @@ from django import forms
 from django.utils.safestring import mark_safe
 from game.models import Answer, Topic
 
-object_topic = Topic.objects.all()
-select_topic = [tuple([t.topic_name, t.topic_name]) for t in object_topic]
 select_difficulty = [
     ('easy','Easy'),
     ('normal','Normal'),
@@ -12,15 +10,22 @@ select_difficulty = [
 ]
 
 class QuestionForm(forms.Form):
-    topic = forms.CharField(label='Topic', 
-    widget=forms.Select(
-        choices=select_topic,
-        )
+    class Meta:
+        model = Topic
+        fields = [
+            "topic","difficulty", "title", "question"
+        ]
+
+    topic = forms.ModelChoiceField(label='Topic', 
+    queryset=Topic.objects.all(),
+    initial={'topic':1},
+    required=True,
     )
     difficulty = forms.CharField(label='Difficulty', 
     widget=forms.Select(
         choices=select_difficulty,
-        )
+        ),
+    required=True,
     )
     title = forms.CharField(label=mark_safe("Title</br>"), 
     max_length=100000,
@@ -30,7 +35,8 @@ class QuestionForm(forms.Form):
             'style' : 'height: 50px; font-size: 22px',
             'class' : 'mt-5',
             }
-        )
+        ),
+    required=True,
     )
     question = forms.CharField(label=mark_safe('Question</br>'), 
     max_length=100000,
@@ -40,7 +46,8 @@ class QuestionForm(forms.Form):
             'style' : 'height: 400px; font-size: 22px',
             'class' : 'mt-5',
             }
-        )
+        ),
+    required=True,
     )
 
 class AnswerForm(forms.Form):
@@ -54,9 +61,12 @@ class AnswerForm(forms.Form):
         self.fields['answer'].widget = forms.TextInput(
             attrs={
                 'id': 'answer',
-                'style': 'height: 28px; font-size: 16px; ',
+                'style': 'height: 28px; font-size: 22px; ',
                 'size': box_length,
                 'maxlength': ans_length,
                 'title': hint,
                 'onblur': 'checkAnswer()',
             })
+
+class AForm(forms.Form):
+    c = forms.ChoiceField(choices=(("a","A"), ("b", "B")), disabled=True)
