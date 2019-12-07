@@ -14,5 +14,5 @@ class AnswerFormTest(TestCase):
                                      box_length=str(self.answer_length)+"ch", hint=self.hint)
 
     def test_html_answer_form_tag(self):
-        self.assertEquals(str(self.blank_form),'<tr><th></th><td><input type="text" name="answer" id="answer" style="height: 28px; font-size: 16px; " size="10ch" maxlength="10" title="Do again and again &lt;adv&gt;" onblur="checkAnswer()" required></td></tr>')
+        self.assertEquals(str(self.blank_form),'<tr><th></th><td><input type="text" name="answer" id="answer" style="height: 28px; font-size: 22px; " size="10ch" maxlength="10" title="Do again and again &lt;adv&gt;" onblur="checkAnswer()" required></td></tr>')
 
