@@ -1,1 +1,1 @@
-web: gunicorn thor-the-god-of-thunder.wsgi
+web: gunicorn thor.wsgi
