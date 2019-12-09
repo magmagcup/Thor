@@ -222,4 +222,5 @@ def edit_form(request, question_id):
         question = Question.objects.get(pk=question_id)
         topic = Topic.objects.get(pk=question.topic_id)
         form = QuestionForm(instance=question)
+        question.delete()
         return render(request, "game/form.html", {"question_id":question_id, "form":form})
