@@ -150,11 +150,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/static_files/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
 
 
-django_heroku.settings(locals())
+if 'HEROKU' in os.environ:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_URL = '/static/'
+    django_heroku.settings(locals())
+else:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = '/static_files/'
+    STATICFILES_DIRS = [
+        BASE_DIR + '/game/static/',
+    ]

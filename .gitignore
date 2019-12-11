@@ -117,3 +117,7 @@ game/migrations/
 *.code-workspace
 
 game/migrations/
+
+*.pyc
+
+
