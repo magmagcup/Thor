@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
@@ -85,27 +86,11 @@ def random_question_list(value, topic_id: int):
     question_list += sample_question(value, topic_id, 'extreme', 1)
     return question_list
 
-@login_required
-def question_page(request, topic_id):
-    """Redirect to the Game page."""
-    if request.user.is_staff:
-        return home_page(request, "Can't play as super user")
-    questions = random_question_list(Question, topic_id)
-    q_title = [q.question_title for q in questions]
-    q_text = [q.question_text for q in questions]
-    q_diff = [q.difficulty for q in questions]
-    ans, hint = [], []
-    for question in questions:
-        answer_set = list(Answer.objects.filter(question_id=question.id, topic_id=topic_id))
-        ans.append([a.answer_text for a in answer_set])
-        hint.append([a.hint_text for a in answer_set])
-    get_best_score(request, topic_id)
-    return render(request, 'game/game.html', {
-        'q_title':q_title, 'q_text':q_text, 'answer':ans, 'hint':hint, 'q_diff':q_diff, 'topic_id':topic_id})
-
 def create_answer_box(value: str):
     """Replace '[[__|__]]' with input tag.
     Return the formatted value."""
+    if not (']]' in value and '[[' in value):
+        raise ValidationError('No answer box in question field.')
     while ']]' in value:
         start = value.find('[[')
         mid = value.find('|')
@@ -120,6 +105,33 @@ def create_answer_box(value: str):
         value = value[:start] + replacement + value[end+2:]
     return value
 
+def question_page_resources(topic_id):
+    questions = random_question_list(Question, topic_id)
+    q_title = [q.question_title for q in questions]
+    q_text = []
+    for q in questions:
+        boxed_question = create_answer_box(q.question_text)
+        q_text.append(boxed_question)
+    q_diff = [q.difficulty for q in questions]
+    ans, hint = [], []
+    for question in questions:
+        answer_set = list(Answer.objects.filter(
+            question_id=question.id, topic_id=topic_id))
+        ans.append([a.answer_text for a in answer_set])
+        hint.append([a.hint_text for a in answer_set])
+    resources = {"title": q_title, "text": q_text,
+                 "diff": q_diff, "answer": ans, "hint": hint}
+    return resources
+
+@login_required
+def question_page(request, topic_id):
+    """Redirect to the Game page."""
+    resources = question_page_resources(topic_id)
+    get_best_score(request, topic_id)
+    return render(request, 'game/game.html', {
+        'q_title': resources["title"], 'q_text': resources["text"],
+        'answer': resources["answer"], 'hint': resources["hint"],
+        'q_diff': resources["diff"], 'topic_id': topic_id})
 
 def assign_answer(value, question_id, topic_id):
     """From 'value', Save string inside '[[__|__]]' as Answer."""
@@ -155,19 +167,17 @@ def get_stat(request):
 
 @login_required
 def preview_form(request):
-    """Redirect to Form Preview page."""
+    """Reidrect to Form Preview page."""
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
-            topic_id = form.data.get('topic')  # topic_id is an integer
-            topic = Topic.objects.get(pk=topic_id)
-            title = form.data.get('title')
-            raw_question = form.data.get('question')
-            boxed_question = create_answer_box(raw_question)
+            topic = Topic.objects.get(pk=int(form.data.get('topic')))
+            title = form.data.get('question_title')
+            raw_question = form.data.get('question_text')
             difficulty = form.data.get('difficulty')
-            question = Question(topic_id=topic.id,
+            question = Question(topic=topic,
                                 question_title=title,
-                                question_text=boxed_question,
+                                question_text=raw_question,
                                 difficulty=difficulty)
             question.save()
             assign_answer(raw_question, question.id, topic.id)
@@ -210,3 +220,11 @@ def get_best_score(request, topic_id):
     if not check_key:
         s = Best_score(user=get_user, key=topic.topic_name, value=0)
         s.save()
+
+def edit_form(request, question_id):
+    if request.method == "GET":
+        question = Question.objects.get(pk=question_id)
+        topic = Topic.objects.get(pk=question.topic_id)
+        form = QuestionForm(instance=question)
+        question.delete()
+        return render(request, "game/form.html", {"question_id":question_id, "form":form})
