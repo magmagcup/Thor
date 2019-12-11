@@ -1,7 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-}
 @font-face
 {
     font-family: 'THOR Ragnarok';
@@ -10,28 +6,70 @@
 
 body {
     background-image: url("lightning.jpg");
+    background-color: rgb(39, 39, 39);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover, contain;
     font-family: 'Mallanna';
 }
 
-
 h1 {
     text-align: center;
     text-shadow: 5px 2px darkred;
   }
 
-.col-12 {
-width: 100% !important;
-}
-
-
 .score_table {
     background-color: rgba(70, 83, 88, 0.445);
     border-radius: 15px;
-    border-style: solid; 
+    border-style: solid;
+    border-color: white;
     }
+
+.howto_box {
+    background-color: rgba(70, 83, 88, 0.445);
+    border-radius: 15px;
+    border-style: solid;
+    border-color: black;
+    }
+
+.form_box {
+    background-color: white;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: rosybrown;
+}
+
+select {
+    font-size: 20;
+}
+
+.btnlogin {
+    color: rgb(192, 108, 108);
+    background-color: white;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    border-radius: 3%;
+    padding: 26px 63px;
+    }
+        
+.btnlogin:hover {
+background-color: rosybrown;
+color: white;
+} 
+
+.btnform {
+color: rgb(192, 108, 108);
+background-color: white;
+-webkit-transition-duration: 0.4s; 
+transition-duration: 0.4s;
+border-radius: 5%
+}
+    
+.btnform:hover {
+background-color: rosybrown;
+color: white;
+}
+
 
 /* unvisited link */
 a:link {
@@ -45,18 +83,5 @@ color: black;
 
 /* mouse over link */
 a:hover {
-color: palevioletred;
-}
-
-
-.long_container {
-    min-height:50%;
-}
-
-.medium_container {
-    min-height:10%;
-}
-
-.bigger_font {
-    font-size: 30px;
+color: white;
 }

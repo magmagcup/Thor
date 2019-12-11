@@ -1,8 +1,17 @@
 {% extends "game/base.html" %}
 
 {% block content %}
+{% load static %}
+<link rel = "stylesheet" type = "text/css" href="{% static 'game/topic_page_style.css' %}">
 
-{% for t in topic %}
-  <br><br><br><br><a href="{% url 'game:question' t.id %}">{{ t }}</a>
-{% endfor %}
+<h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Pick your topic</h1>
+<div class="container mt-4">
+    <div class="mt-5 row">
+        {% for t in topic %}
+        <div class="col-4">
+            <button type="button" class="m-2 mt-4 btntopic btn-lg"><a href="{% url 'game:question' t.id %}">{{ t }}</a></button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock  %}

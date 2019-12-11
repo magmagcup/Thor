@@ -1,0 +1,16 @@
+.btntopic {
+    color: darkred;
+    background-color: white; 
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    display: block;
+    width: 100%;
+    padding: 26px 63px;
+    cursor: pointer;
+    text-align: center;
+    }
+    
+.btntopic:hover {
+    background-color: rgba(150, 45, 110, 0.74);
+    color: antiquewhite;
+    }
