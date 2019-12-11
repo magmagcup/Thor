@@ -6,7 +6,6 @@
 
 body {
     background-image: url("lightning.jpg");
-    background-color: rgb(39, 39, 39);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover, contain;
@@ -45,3 +44,19 @@ h1 {
 background-color: rosybrown;
 color: white;
 } 
+
+
+/* unvisited link */
+a:link {
+color: rebeccapurple;
+}
+
+/* visited link */
+a:visited {
+color: black;
+}
+
+/* mouse over link */
+a:hover {
+color: white;
+}
