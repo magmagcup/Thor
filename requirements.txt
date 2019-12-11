@@ -31,3 +31,6 @@ social-auth-core==3.2.0
 sqlparse==0.3.0
 urllib3==1.25.7
 whitenoise==4.1.4
+coverage
+codecov
+
