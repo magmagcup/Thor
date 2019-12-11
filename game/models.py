@@ -61,4 +61,4 @@ class Best_score(models.Model):
     value = models.IntegerField(default=0)
 
     def __str__(self):
-        return  self.key
+        return self.key

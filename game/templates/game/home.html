@@ -3,7 +3,49 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+<script>
+
+    function change_data() {
+        document.getElementById('name_10').innerHTML = " ";
+        var x = document.getElementById("select_topic").value;
+        var rank_num = 1;
+        empty_data();
+        {% for each_score in best %}
+            var topic_text = "{{ each_score.key }}";
+            if (x == topic_text) {
+                if (document.getElementById('name_10').innerHTML == '') {
+                    var name_id = "name_" + rank_num;
+                    var name_score = "num_" + rank_num;
+                    document.getElementById(name_id).innerHTML = "{{ each_score.user }}";
+                    document.getElementById(name_score).innerHTML = "{{ each_score.value }}";
+                }
+                if ('{{ each_score.user }}' == '{{ user }}') {
+                    document.getElementById('user_rank').innerHTML = rank_num ;
+                    document.getElementById('user_score').innerHTML = {{each_score.value}};
+                }
+                rank_num++;
+            }
+        {% endfor %}
+    }
+
+    function empty_data() {
+        document.getElementById('user_rank').innerHTML = '';
+        document.getElementById('user_score').innerHTML = '';
+        var i;
+        for (i = 1; i < 11; i++) {
+        var name_id = "name_" + i;
+        var name_score = "num_" + i;
+        document.getElementById(name_id).innerHTML = "";
+        document.getElementById(name_score).innerHTML = "";
+    }
+    }
+
+</script>
+
     <h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Thor: The God of Thunder</h1>
+    {% if user_score != '' %}
+        <h1> {{ user_score }}</h1>
+    {% endif %}
     <div class="container text-white my-3">
         <div class="row d-flex justify-content-around mb-3 align-content-center">
             <div class="col-5">
@@ -11,15 +53,13 @@
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row align-content-center" style="font-size: 20px"> TOPIC </div>
                     </div>
-                    <div class="dropdown col-6 d-flex justify-content-center">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Select
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">History</a>
-                            <a class="dropdown-item" href="#">Python</a> 
-                            <a class="dropdown-item" href="#">Languages</a>
-                        </div>
+                    <div class="col-6 d-flex justify-content-center">
+                            <select class="browser-default custom-select" id = "select_topic" onchange="change_data()">
+                                <option selected>Select topic</option>
+                                {% for each_topic in all_topic %}
+                                <option value="{{ each_topic.topic_name }}"> {{each_topic.topic_name}}</option>
+                                {% endfor %}
+                            </select>
                     </div>
                 </div>
             </div>
@@ -41,6 +81,18 @@
                         SCORE
                     </div>
                 </div>
+                {% for num in number %}
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center">
+                        <div class="row"> {{num}} </div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center" id="name_{{num}}">
+                    </div>
+                    <div class="col-4 d-flex justify-content-center" id="num_{{num}}">
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
                 <div class="row d-flex justify-content-center" style="padding-top: 3%">
                 </div>  
             </div>
@@ -57,8 +109,22 @@
                 
                     <button type="button" class="btn btn-light col-5"><a href="{% url 'game:form' %}">Create Forms</a></button>
                 </div>
+                <div class="row d-flex justify-content-center score_table mt-2">
+                    <div class="col-5 d-flex justify-content-center">
+                        RANK
+                    </div>
+                    <div class="col-5 d-flex justify-content-center">
+                        SCORE
+                    </div>
+                        <div id="user_rank" class="col-5 d-flex justify-content-center">
+                        </div>
+                        <div id="user_score" class="col-5 d-flex justify-content-center">
+                        </div>
+                </div>
+                                    </div>
+
             </div>
-        </div> 
+        </div>
      </div>
 {% else %}
     <center>
