@@ -136,9 +136,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = "UTC"
+# TIME_ZONE = "UTC"
 
-# TIME_ZONE = config("TIME_ZONE", default="timezone")
+TIME_ZONE = config("TIME_ZONE", default="timezone")
 
 USE_I18N = True
 
@@ -161,5 +161,5 @@ else:
     STATIC_URL = '/static/'
     STATIC_ROOT = '/static_files/'
     STATICFILES_DIRS = [
-        BASE_DIR + '/game/static/',
+        BASE_DIR + '/static/',
     ]
