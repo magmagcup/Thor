@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.safestring import mark_safe
-from game.models import Answer, Topic
+from game.models import Answer, Topic, Question
 
 select_difficulty = [
     ('easy','Easy'),
@@ -9,46 +9,29 @@ select_difficulty = [
     ('extreme','Extreme'),
 ]
 
-class QuestionForm(forms.Form):
+class QuestionForm(forms.ModelForm):
     class Meta:
-        model = Topic
-        fields = [
-            "topic","difficulty", "title", "question"
-        ]
-
-    topic = forms.ModelChoiceField(label='Topic', 
-    queryset=Topic.objects.all(),
-    initial={'topic':1},
-    required=True,
-    )
-    difficulty = forms.CharField(label='Difficulty', 
-    widget=forms.Select(
+        model = Question
+        fields = '__all__'
+        widgets = {
+            'difficulty':forms.Select(
         choices=select_difficulty,
         ),
-    required=True,
-    )
-    title = forms.CharField(label=mark_safe("Title</br>"), 
-    max_length=100000,
-    widget=forms.Textarea(
+            'question_title': forms.Textarea(
         attrs={
             'id': 'title',
             'style' : 'height: 50px; font-size: 22px',
             'class' : 'mt-5',
             }
-        ),
-    required=True,
-    )
-    question = forms.CharField(label=mark_safe('Question</br>'), 
-    max_length=100000,
-    widget=forms.Textarea(
+            ),
+        'question_text':forms.Textarea(
         attrs={
             'id': 'question',
             'style' : 'height: 400px; font-size: 22px',
             'class' : 'mt-5',
             }
-        ),
-    required=True,
-    )
+        )
+        }
 
 class AnswerForm(forms.Form):
     answer = forms.CharField(label=mark_safe(''))
