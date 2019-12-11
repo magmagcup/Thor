@@ -1,16 +1,26 @@
-.btntopic {
-    color: darkred;
-    background-color: white; 
+h1.topic {
+    font-family: 'THOR Ragnarok';
+    color:white;
+    font-size: 55px;
+    letter-spacing: 5;
+}
+
+button.topic {
+    background-color: rgb(44, 19, 17); 
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
     display: block;
     width: 100%;
-    padding: 26px 63px;
+    padding: 46px;
     cursor: pointer;
     text-align: center;
+    font-size: 25px;
+    border-width: 1.5px;
+    border-color: rgba(255, 255, 255, 0.692);
+    color: rgb(252, 200, 200)
     }
     
-.btntopic:hover {
-    background-color: rgba(150, 45, 110, 0.74);
-    color: antiquewhite;
+button.topic:hover {
+    background-color: rgba(161, 40, 111, 0.76);
+    color: white;
     }

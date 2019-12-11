@@ -4,12 +4,12 @@
 {% load static %}
 <link rel = "stylesheet" type = "text/css" href="{% static 'game/topic_page_style.css' %}">
 
-<h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Pick your topic</h1>
-<div class="container mt-4">
+<h1 class="mt-5 pt-5 topic">Pick your topic</h1>
+<div class="mt-4 container">
     <div class="mt-5 row">
         {% for t in topic %}
         <div class="col-4">
-            <button type="button" class="m-2 mt-4 btntopic btn-lg"><a href="{% url 'game:question' t.id %}">{{ t }}</a></button>
+            <button type="button" class="m-2 mt-4 topic btn-lg" onclick="window.location.href='{% url 'game:question' t.id %}'">{{ t }}</button>
         </div>
         {% endfor %}
     </div>
