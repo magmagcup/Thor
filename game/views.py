@@ -89,8 +89,6 @@ def random_question_list(value, topic_id: int):
 def create_answer_box(value: str):
     """Replace '[[__|__]]' with input tag.
     Return the formatted value."""
-    if not (']]' in value and '[[' in value):
-        raise ValidationError('No answer box in question field.')
     while ']]' in value:
         start = value.find('[[')
         mid = value.find('|')
