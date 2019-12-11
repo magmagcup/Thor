@@ -31,41 +31,6 @@ h1 {
     border-color: black;
     }
 
-.form_box {
-    background-color: rgba(15, 18, 19, 0.445);
-    border-radius: 15px;
-    border-style: solid;
-    border-color: rgba(255, 255, 255, 0.76);
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ddd;
-    color: white;
-}
-
-td, th {  
-    border: 1px solid #ddd;
-    color: white;
-    padding: 15px;
-    text-align: center;
-  }
-  
-  
-mark {
-    color: rgb(243, 243, 142);
-    background-color: rgba(150, 45, 110, 0.74);
-}
-
-b {
-    color: rgb(255, 255, 124);
-}
-
-select {
-    font-size: 18;
-}
-
 .btnlogin {
     color: rgb(192, 108, 108);
     background-color: white;
@@ -80,18 +45,6 @@ background-color: rosybrown;
 color: white;
 } 
 
-.btnform {
-color: white;
-background-color:rgba(70, 83, 88, 0.445);
--webkit-transition-duration: 0.4s; 
-transition-duration: 0.4s;
-border-radius: 5%
-}
-    
-.btnform:hover {
-background-color: rgb(109, 3, 3);
-color: white;
-}
 
 /* unvisited link */
 a:link {
