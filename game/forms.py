@@ -9,7 +9,6 @@ select_difficulty = [
     ('extreme','Extreme'),
 ]
 
-
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
@@ -64,7 +63,6 @@ class AnswerForm(forms.Form):
                 'onblur': 'checkAnswer()',
             })
 
-
 class AForm(forms.Form):
     c = forms.ChoiceField(choices=(("a","A"), ("b", "B")), disabled=True)
-
+    
