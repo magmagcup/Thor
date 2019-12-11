@@ -15,6 +15,13 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = '__all__'
         widgets = {
+        'topic':forms.Select(
+              attrs={
+            'id': 'topic',
+            'style' : 'height: 50px; font-size: 20px;',
+            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
+            }
+            ),
             'difficulty':forms.Select(
         choices=select_difficulty,
               attrs={
