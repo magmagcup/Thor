@@ -16,11 +16,14 @@ class Topic(models.Model):
 
 class Question(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-
-    question_title = models.CharField(max_length=1000000)
-    question_text = models.CharField(max_length=10000000)
-
+    
     difficulty = models.CharField(max_length=10)
+
+    question_title = models.CharField(max_length=256,
+    verbose_name='Title')
+    question_text = models.TextField(verbose_name='Question')
+
+
 
     def __str__(self):
         return self.question_title
@@ -58,4 +61,4 @@ class Best_score(models.Model):
     value = models.IntegerField(default=0)
 
     def __str__(self):
-        return  self.key
+        return self.key

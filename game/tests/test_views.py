@@ -4,6 +4,16 @@ from django.contrib.auth.models import User
 from game.models import Question, Topic, Answer, Best_score, Statistic
 from game.views import *
 
+def get_best_score(topic_id, user_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    get_user = User.objects.get(pk=user_id)
+    check_key = Best_score.objects.filter(key=topic.topic_name, user=user_id)
+    if not check_key:
+        s = Best_score(user=get_user, key=topic.topic_name, value=0)
+        s.save()
+        return True
+    return False
+
 class ViewTest(TestCase):
     def setUp(self):
         self.client = Client()
@@ -12,10 +22,12 @@ class ViewTest(TestCase):
         self.user = User.objects.create_user(self.username,password=self.password)
         self.check = Statistic.objects.filter(user=self.user.id)
         self.status = True
+        self.topic = Topic.objects.create(topic_name="Topic")
+        self.question = Question.objects.create(topic=self.topic, question_title='Hello', question_text="world", difficulty="Easy")
     
     def test_get_stat(self):
         self.client.force_login(self.user)
-        response = self.client.get(path='/stat/', follow=True)
+        response = self.client.get(path='/stat/', data={'user_id':1}, follow=True)
         status = response.status_code
         self.assertEquals(status, 200)
 
@@ -29,4 +41,42 @@ class ViewTest(TestCase):
         self.assertEqual(stat.user.username, self.username)
         self.assertTrue(stat.user.password)
         self.assertTemplateUsed(response, 'game/base.html')
+    
+    def test_discard_form(self):
+        get_question = Question.objects.get(pk=self.question.id)
+        self.client.force_login(self.user)
 
+        response = self.client.get(path=f'game/{get_question.id}', data={'question_id':get_question.id}, follow=True)
+        status = response.status_code
+        self.assertEquals(status, 200)
+    
+    def test_preview_form(self):
+        self.client.force_login(self.user)
+        get_question = Question.objects.get(pk=self.question.id)
+        response = self.client.post(path=f'game/preview/', 
+                                data={
+                                    'topic':1, 
+                                    'difficulty':"Easy",
+                                    'title':"Hello", 
+                                    'question':"[[Hello|]]"}, 
+                                    follow=True)
+        status = response.status_code
+        self.assertEquals(status, 200)
+    
+    def test_receive_score(self):
+        self.client.force_login(self.user)
+        response = self.client.post(path=f'game/recieve/{self.topic.id}', 
+                                    data={
+                                    'topic':self.topic.id,
+                                    'user_id':1,
+                                    'score':100,},
+                                    follow=True)
+        status = response.status_code
+        self.assertEquals(status, 200)
+    
+    def test_get_best_score(self):
+        status = get_best_score(self.topic.id, self.user.id)
+        self.assertTrue(status)
+        Best_score.objects.create(user=self.user, key=self.topic.topic_name, value=0)
+        status = get_best_score(self.topic.id, self.user.id)
+        self.assertFalse(status)

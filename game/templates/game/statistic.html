@@ -1,24 +1,43 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-<h1 class=""style="font-family: 'Baloo Bhai'; font-size: 80px; text-align:center; color:azure; padding-top:5%" >Player's Profile<br> <br></h1>
+<h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Player's Profile<br> <br></h1>
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-5">
             <img class="img-responsive rounded mx-auto d-block" src="{{ pic.profile_photo }}" alt="Profile Picture" width="300" height="auto" style="border-radius:50%; border-style:solid">
         </div>
-        <div class="col-5">
+        <div class="col-7 text-white">
             <div class="row justify-content-center">
-                <div class="col-7 d-flex justify-content-center">
-                    <h3 class="text-white">Username: {{ user.username }}</h3>
-                </div>
-                <div class="col-5 d-flex justify-content-center">
-                    <h3 class="text-white">User ID:{{ user.id }}</h3>
+                <div class="score_table col-10">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-5 d-flex justify-content-center">
+                            <h1 class="mt-1">{{ user.username }}</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <h3 class="text-white">Highest Score = {{ stat.score }}</h3>
+            <br>
+            <div class="row justify-content-around">
+                <div class="score_table col-6">
+                    <div class="row d-flex justify-content-center">
+                        <h3 class="mt-1">Topic |Best score</h3>
+                    </div>
+                    {% if user_score %}
+                    {% for score in user_score %}
+                    <br>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-4 d-flex justify-content-center">
+                            <div class="row"> {{score.key}} </div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <div class="row"> {{score.value}} </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
             <br><br><br><br><br>
             <div class="row justify-content-center">
