@@ -159,7 +159,7 @@ if 'HEROKU' in os.environ:
     django_heroku.settings(locals())
 else:
     STATIC_URL = '/static/'
-    STATIC_ROOT = '/static_files/'
+    STATIC_ROOT = '/static/'
     STATICFILES_DIRS = [
         BASE_DIR + '/static/',
     ]
