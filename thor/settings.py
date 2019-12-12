@@ -36,6 +36,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("OAUTH2_SECRET", default="secret")
 LOGIN_REDIRECT_URL = '/game/stat'
 LOGIN_URL = '/game/'
 
+DATABASE_URL = 'postgres://edgffbixtemkev:6554a386e62365428dc12f98f13b3db6d13a585ddb9e27f1bf9c5a962d20b950@ec2-174-129-255-59.compute-1.amazonaws.com:5432/d3k7tijudk63ct'
+
+
 SOCIAL_AUTH_PIPELINE = (
 
     'social.pipeline.social_auth.social_details',
@@ -149,7 +152,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 
 
 if 'HEROKU' in os.environ:
