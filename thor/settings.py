@@ -11,7 +11,7 @@ import os
 from decouple import config, Csv
 import django_heroku
 import dj_database_url
-import dotenv
+# import dotenv
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -153,9 +153,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 # This is new:
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
