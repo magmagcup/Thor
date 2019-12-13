@@ -154,10 +154,7 @@ USE_TZ = True
 
 # This is new:
 dotenv_file = os.path.join(BASE_DIR, ".env")
-envi = False
-
 if os.path.isfile(dotenv_file):
-    envi = True
     dotenv.load_dotenv(dotenv_file)
 
 DATABASES = {}
@@ -182,9 +179,7 @@ STATICFILES_DIRS = (
 #     STATICFILES_DIRS = [
 #         BASE_DIR + '/static/',
 #     ]
-if not envi:
-    django_heroku.settings(locals())
-    try:
-        del DATABASES['default']['OPTIONS']['sslmode']
-    except KeyError:
-        pass
+
+django_heroku.settings(locals())
+
+del DATABASES['default']['OPTIONS']['sslmode']
