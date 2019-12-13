@@ -1,1 +1,1 @@
-'web: gunicorn thor.wsgi --log-file -' 
+'web: gunicorn game.wsgi --log-file -'
