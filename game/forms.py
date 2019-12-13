@@ -33,7 +33,7 @@ class QuestionForm(forms.ModelForm):
                 attrs={
                     'id': 'title',
                     'style' : 'height: 50px; font-size: 18px; resize: none',
-                    'class' : 'col-10 mt-2 p-3 d-flex justify-content-center',
+                    'class' : 'col-10 mt-2 p-3   d-flex justify-content-center',
                 }
             ),
             'question_text':forms.Textarea(
