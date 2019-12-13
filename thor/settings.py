@@ -157,9 +157,6 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
@@ -180,6 +177,11 @@ STATICFILES_DIRS = (
 #         BASE_DIR + '/static/',
 #     ]
 
-django_heroku.settings(locals())
 
-del DATABASES['default']['OPTIONS']['sslmode']
+if 'HEROKU' in os.environ:
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+    django_heroku.settings(locals())
+    del DATABASES['default']['OPTIONS']['sslmode']
+else:
+    DATABASES = {'default': dj_database_url.config(default='sqlite:///db.sqlite3')}
