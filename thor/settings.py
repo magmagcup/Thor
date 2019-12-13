@@ -182,6 +182,6 @@ STATICFILES_DIRS = (
 #     STATICFILES_DIRS = [
 #         BASE_DIR + '/static/',
 #     ]
-if not envi:
+if envi:
     django_heroku.settings(locals())
     del DATABASES['default']['OPTIONS']['sslmode']
