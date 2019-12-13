@@ -164,19 +164,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-# if 'HEROKU' in os.environ:
-#     import django_heroku
-#     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-#     STATIC_URL = '/static/'
-#     django_heroku.settings(locals())
-# else:
-#     STATIC_URL = '/static/'
-#     STATIC_ROOT = '/static/'
-#     STATICFILES_DIRS = [
-#         BASE_DIR + '/static/',
-#     ]
-
 if 'HEROKU' in os.environ:
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config(conn_max_age=600)
