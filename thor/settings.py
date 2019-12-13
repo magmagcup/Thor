@@ -172,11 +172,7 @@ DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 #     STATICFILES_DIRS = [
 #         BASE_DIR + '/static/',
 #     ]
-STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR + '/static/',
-    ]
+
 django_heroku.settings(locals())
 
 del DATABASES['default']['OPTIONS']['sslmode']
