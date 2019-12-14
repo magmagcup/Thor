@@ -1,0 +1,20 @@
+[run]
+branch = True
+source = .
+
+[report]
+exclude_lines = 
+    if self.debug:
+    pragma: no cover
+    raise NotImplementedError
+    if name == .main.:
+
+omit = 
+    tests/*
+    manage.py
+    /tests/
+    test*.py
+    venv/
+    config/
+    game/templatetags/*
+    thor/wsgi.py
