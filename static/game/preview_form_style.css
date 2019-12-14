@@ -11,10 +11,13 @@ input[type=text]:focus {
     border: 2px solid #555;
 }
 
-.head {
+h1.head {
     color:white;
     text-align:center;
     margin-top: 20px;
+    letter-spacing: 5;
+    word-spacing: 10px;
+    font-size: 60px;
 }
 
 #header_difficulty{
@@ -22,7 +25,7 @@ input[type=text]:focus {
 }
 
 .main_focus {
-    background-color: rgba(70, 83, 88, 0.445);
+    background-color: rgba(15, 18, 19, 0.822);
     border-radius: 15px;
     border: rgb(220, 20, 60, 0.75) solid; 
     padding:3%;

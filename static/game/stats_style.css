@@ -1,0 +1,35 @@
+h1.stats {
+    font-family: 'THOR Ragnarok';
+    color:white;
+    font-size: 55px;
+    letter-spacing: 5;
+}
+
+h2.stats {
+    color: white;
+}
+
+button.stats {
+    color: white;
+    background-color: rgb(70, 19, 33);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;			
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    padding: 5px;
+}
+
+button.stats:hover {
+    background-color:  rgba(245, 245, 245, 0.829);
+    color: black;
+}
+
+.showscore {
+    background-color: rgba(0, 0, 0, 0.644);
+    border-radius: 15px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.699);
+    padding: 2%;
+    padding-left: 5%;
+}
