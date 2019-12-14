@@ -9,25 +9,50 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
 from .forms import QuestionForm, AnswerForm
 from .models import Question, Statistic, Topic, Answer, Best_score, UserPicture
+import logging
 
 # Create your views here.
 
+logger = logging.getLogger('thor')
+
+def get_client_ip(request):
+    get_ip = request.META.get('HTTP_X_FORWARDED_FOR')
+    if get_ip:
+        ip = get_ip.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 def index(request):
     """Redirect to index page."""
+    if str(request.user) == 'AnonymousUser':
+        client_ip = get_client_ip(request)
+        logger.error('Access from {}'.format(client_ip))
     return HttpResponseRedirect(reverse("game:index"))
 
 
 def page404(request, exception):
     """Redirect to 404 page."""
+    client_ip = get_client_ip(request)
+    logger.error('response status code 404 from {}'.format(client_ip))
     return render(request, 'game/404.html')
 
 def views_logout(request):
     """User logout and redirect to homepage."""
+    user = request.user
+    client_ip = get_client_ip(request)
+    logger.info('Logout from {}'.format(user))
     logout(request)
     return redirect("game:home")
 
 def home_page(request, error: str=''):
+    user = request.user
     """Redirect to homepage."""
+    if str(request.user) == 'AnonymousUser':
+        client_ip = get_client_ip(request)
+        logger.error('Access from {}'.format(client_ip))
+    else:
+        logger.info('Access from {}'.format(user))
     topic = Topic.objects.all()
     all_best_score = Best_score.objects.order_by('-value')
     return render(request, 'game/home.html', {'all_topic': topic, 'best': all_best_score, 'number': range(1, 11), 'super_user': error})
@@ -35,24 +60,44 @@ def home_page(request, error: str=''):
 @login_required
 def form_page(request):
     """Redirect to Add Question Form page."""
+    user = request.user
+    if str(request.user) == 'AnonymousUser':
+        client_ip = get_client_ip(request)
+        logger.error('Try to access from {}'.format(client_ip))
+    logger.info('Access from {}'.format(user))
     form = QuestionForm()
     context = {'form': form}
     return render(request, 'game/form.html', context)
 
 @login_required
 def statistic_page(request):
+    user = request.user
+    client_ip = get_client_ip(request)
+    if str(request.user) == 'AnonymousUser':
+        logger.error('Try to access from {}'.format(client_ip))
+    logger.info('Access from {}'.format(user))
     statistic = get_object_or_404(Statistic, user=request.user)
     picture = get_object_or_404(UserPicture, user=request.user)
     score_for_user = Best_score.objects.filter(user=request.user)
     return render(request, 'game/statistic.html', {'stat': statistic,'pic': picture, 'user_score': score_for_user})
 
 def how_to_play_page(request):
+    user = request.user
+    client_ip = get_client_ip(request)
+    if str(request.user) == 'AnonymousUser':
+        logger.error('Try to access from {}'.format(client_ip))
+    logger.info('Access from {}'.format(user))
     return render(request, 'game/howto.html')
     
 
 @login_required
 def topic_page(request):
     """Redirect to Select Topic page."""
+    user = request.user
+    client_ip = get_client_ip(request)
+    if str(request.user) == 'AnonymousUser':
+        logger.error('Try to access from {}'.format(client_ip))
+    logger.info('Access from {}'.format(user))
     topic = Topic.objects.all()
     return render(request, 'game/topic.html', {'topic':topic})
 
@@ -124,6 +169,11 @@ def question_page_resources(topic_id):
 @login_required
 def question_page(request, topic_id):
     """Redirect to the Game page."""
+    user = request.user
+    client_ip = get_client_ip(request)
+    if str(request.user) == 'AnonymousUser':
+        logger.error('Access from {}'.format(client_ip))
+    logger.info('Access from {}'.format(user))
     resources = question_page_resources(topic_id)
     get_best_score(request, topic_id)
     return render(request, 'game/game.html', {
@@ -148,12 +198,16 @@ def assign_answer(value, question_id, topic_id):
 @login_required
 def get_stat(request):
     """Create statistic for each player include score"""
+    name = request.user
+    logger.info("Check player {} info".format(name))
     user_id = request.user.id
     status = True
     check_id = Statistic.objects.filter(user_id=user_id)
     if check_id:
         status = False
+        logger.error("{} stat is already exist".format(name))
     if User.is_authenticated and status:
+        logger.info("Create stat for {}".format(name))
         user = User.objects.get(pk=user_id)
         stat = Statistic(user=user)
         stat.save()
@@ -166,6 +220,8 @@ def get_stat(request):
 @login_required
 def preview_form(request):
     """Reidrect to Form Preview page."""
+    name = request.user
+    logger.info("Create question from {}".format(name))
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
@@ -184,6 +240,8 @@ def preview_form(request):
 @login_required
 def discard_form(request, question_id):
     """Discard the Question Form."""
+    name = request.user
+    logger.info("Delete a question from {}".format(name))
     check = Question.objects.filter(pk=question_id)
     if check:
         question = Question.objects.get(pk=question_id)
@@ -201,28 +259,39 @@ def receive_score(request, topic_id):
     if check_key:
         try:
             score = request.GET.get('result_score')
+            logger.info("Player receive {} score".format(score))
             if int(profile.value) < int(score):
                 profile.value = int(score)
                 profile.save()
         except:
+            client_ip = get_client_ip(request)
+            logger.error("Error from end point".format(client_ip))
             pass
     return redirect("game:home")
 
 
 def get_best_score(request, topic_id):
     """Create best score obj"""
+    name = request.user
+    logger.info("Check best score of {}".format(name))
     user_id = request.user.id
     topic = get_object_or_404(Topic, pk=topic_id)
     get_user = User.objects.get(pk=user_id)
     check_key = Best_score.objects.filter(key=topic.topic_name, user=user_id)
     if not check_key:
+        logger.info("Create best score for {}".format(name))
         s = Best_score(user=get_user, key=topic.topic_name, value=0)
         s.save()
+    else:
+        logger.error("Best score of {} is already exist".format(name))
 
 def edit_form(request, question_id):
+    name = request.user
+    logger.info("{} want to edit form".format(name))
     if request.method == "GET":
         question = Question.objects.get(pk=question_id)
         topic = Topic.objects.get(pk=question.topic_id)
         form = QuestionForm(instance=question)
+        logger.info("question {} is deleted".format(question.question_title))
         question.delete()
         return render(request, "game/form.html", {"question_id":question_id, "form":form})
