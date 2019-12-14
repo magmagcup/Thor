@@ -24,7 +24,7 @@ h1.authhome {
     letter-spacing: 5;
 }
 
-h1.home { 
+h1.home {
     color: rgb(168, 63, 81);
     font-size: 100px;
     letter-spacing: 38px;
@@ -54,43 +54,43 @@ button.login {
     padding: 26px 63px;
     font-size: 22px;
     }
-        
+
 button.login:hover {
     background-color: rgb(70, 19, 33);
     color: white;
     border-style: solid 3px;
     border-color: white;
-} 
+}
 
 
-button.playnow {		
-    color: rgb(71, 24, 37);		
-    background-color:rgb(255, 255, 255);		
-    -webkit-transition-duration: 0.1s; 		
-    transition-duration: 0.4s;						
+button.playnow {
+    color: rgb(71, 24, 37);
+    background-color:rgb(255, 255, 255);
+    -webkit-transition-duration: 0.1s;
+    transition-duration: 0.4s;				
     font-size: 25px;
-    padding: 10px; 
+    padding: 10px;
     border-style: solid;
-}		
+}
 
-button.playnow:hover {		
-    background-color: rgba(161, 40, 111, 0.76);		
-    color: white;	
+button.playnow:hover {
+    background-color: rgba(161, 40, 111, 0.76);
+    color: white;
     border-style: solid;
-    border-color: rgb(175, 175, 175);	
-}		
+    border-color: rgb(175, 175, 175);
+}
 
-button.home {		
-    color: white;		
-    background-color: rgb(71, 24, 37);		
-    -webkit-transition-duration: 0.4s; 		
-    transition-duration: 0.4s;						
+button.home {
+    color: white;
+    background-color: rgb(71, 24, 37);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;		
     font-size: 20px;
     border-style: solid;
     border-color: rgb(175, 175, 175);
-}		
+}
 
-button.home:hover {		
-    background-color:  rgb(255, 255, 255);		
+button.home:hover {
+    background-color:  rgb(255, 255, 255);
     color:  rgb(71, 24, 37);
-}		
+}
