@@ -8,12 +8,11 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class SeleniumTestCase(LiveServerTestCase):
-    
-    
+
     def setUp(self):
         options = webdriver.ChromeOptions()
         self.browser = webdriver.Chrome(chrome_options=options)
-        self.driver = webdriver.Chrome(executable_path="chromedriver")
+        self.driver = webdriver.Chrome(executable_path="'/home/travis/virtualenv/python3.6.7/chromedriver'")
         self.wait = WebDriverWait(self.browser, 10)
         super(SeleniumTestCase, self).setUp()
     
