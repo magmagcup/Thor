@@ -34,7 +34,8 @@ class ViewTest(TestCase):
         self.check = Statistic.objects.filter(user=self.user.id)
         self.status = True
         self.topic = Topic.objects.create(topic_name="Topic")
-        self.question = Question.objects.create(topic=self.topic, question_title='Hello', question_text="world", difficulty="Easy")
+        self.question = Question.objects.create(
+            topic=self.topic, question_title='Hello',question_text="[[world|world]]", difficulty="Easy")
     
     def test_get_stat(self):
         self.client.force_login(self.user)
