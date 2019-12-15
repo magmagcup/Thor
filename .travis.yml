@@ -10,15 +10,16 @@
  install:
    - pip install -r requirements.txt
 
- services:
-   - xvfb
-   -
+ addons:
+   chrome: stable
+   apt:
+     packages:
+       - chromium-chromedriver
+
  before_script:
-    - wget https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip
-    - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python3.6.7/
-    - export CHROME_BIN=chromium-browser
-    - "export DISPLAY=:99.0"
-    - sleep 3
+  - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+
  # script to run tests. Script can have many commands, one per line.
  script:
    - python manage.py makemigrations
