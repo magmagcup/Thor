@@ -98,3 +98,18 @@ class ViewTest(TestCase):
         self.assertTrue(status)
         status = edit_form(self.question.id)
         self.assertFalse(status)
+    
+    def test_question_page(self):
+        self.client.force_login(self.user)
+        resources = question_page_resources(self.topic.id)
+        response = self.client.post(path=f'game/{self.topic.id}',
+                                    data={
+                                        'q_title': resources["title"], 
+                                        'q_text': resources["text"],
+                                        'answer': resources["answer"], 
+                                        'hint': resources["hint"],
+                                        'q_diff': resources["diff"], 
+                                        'topic_id': self.topic.id},
+                                    follow=True)
+        status = response.status_code
+        self.assertEquals(status, 200)

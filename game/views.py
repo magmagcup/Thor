@@ -266,7 +266,6 @@ def receive_score(request, topic_id):
         except:
             client_ip = get_client_ip(request)
             logger.error("Error from end point".format(client_ip))
-            pass
     return redirect("game:home")
 
 
