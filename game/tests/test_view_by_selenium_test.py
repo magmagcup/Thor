@@ -11,9 +11,6 @@ class SeleniumTestCase(LiveServerTestCase):
 
     def setUp(self):
         options = webdriver.ChromeOptions()
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--headless")
         self.browser = webdriver.Chrome(chrome_options=options)
         # self.driver = webdriver.Chrome()
         self.wait = WebDriverWait(self.browser, 10)

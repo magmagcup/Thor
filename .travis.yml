@@ -19,8 +19,7 @@
  before_script:
   - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-  - echo $PATH
-  - echo "<br>"
+
  # script to run tests. Script can have many commands, one per line.
  script:
    - python manage.py makemigrations
