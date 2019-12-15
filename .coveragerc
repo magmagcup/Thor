@@ -17,4 +17,5 @@ omit =
     venv/
     config/
     game/templatetags/*
-    thor/wsgi.py
+    game/templatetags/boxed_answer.py
+    thor/*

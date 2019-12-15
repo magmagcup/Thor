@@ -59,20 +59,20 @@ class SeleniumTestCase(LiveServerTestCase):
         image = self.browser.find_element_by_id('example')
         print(image.get_attribute('src'))
     
-    # def set_up_user(self):
-    #     """Setup user to login"""
-    #     self.browser.get('https://thor-thunder.herokuapp.com/game/')
-    #     self.browser.find_element_by_class_name('btn').click()
-    #     time.sleep(10)
-    #     mail = self.browser.find_element_by_xpath('//*[@id="identifierId"]')
-    #     mail.send_keys("gamethorthunder@gmail.com")
-    #     self.browser.find_element_by_id('identifierNext').click()
-    #     time.sleep(10)
-    #     password = self.browser.find_element_by_xpath('//*[@name="password"]')
-    #     password.send_keys("thorthunder1234")
-    #     self.browser.find_element_by_id('passwordNext').click()
-    #     time.sleep(10)
-    #
-    #
-    # def test_login_oauth(self):
-    #     self.set_up_user()
+    def set_up_user(self):
+        """Setup user to login"""
+        self.browser.get('https://thor-thunder.herokuapp.com/game/')
+        self.browser.find_element_by_class_name('btn').click()
+        time.sleep(10)
+        mail = self.browser.find_element_by_xpath('//*[@id="identifierId"]')
+        mail.send_keys("gamethorthunder@gmail.com")
+        self.browser.find_element_by_id('identifierNext').click()
+        time.sleep(10)
+        password = self.browser.find_element_by_xpath('//*[@name="password"]')
+        password.send_keys("thorthunder1234")
+        self.browser.find_element_by_id('passwordNext').click()
+        time.sleep(10)
+
+
+    def test_login_oauth(self):
+        self.set_up_user()
