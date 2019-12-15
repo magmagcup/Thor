@@ -6,18 +6,18 @@
 
 <h1 class="mt-5 pt-5 head">Preview Form</h1>
 <div class="main_focus container">
-    <h4 >Topic: {{question.topic}}</h4>
-    <h4> Difficulty: {{question.difficulty|title}}</h4>
-    <h3 class="title">{{question.question_title}}</h3>
+    <h4 id="pre-topic">Topic: {{question.topic}}</h4>
+    <h4 id="pre-diff"> Difficulty: {{question.difficulty|title}}</h4>
+    <h3 id="pre-question" class="title">{{question.question_title}}</h3>
     <br>
-    <p class="q_text">{{question.question_text|boxed}}</p>
+    <p id="pre-question-box" class="q_text">{{question.question_text|boxed}}</p>
 </div>
 
 <div class="button-group">
-    <a class="button" href="{% url 'game:edit' question.id %}">Back to Edit Form</a>
-    <a class="button" href="{% url 'game:form' %}">Save and Create Another</a>
-    <a class="button" href="{% url 'game:home' %}">Save</a>
-    <a class="button" href="{% url 'game:discard' question.id %}">Discard</a>
+    <a id="edit-form" class="button" href="{% url 'game:edit' question.id %}">Back to Edit Form</a>
+    <a id="save-and-create" class="button" href="{% url 'game:form' %}">Save and Create Another</a>
+    <a id="save-question" class="button" href="{% url 'game:home' %}">Save</a>
+    <a id="discard-form" class="button" href="{% url 'game:discard' question.id %}">Discard</a>
 
 </div>
 
