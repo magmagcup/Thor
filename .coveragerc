@@ -19,3 +19,4 @@ omit =
     game/templatetags/*
     game/templatetags/boxed_answer.py
     thor/*
+    thor/wsgi.py
