@@ -46,10 +46,6 @@ class ViewTest(TestCase):
         stat = Statistic.objects.create(user=self.user)
         self.assertTrue(self.check)
 
-        if self.check:
-            self.status = False
-            self.assertFalse(self.status)
-
         self.assertEqual(stat.user.username, self.username)
         self.assertTrue(stat.user.password)
         self.assertTemplateUsed(response, 'game/base.html')
