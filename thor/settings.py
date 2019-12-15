@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY', default="secret")
 
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = ['*','thor-the-god-of-thunder.herokuapp.com', 'sheltered-refuge-21613.herokuapp.com']
+ALLOWED_HOSTS = ['*','thor-the-god-of-thunder.herokuapp.com', 'thor-thunder.herokuapp.com']
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_POSTGRES_JSONFIELD = config("AUTH_POSTGRES_JSONFIELD", cast=bool, default=False)
