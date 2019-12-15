@@ -110,3 +110,9 @@ class ViewTest(TestCase):
                                     follow=True)
         status = response.status_code
         self.assertEquals(status, 200)
+    
+    def test_answer_box(self):
+        value = 'hello [[world|ruri]], python'
+        boxed = create_answer_box(value)
+        expect = 'hello <tr><th></th><td><input type="text" name="answer" id="answer" style="height: 28px; font-size: 22px; " size="5ch" maxlength="5" title="ruri" onblur="checkAnswer()" required></td></tr>, python'
+        self.assertEqual(boxed, expect)
