@@ -14,6 +14,17 @@ def get_best_score(topic_id, user_id):
         return True
     return False
 
+def edit_form(question_id):
+    check_key = Question.objects.filter(pk=question_id)
+    if check_key:
+        question = Question.objects.get(pk=question_id)
+        topic = Topic.objects.get(pk=question.topic_id)
+        form = QuestionForm(instance=question)
+        question.delete()
+        return True, form
+    return False
+
+
 class ViewTest(TestCase):
     def setUp(self):
         self.client = Client()
@@ -79,4 +90,11 @@ class ViewTest(TestCase):
         self.assertTrue(status)
         Best_score.objects.create(user=self.user, key=self.topic.topic_name, value=0)
         status = get_best_score(self.topic.id, self.user.id)
+        self.assertFalse(status)
+    
+    def test_edit_form(self):
+        status = edit_form(self.question.id)
+        self.assertTrue('<class "game.forms.QuestionForm">', type(status[1]))
+        self.assertTrue(status)
+        status = edit_form(self.question.id)
         self.assertFalse(status)

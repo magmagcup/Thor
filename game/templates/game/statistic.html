@@ -1,56 +1,58 @@
 {% extends "game/base.html" %}
+{% load static%}
 
 {% block content %}
-<h1 class="mt-5 pt-5" style="font-family: 'THOR Ragnarok'; color:white; font-size: 55px; letter-spacing: 5">Player's Profile<br> <br></h1>
+<link rel="stylesheet" href="{% static 'game/stats_style.css' %}">
+
+<h1 class="mt-5 pt-5 stats">Player Statistic</h1>
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-5">
-            <img class="img-responsive rounded mx-auto d-block" src="{{ pic.profile_photo }}" alt="Profile Picture" width="300" height="auto" style="border-radius:50%; border-style:solid">
-        </div>
-        <div class="col-7 text-white">
-            <div class="row justify-content-center">
-                <div class="score_table col-10">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-5 d-flex justify-content-center">
-                            <h1 class="mt-1">{{ user.username }}</h1>
-                        </div>
-                    </div>
-                </div>
+        <div class="col" style="margin-top: 5%; margin-left: 13%">
+            <div class="mb-4 row d-flex justify-content-center">
+                <img class="rounded" src="{{ pic.profile_photo }}" alt: "Profile Picture" style="width:auto;height:300px">
             </div>
-            <br>
-            <div class="row justify-content-around">
-                <div class="score_table col-6">
+            <div class="mb-4 row scoreboard d-flex justify-content-center">
+                <h2 class="mt-1 stats">Username: {{ user.username }}</h2>
+            </div>
+        </div>
+        <div class="col-6 text-white">
+            <div class="mt-5 row justify-content-around">
+                <div class="showscore col-7">
                     <div class="row d-flex justify-content-center">
-                        <h3 class="mt-1">Topic |Best score</h3>
+                        <div class="col-4 d-flex justify-content-center">
+                            <h3 class="mb-3" style="font-size: 25px">Topic</h3>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <h3 class="mb-3" style="font-size: 25px">Best score</h3>
+                        </div>
                     </div>
                     {% if user_score %}
-                    {% for score in user_score %}
-                    <br>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 d-flex justify-content-center">
-                            <div class="row"> {{score.key}} </div>
+                        {% for score in user_score %}
+                        <div class="row justify-content-center">
+                            <div class="col-4 d-flex justify-content-center">
+                                <div class="row"> {{score.key}} </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center">
+                                <div class="row"> {{score.value}} </div>
+                            </div>
                         </div>
-                        <div class="col-4 d-flex justify-content-center">
-                            <div class="row"> {{score.value}} </div>
-                        </div>
-                    </div>
-                    {% endfor %}
+                        <br>
+                        {% endfor %}
                     {% endif %}
                 </div>
             </div>
-            <br><br><br><br><br>
-            <div class="row justify-content-center">
-                <div class="col-6 d-flex justify-content-center">
-                    <button type="button" class="btn btn-light"><a href="{% url 'game:home' %}">Home</a></button>
+            <div class="mt-3 row justify-content-center">
+                <div class="col-4 d-flex justify-content-center">
+                    <button type="button" class="btn stats" onclick="window.location.href='{% url 'game:home' %}'">Home</a></button>
                 </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <button type="button" class="btn btn-light"><a href="{% url 'game:form' %}">Create Forms</a></button>
+                <div class="col-4 d-flex justify-content-center">
+                    <button type="button" class="btn stats" onclick="window.location.href='{% url 'game:form' %}'">Create Question</button>
                 </div>
             </div>
         </div> 
     </div>
 </div>
+<br><br>
 {% endif %}
-<br><br><br><br><br>
 {% endblock %}

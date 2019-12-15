@@ -1,0 +1,37 @@
+h1.howto {
+    font-family: 'THOR Ragnarok';
+    font-size: 70px;
+    text-align: center;
+    color: white;
+    word-spacing: 27;
+    letter-spacing: 5;
+}
+
+p {
+    color: rosybrown;
+    display: flex;
+    justify-content: center;
+}
+
+
+.howto_box {
+    background-color: rgba(15, 18, 19, 0.822);
+    border-radius: 15px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.589);
+    color: white;
+    font-size: 22px;
+    }
+
+button.howto {
+    color: white;
+    background-color: rgb(70, 19, 33);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    font-size: 30px;
+}
+
+button.howto:hover {
+    background-color:  white;
+    color: rgb(70, 19, 33);
+}

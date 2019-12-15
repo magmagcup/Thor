@@ -14,35 +14,35 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = '__all__'
         widgets = {
-        'topic':forms.Select(
-              attrs={
-            'id': 'topic',
-            'style' : 'height: 50px; font-size: 20px;',
-            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
-            }
+            'topic':forms.Select(
+                attrs={
+                'id': 'topic',
+                'style' : 'height: 50px; font-size: 20px;',
+                'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
+                }
             ),
             'difficulty':forms.Select(
-        choices=select_difficulty,
-              attrs={
-            'id': 'difficulty',
-            'style' : 'height: 50px; font-size: 20px;',
-            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
-            }
-        ),
-            'question_title': forms.Textarea(
-        attrs={
-            'id': 'title',
-            'style' : 'height: 50px; font-size: 20px',
-            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
-            }
+                choices=select_difficulty,
+                attrs={
+                    'id': 'difficulty',
+                    'style' : 'height: 50px; font-size: 20px;',
+                    'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
+                }
             ),
-        'question_text':forms.Textarea(
-        attrs={
-            'id': 'question',
-            'style' : 'height: 750px; font-size: 18px; border-radius: 3%',
-            'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
-            }
-        )
+            'question_title': forms.Textarea(
+                attrs={
+                    'id': 'title',
+                    'style' : 'height: 50px; font-size: 18px; resize: none',
+                    'class' : 'col-10 mt-2 p-3 d-flex justify-content-center',
+                }
+            ),
+            'question_text':forms.Textarea(
+                attrs={
+                    'id': 'question',
+                    'style' : 'height: 750px; font-size: 18px; border-radius: 3%',
+                    'class' : 'col-10 mt-2 p-4 d-flex justify-content-center',
+                }
+            )
         }
 
 class AnswerForm(forms.Form):
