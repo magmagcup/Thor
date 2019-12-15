@@ -15,7 +15,7 @@ class SeleniumTestCase(LiveServerTestCase):
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--headless")
         self.browser = webdriver.Chrome(chrome_options=options)
-        self.driver = webdriver.Chrome()
+        # self.driver = webdriver.Chrome()
         self.wait = WebDriverWait(self.browser, 10)
         super(SeleniumTestCase, self).setUp()
     
