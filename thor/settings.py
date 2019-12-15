@@ -38,10 +38,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("OAUTH2_SECRET", default="secret")
 LOGIN_REDIRECT_URL = '/game/stat/'
 LOGIN_URL = '/game/'
 
-SELENIUM_WEBDRIVERS = {
-    'default': {'callable': webdriver.Chrome, 'args': (), 'kwargs': {}},
-}
-
 SOCIAL_AUTH_PIPELINE = (
 
     'social.pipeline.social_auth.social_details',
