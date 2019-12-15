@@ -12,13 +12,13 @@
           {% csrf_token %}
           <div class="form-group  has-feedback">
             <h4 class="text-white">{{ form.as_p }}</h4>
-            <button class="mt-3 mb-5 form btn-light" type="submit">Next</button>
+            <button id="submit-form" class="mt-3 mb-5 form btn-light" type="submit">Next</button>
           </div>
         </form>
       </center>
     </div>
     <div class="col-4">
-      <p class="p-4 form_box"> 
+      <p id="suggestion" class="p-4 form_box"> 
         <b>Step 1:</b><br>Select the topic you wish to add your question to.<br>
         <b>Step 2:</b><br>Select the difficulty for you question.<br>
         <b>Step 3:</b><br>Add a title for your question.<br>
