@@ -13,7 +13,7 @@ class SeleniumTestCase(LiveServerTestCase):
     def setUp(self):
         options = webdriver.ChromeOptions()
         self.browser = webdriver.Chrome(chrome_options=options)
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(executable_path="chromedriver")
         self.wait = WebDriverWait(self.browser, 10)
         super(SeleniumTestCase, self).setUp()
     
