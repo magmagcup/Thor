@@ -74,5 +74,5 @@ class SeleniumTestCase(LiveServerTestCase):
         time.sleep(10)
 
 
-    def test_login_oauth(self):
-        self.set_up_user()
+    # def test_login_oauth(self):
+    #     self.set_up_user()
