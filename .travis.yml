@@ -12,11 +12,8 @@
 
  before_script:
     - wget https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip
-
     - unzip chromedriver_linux64.zip
-
-    - export chromedriver=chromium-browser
-
+    - echo $PATH
  # script to run tests. Script can have many commands, one per line.
  script:
    - python manage.py makemigrations
