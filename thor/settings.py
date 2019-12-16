@@ -12,6 +12,7 @@ from decouple import config, Csv
 import django_heroku
 import dj_database_url
 import dotenv
+from selenium import webdriver
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -36,7 +37,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("OAUTH2_KEY", default="key")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("OAUTH2_SECRET", default="secret")
 LOGIN_REDIRECT_URL = '/game/stat/'
 LOGIN_URL = '/game/'
-
 
 SOCIAL_AUTH_PIPELINE = (
 

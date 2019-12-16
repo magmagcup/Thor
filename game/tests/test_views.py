@@ -34,7 +34,8 @@ class ViewTest(TestCase):
         self.check = Statistic.objects.filter(user=self.user.id)
         self.status = True
         self.topic = Topic.objects.create(topic_name="Topic")
-        self.question = Question.objects.create(topic=self.topic, question_title='Hello', question_text="world", difficulty="Easy")
+        self.question = Question.objects.create(
+            topic=self.topic, question_title='Hello',question_text="[[world|world]]", difficulty="Easy")
     
     def test_get_stat(self):
         self.client.force_login(self.user)
@@ -44,10 +45,6 @@ class ViewTest(TestCase):
 
         stat = Statistic.objects.create(user=self.user)
         self.assertTrue(self.check)
-
-        if self.check:
-            self.status = False
-            self.assertFalse(self.status)
 
         self.assertEqual(stat.user.username, self.username)
         self.assertTrue(stat.user.password)
@@ -98,3 +95,24 @@ class ViewTest(TestCase):
         self.assertTrue(status)
         status = edit_form(self.question.id)
         self.assertFalse(status)
+    
+    def test_question_page(self):
+        self.client.force_login(self.user)
+        resources = question_page_resources(self.topic.id)
+        response = self.client.post(path=f'game/{self.topic.id}',
+                                    data={
+                                        'q_title': resources["title"], 
+                                        'q_text': resources["text"],
+                                        'answer': resources["answer"], 
+                                        'hint': resources["hint"],
+                                        'q_diff': resources["diff"], 
+                                        'topic_id': self.topic.id},
+                                    follow=True)
+        status = response.status_code
+        self.assertEquals(status, 200)
+    
+    def test_answer_box(self):
+        value = 'hello [[world|ruri]], python'
+        boxed = create_answer_box(value)
+        expect = 'hello <tr><th></th><td><input type="text" name="answer" id="answer" style="height: 28px; font-size: 22px; " size="5ch" maxlength="5" title="ruri" onblur="checkAnswer()" required></td></tr>, python'
+        self.assertEqual(boxed, expect)
