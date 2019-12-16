@@ -1,0 +1,65 @@
+.form_box {
+    background-color: rgba(15, 18, 19, 0.445);
+    border-radius: 15px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.76);
+    color: white;
+    font-size: 18px;
+}
+
+h1.form {
+   font-family: 'THOR Ragnarok';
+   font-size: 60px;
+   text-align: center;
+   color: white;
+}
+
+button.form {
+   color: rgb(71, 24, 37);
+   background-color:white;
+   -webkit-transition-duration: 0.4s;
+   transition-duration: 0.4s;
+   border-radius: 5%;
+   padding: 15px 35px;
+   font-size: 18px;
+}
+
+button.form:hover {
+   background-color: rgb(71, 24, 37);
+   color: white;
+   border-style: solid;
+   border-color: rgb(175, 175, 175);
+   }
+
+p {
+   justify-content: center;
+}
+
+table, td, th {
+   border: 1px solid #ddd;
+   color: white;
+}
+
+table {
+   border-collapse: collapse;
+   width: 100%;
+}
+
+td, th {
+   padding: 15px;
+   text-align: center;
+}
+
+
+mark {
+   color: rgb(243, 243, 142);
+   background-color: rgba(150, 45, 110, 0.74);
+}
+
+b {
+   color: rgb(255, 255, 124);
+}
+
+select {
+   font-size: 18;
+}

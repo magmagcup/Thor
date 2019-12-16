@@ -6,7 +6,6 @@
 
 body {
     background-image: url("lightning.jpg");
-    background-color: rgb(39, 39, 39);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover, contain;
@@ -16,72 +15,82 @@ body {
 h1 {
     text-align: center;
     text-shadow: 5px 2px darkred;
+    font-family: 'THOR Ragnarok';
+    color: white;
   }
 
-.score_table {
-    background-color: rgba(70, 83, 88, 0.445);
+h1.authhome {
+    font-size: 55px;
+    letter-spacing: 5;
+}
+
+h1.home {
+    color: rgb(168, 63, 81);
+    font-size: 100px;
+    letter-spacing: 38px;
+    text-shadow: 4px 2px white;
+}
+
+h2.home {
+    font-family: 'THOR Ragnarok';
+    font-size: 40px;
+    font-style: extra bold;
+    letter-spacing: 5;
+    color: white;
+}
+
+.scoreboard {
+    background-color: rgba(15, 18, 19, 0.445);
     border-radius: 15px;
     border-style: solid;
     border-color: white;
     }
 
-.howto_box {
-    background-color: rgba(70, 83, 88, 0.445);
-    border-radius: 15px;
-    border-style: solid;
-    border-color: black;
-    }
-
-.form_box {
-    background-color: white;
-    border-radius: 15px;
-    border-style: solid;
-    border-color: rosybrown;
-}
-
-select {
-    font-size: 20;
-}
-
-.btnlogin {
+button.login {
     color: rgb(192, 108, 108);
     background-color: white;
-    -webkit-transition-duration: 0.4s; 
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
-    border-radius: 3%;
     padding: 26px 63px;
+    font-size: 22px;
     }
-        
-.btnlogin:hover {
-background-color: rosybrown;
-color: white;
-} 
 
-.btnform {
-color: rgb(192, 108, 108);
-background-color: white;
--webkit-transition-duration: 0.4s; 
-transition-duration: 0.4s;
-border-radius: 5%
-}
-    
-.btnform:hover {
-background-color: rosybrown;
-color: white;
+button.login:hover {
+    background-color: rgb(70, 19, 33);
+    color: white;
+    border-style: solid 3px;
+    border-color: white;
 }
 
 
-/* unvisited link */
-a:link {
-color: rebeccapurple;
+button.playnow {
+    color: rgb(71, 24, 37);
+    background-color:rgb(255, 255, 255);
+    -webkit-transition-duration: 0.1s;
+    transition-duration: 0.4s;				
+    font-size: 25px;
+    padding: 10px;
+    border-style: solid;
 }
 
-/* visited link */
-a:visited {
-color: black;
+button.playnow:hover {
+    background-color: rgba(161, 40, 111, 0.76);
+    color: white;
+    border-style: solid;
+    border-color: rgb(175, 175, 175);
 }
 
-/* mouse over link */
-a:hover {
-color: white;
+button.home {
+    color: white;
+    background-color: rgb(71, 24, 37);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;		
+    font-size: 20px;
+    border-style: solid;
+    border-color: rgb(175, 175, 175);
+}
+
+button.home:hover {
+    background-color:  rgb(255, 255, 255);
+    color:  rgb(71, 24, 37);
 }

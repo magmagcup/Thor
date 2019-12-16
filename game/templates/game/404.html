@@ -1,7 +1,22 @@
 {% extends "game/base.html" %}
-
 {% block content %}
-<h1 class=""style="font-family: 'Supermercado One'; font-size: 200px; text-align:center; color:fefce0 ; padding-top:15%" >404</h1>
-<h1 class=""style="font-family: 'Supermercado One'; font-size: 80px; text-align:center; color:fefce0" >Page not found</h1>
+{% load static %}
+
+<link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+
+
+<div class="container" style="padding-top:10%">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h1 class="pr-3"style="font-family: 'Anton'; font-size: 180px; text-align:center; color:white; margin-top: 45%; letter-spacing:5; text-shadow: 8px 8px darkred;">404</h1>
+        </div>
+        <div class="col-4">
+            <img src="{% static 'game/oops.png' %}" alt="Thor Icon" height="400" width="auto">
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <h1 class=""style="font-family: 'THOR Ragnarok'; font-size: 60px; text-align:center; color:white" >Page not found</h1>
+    </div>
+</div>
 
 {% endblock %}

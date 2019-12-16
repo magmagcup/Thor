@@ -19,5 +19,6 @@ urlpatterns = [
     path('topic/', views.topic_page, name='topic'),
     path('<int:topic_id>/', views.question_page, name='question'),
     path('receive/<int:topic_id>/', views.receive_score, name='receive'),
+    path('<int:question_id>/edit/', views.edit_form, name='edit'),
 ]
   

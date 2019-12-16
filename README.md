@@ -1,6 +1,9 @@
 # Thor: The God of Thunder  
 
-<!-- [![codecov](https://codecov.io/gh/magmagcup/thor/branch/master/graph/badge.svg)](https://codecov.io/gh/magmagcup/thor) -->
+<img width="200px" height="auto" src="static/game/icon.gif">
+
+[![Build Status](https://travis-ci.com/magmagcup/Thor.svg?branch=develop)](https://travis-ci.com/magmagcup/Thor)
+[![codecov](https://codecov.io/gh/magmagcup/thor/branch/develop/graph/badge.svg)](https://codecov.io/gh/magmagcup/thor) 
 
 ## Team members
 
@@ -74,4 +77,5 @@ To enter the game site.
 
 * Iteration plans  in [project document](https://docs.google.com/document/d/1Q2PZyZD6GGjra6n8zBE4ohgaDXcAb8P__CwaxpWwbAs/edit#).  
 * Task board  on [Trello](https://trello.com/b/5H0LhPUD/isp-series).
-* Projects Proposal [here.](https://docs.google.com/document/d/1u56cPcZAjH7Zpv4XZvvtxiRkJ0TOCDOyWOA9pr01ESA/edit#heading=h.xcfzxuptdvae)
+* Projects Proposal [here.](https://docs.google.com/document/d/1u56cPcZAjH7Zpv4XZvvtxiRkJ0TOCDOyWOA9pr01ESA/edit?usp=sharing)
+* Code script/checklist [here.](https://docs.google.com/document/d/1rB76lxvoa3AoQ6cktqVeokeiMgrl03sMlR67-B2g_XM/edit?usp=sharing)

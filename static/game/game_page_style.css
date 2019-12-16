@@ -1,0 +1,48 @@
+input[type=text] {
+    padding: 15px 5px;
+    box-sizing: border-box;
+    border: 2px solid #eeeddd;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    outline: none;
+  }
+  
+  input[type=text]:focus {
+    border: 2px solid #555;
+  }
+  
+  .main_focus {
+    background-color: rgba(15, 18, 19, 0.822);
+    border-radius: 15px;
+    border-style: solid; 
+    padding:3%;
+    font-size:24px;
+    color: white;
+    margin-top:7%;
+  }
+  
+  .title {
+    text-align: center;
+  }
+  
+  .q_text {
+    text-align: justified;
+  }
+  button {
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    border: palevioletred solid;
+    background-color: rgba(70, 83, 88, 0.445);
+    color: white;
+    width: 10%;
+
+  }
+  
+  button:hover {
+    background-color: palevioletred;
+    color:white;
+  }
+  button:focus{
+    background-color: palevioletred;
+    color:white;
+  }
