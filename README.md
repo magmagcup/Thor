@@ -1,5 +1,7 @@
 # Thor: The God of Thunder  
 
+<img width="200px" height="auto" src="static/game/icon.gif">
+
 [![Build Status](https://travis-ci.com/magmagcup/Thor.svg?branch=develop)](https://travis-ci.com/magmagcup/Thor)
 [![codecov](https://codecov.io/gh/magmagcup/thor/branch/develop/graph/badge.svg)](https://codecov.io/gh/magmagcup/thor) 
 
